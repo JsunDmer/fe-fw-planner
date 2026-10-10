@@ -340,8 +340,12 @@ fun EmptyHint(text: String, modifier: Modifier = Modifier) {
  * 保证不同职业节点之间列对齐、行高等宽，避免纯文本成长串造成的错行与不可读。
  */
 @Composable
-fun GrowthGrid(cells: List<GrowthCell>, modifier: Modifier = Modifier, compact: Boolean = false) {
-    val cellHeight = if (compact) 38.dp else 46.dp
+fun GrowthGrid(cells: List<GrowthCell>, modifier: Modifier = Modifier, compact: Boolean = false, mini: Boolean = false) {
+    val cellHeight = when {
+        mini -> 28.dp
+        compact -> 38.dp
+        else -> 46.dp
+    }
     Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         cells.chunked(3).forEach { rowCells ->
             Row(
@@ -349,7 +353,7 @@ fun GrowthGrid(cells: List<GrowthCell>, modifier: Modifier = Modifier, compact: 
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 rowCells.forEach { cell ->
-                    GrowthCellView(cell = cell, height = cellHeight, compact = compact, modifier = Modifier.weight(1f))
+                    GrowthCellView(cell = cell, height = cellHeight, compact = compact, mini = mini, modifier = Modifier.weight(1f))
                 }
                 repeat(3 - rowCells.size) { Spacer(Modifier.weight(1f)) }
             }
@@ -358,7 +362,7 @@ fun GrowthGrid(cells: List<GrowthCell>, modifier: Modifier = Modifier, compact: 
 }
 
 @Composable
-private fun GrowthCellView(cell: GrowthCell, height: Dp, compact: Boolean, modifier: Modifier = Modifier) {
+private fun GrowthCellView(cell: GrowthCell, height: Dp, compact: Boolean, mini: Boolean, modifier: Modifier = Modifier) {
     val valueColor = when {
         cell.value >= 60 -> OkText
         cell.value >= 45 -> Primary
@@ -375,7 +379,7 @@ private fun GrowthCellView(cell: GrowthCell, height: Dp, compact: Boolean, modif
                 if (cell.bonus > 0) Primary.copy(alpha = 0.55f) else BorderSoft,
                 RoundedCornerShape(6.dp)
             )
-            .padding(horizontal = 4.dp, vertical = 2.dp),
+            .padding(horizontal = 4.dp, vertical = if (mini) 1.dp else 2.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -386,20 +390,20 @@ private fun GrowthCellView(cell: GrowthCell, height: Dp, compact: Boolean, modif
         ) {
             Text(
                 cell.label,
-                fontSize = 9.sp,
+                fontSize = if (mini) 8.sp else 9.sp,
                 color = Muted,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1f, fill = false)
             )
             if (cell.bonus > 0) {
-                Text("+${cell.bonus}", fontSize = 8.sp, color = Primary, maxLines = 1)
+                Text("+${cell.bonus}", fontSize = if (mini) 7.sp else 8.sp, color = Primary, maxLines = 1)
             }
         }
         Text(
             "${cell.value}",
-            fontSize = if (compact) 13.sp else 16.sp,
-            fontWeight = FontWeight.SemiBold,
+            fontSize = if (mini) 11.sp else if (compact) 13.sp else 16.sp,
+            fontWeight = if (mini) FontWeight.Medium else FontWeight.SemiBold,
             color = valueColor
         )
         if (!compact) {

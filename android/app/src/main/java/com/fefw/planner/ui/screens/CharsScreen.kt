@@ -143,7 +143,7 @@ private fun CharRow(c: Character, route: String, data: SlotData, routeKeys: List
         }
         if (c.skills.isNotEmpty()) {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text("特技", style = MaterialTheme.typography.bodySmall, color = Muted)
+                Text("特性", style = MaterialTheme.typography.bodySmall, color = Muted)
                 c.skills.forEach { sk ->
                     Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         TagPill(sk.kind)

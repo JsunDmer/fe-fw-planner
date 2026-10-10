@@ -9,6 +9,23 @@ val MOUNT_UNIT_REGEX = Regex("骑兵|飞行")
 /** 凯伊线坐骑选择可选类型（按需求排除战象）。 */
 val SELECTABLE_MOUNT_TYPES = listOf("马", "天马", "飞龙", "飞鸵")
 const val KAI_ROUTE = "凯伊"
+
+/**
+ * 职业可用的坐骑类型：按职业名内置坐骑关键词（鸵/龙/天翼）判定，
+ * 其余 unitType 含「骑兵」的职业默认为马；战象被排除在规划范围外，返回空列表（不提供选择）。
+ */
+fun mountTypesForClass(cls: ClassInfo?): List<String> {
+    if (cls == null) return emptyList()
+    val name = cls.name
+    return when {
+        name.contains("鸵") -> listOf("飞鸵")
+        name.contains("龙") -> listOf("飞龙")
+        name.contains("天翼") -> listOf("天马")
+        name.contains("战象") -> emptyList()
+        cls.unitType?.contains("骑兵") == true -> listOf("马")
+        else -> emptyList()
+    }
+}
 val DIFF_RANK = mapOf("低" to 0, "中" to 1, "高" to 2, "超高" to 3)
 
 const val KIND_STORY = "story"

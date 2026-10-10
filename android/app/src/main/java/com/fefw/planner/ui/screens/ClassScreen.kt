@@ -44,12 +44,12 @@ import com.fefw.planner.data.ClassInfo
 import com.fefw.planner.data.Growth
 import com.fefw.planner.data.KAI_ROUTE
 import com.fefw.planner.data.MOUNT_UNIT_REGEX
-import com.fefw.planner.data.SELECTABLE_MOUNT_TYPES
 import com.fefw.planner.data.Step
 import com.fefw.planner.data.addGrowth
 import com.fefw.planner.data.growthCells
 import com.fefw.planner.data.growthInline
 import com.fefw.planner.data.mountGrowthOf
+import com.fefw.planner.data.mountTypesForClass
 import com.fefw.planner.data.recruitsFor
 import com.fefw.planner.data.resolveSteps
 import com.fefw.planner.data.stepMountKey
@@ -172,7 +172,24 @@ private fun CharPlanCard(
                     style = MaterialTheme.typography.bodySmall,
                     color = Muted
                 )
-                GrowthGrid(growthCells(c.growth, null, vm.fe.stats, mountSum), compact = true)
+                GrowthGrid(growthCells(c.growth, null, vm.fe.stats, mountSum), compact = true, mini = true)
+            }
+        }
+
+        if (c.skills.isNotEmpty()) {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text("特性", style = MaterialTheme.typography.bodySmall, color = Muted)
+                c.skills.forEach { sk ->
+                    Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        TagPill(sk.kind)
+                        Text(
+                            sk.text,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = TextSecondary,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
             }
         }
 
@@ -334,7 +351,8 @@ private fun StepNode(
 ) {
     val unitType = cls?.unitType.orEmpty()
     val needsMount = MOUNT_UNIT_REGEX.containsMatchIn(unitType)
-    val mountEligible = route == KAI_ROUTE && needsMount && cls != null
+    val mountTypes = mountTypesForClass(cls)
+    val mountEligible = route == KAI_ROUTE && mountTypes.isNotEmpty() && cls != null
     val mountGrowth = if (mountEligible) mountGrowthOf(vm.fe.mounts, mountName) else null
     // 有效成长 = 角色基础 + 职业加成 + 坐骑加成；结构固定 9 格，保证所有收起态节点等高。
     val cells = growthCells(baseGrowth, cls?.growth, vm.fe.stats, mountGrowth)
@@ -381,10 +399,14 @@ private fun StepNode(
                 KV("固有", cls.innate.joinToString("、"))
             }
             if (mountEligible) {
-                MountPicker(vm, charId, step.tier, mountName)
+                MountPicker(vm, charId, step.tier, mountName, mountTypes)
             } else if (needsMount) {
                 Text(
-                    "需要坐骑（仅凯伊线可选）",
+                    if (route == KAI_ROUTE) {
+                        "需要坐骑（当前无可选类型）"
+                    } else {
+                        "需要坐骑（仅凯伊线可选）"
+                    },
                     style = MaterialTheme.typography.bodySmall,
                     color = Muted
                 )
@@ -399,10 +421,10 @@ private fun StepNode(
 }
 
 @Composable
-private fun MountPicker(vm: PlannerViewModel, charId: String, tier: String, current: String?) {
+private fun MountPicker(vm: PlannerViewModel, charId: String, tier: String, current: String?, types: List<String>) {
     var open by remember { mutableStateOf(false) }
-    val mounts = remember(vm.fe.mounts) {
-        vm.fe.mounts.filter { it.type in SELECTABLE_MOUNT_TYPES }
+    val mounts = remember(vm.fe.mounts, types) {
+        vm.fe.mounts.filter { it.type in types }
     }
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -434,7 +456,7 @@ private fun MountPicker(vm: PlannerViewModel, charId: String, tier: String, curr
                         DropdownMenuItem(
                             text = {
                                 Column {
-                                    Text("${m.type}｜${m.name}", color = TextPrimary)
+                                    Text(m.name, color = TextPrimary)
                                     if (m.growth.isNotBlank()) {
                                         Text(
                                             "成长 ${m.growth}",
