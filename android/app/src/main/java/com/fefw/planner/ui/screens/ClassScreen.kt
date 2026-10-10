@@ -33,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,7 +46,6 @@ import com.fefw.planner.data.MOUNT_UNIT_REGEX
 import com.fefw.planner.data.Step
 import com.fefw.planner.data.addGrowth
 import com.fefw.planner.data.growthCells
-import com.fefw.planner.data.growthInline
 import com.fefw.planner.data.mountGrowthOf
 import com.fefw.planner.data.mountTypesForClass
 import com.fefw.planner.data.recruitsFor
@@ -71,7 +69,6 @@ import com.fefw.planner.ui.theme.Primary
 import com.fefw.planner.ui.theme.ScoutText
 import com.fefw.planner.ui.theme.Surface1
 import com.fefw.planner.ui.theme.Surface2
-import com.fefw.planner.ui.theme.Tertiary
 import com.fefw.planner.ui.theme.TextPrimary
 import com.fefw.planner.ui.theme.TextSecondary
 import com.fefw.planner.viewmodel.PlannerViewModel
@@ -381,22 +378,14 @@ private fun StepNode(
         }
         GrowthGrid(cells)
         if (cls != null && opened) {
-            val req = cls.requirement.ifBlank { "转职证" }
-            KV("需求", req)
-            if (!cls.unlock.isNullOrBlank()) {
-                Text("解锁：${cls.unlock}", style = MaterialTheme.typography.bodySmall, color = ScoutText, maxLines = 2)
-            }
-            Text(
-                "成长加成：${growthInline(cls.growth, vm.fe.stats)}",
-                style = MaterialTheme.typography.bodySmall,
-                color = TextSecondary,
-                maxLines = 2
-            )
-            if (cls.mastery.isNotBlank()) {
-                KV("精通", cls.mastery)
+            if (cls.usableSkills.isNotEmpty()) {
+                KV("职业特技", cls.usableSkills.joinToString("、"))
             }
             if (cls.innate.isNotEmpty()) {
                 KV("固有", cls.innate.joinToString("、"))
+            }
+            if (cls.mastery.isNotBlank()) {
+                KV("精通特技", cls.mastery)
             }
             if (mountEligible) {
                 MountPicker(vm, charId, step.tier, mountName, mountTypes)
@@ -411,7 +400,6 @@ private fun StepNode(
                     color = Muted
                 )
             }
-            ClassDetail(cls, vm)
         }
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             CheckChip(checked = done, label = "已完成", onToggle = { vm.toggleStepDone(charId, step.tier) }, mark = "✓")
@@ -470,41 +458,6 @@ private fun MountPicker(vm: PlannerViewModel, charId: String, tier: String, curr
                         )
                     }
                 }
-            }
-        }
-        val g = mountGrowthOf(vm.fe.mounts, current)
-        if (g != null) {
-            Text(
-                "坐骑成长：${growthInline(g, vm.fe.stats)}",
-                style = MaterialTheme.typography.bodySmall,
-                color = TextSecondary
-            )
-        }
-    }
-}
-
-@Composable
-private fun ClassDetail(cls: ClassInfo, vm: PlannerViewModel) {
-    Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
-        if (cls.usableSkills.isNotEmpty()) {
-            Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                cls.usableSkills.forEach { TagPill(it) }
-            }
-        }
-        vm.recommendByClass[cls.id]?.forEach { r ->
-            Text(r.group, style = MaterialTheme.typography.bodySmall, color = Tertiary, fontWeight = FontWeight.Medium)
-            if (r.desc.isNotBlank()) {
-                Text(r.desc, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
-            }
-            r.picks.forEach { p ->
-                Text(
-                    "${p.name}${if (p.trait.isNotBlank()) "（${p.trait}）" else ""}${if (p.note.isNotBlank()) " ${p.note}" else ""}",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = TextSecondary
-                )
-            }
-            if (r.footer.isNotBlank()) {
-                Text(r.footer, style = MaterialTheme.typography.bodySmall, color = Muted)
             }
         }
     }
