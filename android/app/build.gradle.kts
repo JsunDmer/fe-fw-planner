@@ -18,6 +18,19 @@ android {
         vectorDrawables { useSupportLibrary = true }
     }
 
+    // 正式签名：从 CI 环境变量读取；本地无密钥时回退 debug 签名，保证本地可构建
+    signingConfigs {
+        create("release") {
+            val ksFile = System.getenv("KEYSTORE_FILE")
+            if (!ksFile.isNullOrBlank()) {
+                storeFile = file(ksFile)
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -25,8 +38,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // CI 无发布密钥，release 使用 debug keystore 签名，保证产出可安装的 app-release.apk
-            signingConfig = signingConfigs.getByName("debug")
+            // 有正式密钥用 release 签名；否则回退 debug（仅供本地调试）
+            signingConfig = if (System.getenv("KEYSTORE_FILE").isNullOrBlank()) {
+                signingConfigs.getByName("debug")
+            } else {
+                signingConfigs.getByName("release")
+            }
         }
     }
 
