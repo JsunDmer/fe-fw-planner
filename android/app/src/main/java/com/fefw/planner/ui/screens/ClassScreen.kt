@@ -41,6 +41,7 @@ import com.fefw.planner.data.ClassInfo
 import com.fefw.planner.data.MOUNT_UNIT_REGEX
 import com.fefw.planner.data.Step
 import com.fefw.planner.data.growthInline
+import com.fefw.planner.data.recruitsFor
 import com.fefw.planner.data.resolveSteps
 import com.fefw.planner.ui.components.AssetImage
 import com.fefw.planner.ui.components.Badge
@@ -77,7 +78,7 @@ fun ClassScreen(vm: PlannerViewModel) {
     val chars = remember(all, data, showAll) {
         if (showAll) all
         else all.filter { c ->
-            val rec = data.recruits[c.id]
+            val rec = data.recruitsFor(data.route)[c.id]
             if (rec?.planned == true || rec?.done == true) return@filter true
             val p = data.paths[c.id]
             if (p == null) return@filter false
@@ -113,7 +114,7 @@ fun ClassScreen(vm: PlannerViewModel) {
 @Composable
 private fun CharPlanCard(vm: PlannerViewModel, c: Character, data: com.fefw.planner.data.SlotData, expandClass: Set<String>) {
     val pd = data.paths[c.id]
-    val rec = data.recruits[c.id]
+    val rec = data.recruitsFor(data.route)[c.id]
     val steps = resolveSteps(c, pd, vm.classesById)
     val customMode = pd?.srcPathIndex == -1
     val doneSteps = pd?.doneSteps.orEmpty()

@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.fefw.planner.data.ImportResult
 import com.fefw.planner.data.Slot
+import com.fefw.planner.data.recruitsFor
 import com.fefw.planner.ui.components.Badge
 import com.fefw.planner.ui.components.BadgeKind
 import com.fefw.planner.ui.components.FefwTextField
@@ -233,7 +234,7 @@ private fun SlotRow(
     onRename: () -> Unit,
     onDelete: () -> Unit
 ) {
-    val plannedCount = slot.data.recruits.values.count { it.planned }
+    val plannedCount = slot.data.recruitsFor(slot.data.route).values.count { it.planned }
     Column(
         modifier = Modifier
             .fillMaxWidth()

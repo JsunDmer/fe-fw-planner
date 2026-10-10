@@ -38,6 +38,7 @@ import com.fefw.planner.data.Mount
 import com.fefw.planner.data.isPlannedOrDone
 import com.fefw.planner.data.mountFlagged
 import com.fefw.planner.data.mountNeeded
+import com.fefw.planner.data.recruitsFor
 import com.fefw.planner.ui.components.AssetImage
 import com.fefw.planner.ui.components.Badge
 import com.fefw.planner.ui.components.BadgeKind
@@ -66,8 +67,8 @@ fun MountsScreen(vm: PlannerViewModel) {
     val data = store.activeDataOrNull ?: return
     val highlight by vm.mountHighlight.collectAsStateWithLifecycle()
 
-    val needed = remember(data.recruits, data.paths, vm.fe.characters, vm.classesById) {
-        mountNeeded(vm.fe.characters, data.recruits, data.paths, vm.classesById)
+    val needed = remember(data.recruitsByRoute, data.route, data.paths, vm.fe.characters, vm.classesById) {
+        mountNeeded(vm.fe.characters, data.recruitsFor(data.route), data.paths, vm.classesById)
     }
     val byType = remember(vm.fe.mounts) { vm.fe.mounts.groupBy { it.type } }
     val orderedTypes = remember(byType) {
@@ -135,8 +136,8 @@ private fun MountCard(vm: PlannerViewModel, m: Mount, data: com.fefw.planner.dat
     val captured = ms?.captured == true
     val assigned = ms?.assigned.orEmpty()
     val flagged = mountFlagged(m, vm.routeKeys)
-    val eligible = remember(data.recruits, vm.fe.characters) {
-        vm.fe.characters.filter { isPlannedOrDone(data.recruits, it.id) }
+    val eligible = remember(data.recruitsByRoute, data.route, vm.fe.characters) {
+        vm.fe.characters.filter { isPlannedOrDone(data.recruitsFor(data.route), it.id) }
     }
 
     var pickOpen by remember { mutableStateOf(false) }

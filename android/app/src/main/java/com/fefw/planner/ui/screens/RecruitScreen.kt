@@ -47,6 +47,7 @@ import com.fefw.planner.data.formatMoney
 import com.fefw.planner.data.groupScoutsByRep
 import com.fefw.planner.data.matchFilter
 import com.fefw.planner.data.recruitPool
+import com.fefw.planner.data.recruitsFor
 import com.fefw.planner.data.repThresholds
 import com.fefw.planner.data.scoutComparator
 import com.fefw.planner.data.storyOrderComparator
@@ -92,10 +93,11 @@ fun RecruitScreen(vm: PlannerViewModel) {
     val expandCmp by vm.expandCmp.collectAsStateWithLifecycle()
 
     val route = data.route
+    val routeRecruits = data.recruitsFor(route)
     val pool = remember(vm.fe.characters, route) { recruitPool(vm.fe.characters, route) }
-    val shown = pool.filter { matchFilter(it, q, onlyPlanned, repMin, data.recruits) }
+    val shown = pool.filter { matchFilter(it, q, onlyPlanned, repMin, routeRecruits) }
     val scoutAll = pool.count { it.r?.kind == KIND_SCOUT }
-    val plannedCount = pool.count { data.recruits[it.char.id]?.planned == true }
+    val plannedCount = pool.count { routeRecruits[it.char.id]?.planned == true }
 
     var sheetOpen by remember { mutableStateOf(false) }
     if (sheetOpen) {
@@ -284,7 +286,7 @@ private fun FixedRow(row: RecruitRow) {
 private fun ScoutRow(vm: PlannerViewModel, row: RecruitRow, data: com.fefw.planner.data.SlotData, expandCmp: Set<String>) {
     val c = row.char
     val r = row.r
-    val rec = data.recruits[c.id]
+    val rec = data.recruitsFor(data.route)[c.id]
     val planned = rec?.planned == true
     val done = rec?.done == true
     val cmpOpen = c.id in expandCmp
@@ -443,7 +445,7 @@ private fun HandleSheet(
             Text("已计划 $plannedCount 人 · 本线可挖 $scoutAll 人", style = MaterialTheme.typography.bodySmall, color = Muted)
 
             val scoutPlanned = vm.fe.characters.filter {
-                data.recruits[it.id]?.planned == true && it.recruitByRoute[route]?.kind == KIND_SCOUT
+                data.recruitsFor(route)[it.id]?.planned == true && it.recruitByRoute[route]?.kind == KIND_SCOUT
             }
             if (scoutPlanned.isEmpty()) {
                 EmptyHint(

@@ -25,10 +25,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.fefw.planner.data.Character
 import com.fefw.planner.data.RecruitInfo
+import com.fefw.planner.data.RecruitState
 import com.fefw.planner.data.SlotData
 import com.fefw.planner.data.bestScoutScore
 import com.fefw.planner.data.cmpScore
 import com.fefw.planner.data.hasScout
+import com.fefw.planner.data.recruitsFor
 import com.fefw.planner.ui.components.AssetImage
 import com.fefw.planner.ui.components.Badge
 import com.fefw.planner.ui.components.BadgeKind
@@ -98,7 +100,7 @@ fun CharsScreen(vm: PlannerViewModel) {
 
 @Composable
 private fun CharRow(c: Character, route: String, data: SlotData, routeKeys: List<String>) {
-    val rec = data.recruits[c.id]
+    val rec = data.recruitsFor(route)[c.id]
     val best = bestScoutScore(c, routeKeys)
     Column(
         modifier = Modifier
@@ -119,16 +121,23 @@ private fun CharRow(c: Character, route: String, data: SlotData, routeKeys: List
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text(c.startClass.orEmpty(), style = MaterialTheme.typography.bodySmall, color = Muted)
                     if (rec?.done == true) {
-                        Badge("已招募", BadgeKind.Story)
+                        Badge("本线已招募", BadgeKind.Story)
                     } else if (rec?.planned == true) {
-                        Badge("已计划", BadgeKind.Hero)
+                        Badge("本线已计划", BadgeKind.Hero)
                     }
                 }
             }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             routeKeys.forEach { k ->
-                CharRouteCell(c = c, routeKey = k, curRoute = route, best = best, modifier = Modifier.weight(1f))
+                CharRouteCell(
+                    c = c,
+                    routeKey = k,
+                    curRoute = route,
+                    best = best,
+                    rec = data.recruitsFor(k)[c.id],
+                    modifier = Modifier.weight(1f)
+                )
             }
         }
     }
@@ -140,6 +149,7 @@ private fun CharRouteCell(
     routeKey: String,
     curRoute: String,
     best: Int?,
+    rec: RecruitState?,
     modifier: Modifier = Modifier
 ) {
     val r = c.recruitByRoute[routeKey]
@@ -147,6 +157,11 @@ private fun CharRouteCell(
     val isBest = r != null && r.kind == com.fefw.planner.data.KIND_SCOUT && best != null && cmpScore(r) == best
     val bg = if (isCur) AccentSoft else if (isBest) OkSoft else Panel3
     val bd = if (isCur) Primary else if (isBest) com.fefw.planner.ui.theme.Secondary else Border
+    val mark = when {
+        rec?.done == true -> "✓"
+        rec?.planned == true -> "☆"
+        else -> ""
+    }
 
     Column(
         modifier = modifier
@@ -156,7 +171,12 @@ private fun CharRouteCell(
             .padding(6.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        Text(routeKey, style = MaterialTheme.typography.bodySmall, color = if (isCur) TextPrimary else Muted)
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(3.dp)) {
+            Text(routeKey, style = MaterialTheme.typography.bodySmall, color = if (isCur) TextPrimary else Muted)
+            if (mark.isNotEmpty()) {
+                Text(mark, style = MaterialTheme.typography.bodySmall, color = if (rec?.done == true) OkText else Primary)
+            }
+        }
         when {
             r == null || r.kind == com.fefw.planner.data.KIND_NO -> Text("—", style = MaterialTheme.typography.bodySmall, color = Muted2)
             r.kind == com.fefw.planner.data.KIND_STORY -> Badge("剧情加入", BadgeKind.Story)

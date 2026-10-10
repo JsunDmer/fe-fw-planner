@@ -39,6 +39,15 @@ data class UiState(
 @Serializable
 data class SlotData(
     val route: String = "",
+    /**
+     * 按主角线分区保存挖角勾选：routeKey -> charId -> 状态。
+     * 每条线的勾选互相独立，切换线路时不会把 A 线的勾选带到 B 线（修复过「切线路串线」的 bug）。
+     */
+    val recruitsByRoute: Map<String, Map<String, RecruitState>> = emptyMap(),
+    /**
+     * 旧存档兼容字段：早期版本按 charId 扁平存储勾选（无线路维度）。
+     * 仅用于读取旧数据，由 Repository.normalize() 迁移进 recruitsByRoute[route]；迁移后恒为空，不再写入。
+     */
     val recruits: Map<String, RecruitState> = emptyMap(),
     val paths: Map<String, PathState> = emptyMap(),
     val mounts: Map<String, MountState> = emptyMap(),
@@ -58,6 +67,8 @@ data class Slot(
 
 @Serializable
 data class Store(val activeId: String? = null, val slots: List<Slot> = emptyList())
+
+fun SlotData.recruitsFor(route: String): Map<String, RecruitState> = recruitsByRoute[route].orEmpty()
 
 sealed interface ImportResult {
     data class All(val slots: List<Slot>) : ImportResult
@@ -168,7 +179,19 @@ class Repository(context: Context) {
         fun normalize(d: SlotData, defaultRoute: String): SlotData {
             val route = d.route.ifBlank { defaultRoute }
             val tab = if (d.ui.tab == "settings" || d.ui.tab.isBlank()) "recruit" else d.ui.tab
-            return d.copy(route = route, onboarded = d.onboarded ?: true, ui = d.ui.copy(tab = tab))
+            // 旧存档的扁平 recruits 没有线路维度，归入其当前主角线，升级后不丢勾选；之后该字段不再写入。
+            val byRoute = if (d.recruitsByRoute.isEmpty() && d.recruits.isNotEmpty()) {
+                mapOf(route to d.recruits)
+            } else {
+                d.recruitsByRoute
+            }
+            return d.copy(
+                route = route,
+                recruitsByRoute = byRoute,
+                recruits = emptyMap(),
+                onboarded = d.onboarded ?: true,
+                ui = d.ui.copy(tab = tab)
+            )
         }
     }
 }

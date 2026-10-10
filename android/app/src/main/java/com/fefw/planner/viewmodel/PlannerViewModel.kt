@@ -17,6 +17,7 @@ import com.fefw.planner.data.Slot
 import com.fefw.planner.data.SlotData
 import com.fefw.planner.data.Store
 import com.fefw.planner.data.UiState
+import com.fefw.planner.data.recruitsFor
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -143,16 +144,20 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
 
     fun togglePlanned(id: String) {
         mutate { d ->
-            val rec = d.recruits[id] ?: RecruitState()
-            d.copy(recruits = d.recruits + (id to rec.copy(planned = !rec.planned)))
+            val map = d.recruitsFor(d.route)
+            val rec = map[id] ?: RecruitState()
+            val next = map + (id to rec.copy(planned = !rec.planned))
+            d.copy(recruitsByRoute = d.recruitsByRoute + (d.route to next))
         }
     }
 
     fun toggleDone(id: String) {
         mutate { d ->
-            val rec = d.recruits[id] ?: RecruitState()
+            val map = d.recruitsFor(d.route)
+            val rec = map[id] ?: RecruitState()
             val done = !rec.done
-            d.copy(recruits = d.recruits + (id to rec.copy(done = done, planned = if (done) true else rec.planned)))
+            val next = map + (id to rec.copy(done = done, planned = if (done) true else rec.planned))
+            d.copy(recruitsByRoute = d.recruitsByRoute + (d.route to next))
         }
     }
 
