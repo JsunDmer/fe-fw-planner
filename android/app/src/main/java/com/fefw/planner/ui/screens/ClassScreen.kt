@@ -32,14 +32,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.fefw.planner.data.CUSTOM_TIERS
 import com.fefw.planner.data.Character
 import com.fefw.planner.data.ClassInfo
+import com.fefw.planner.data.Growth
 import com.fefw.planner.data.MOUNT_UNIT_REGEX
 import com.fefw.planner.data.Step
+import com.fefw.planner.data.growthCells
 import com.fefw.planner.data.growthInline
 import com.fefw.planner.data.recruitsFor
 import com.fefw.planner.data.resolveSteps
@@ -50,6 +53,7 @@ import com.fefw.planner.ui.components.CheckChip
 import com.fefw.planner.ui.components.ChoiceChip
 import com.fefw.planner.ui.components.EmptyHint
 import com.fefw.planner.ui.components.FefwTextField
+import com.fefw.planner.ui.components.GrowthGrid
 import com.fefw.planner.ui.components.KV
 import com.fefw.planner.ui.components.PanelCard
 import com.fefw.planner.ui.components.TagPill
@@ -140,11 +144,8 @@ private fun CharPlanCard(vm: PlannerViewModel, c: Character, data: com.fefw.plan
                 if (start.isNotBlank()) {
                     Text("初始职业：$start", style = MaterialTheme.typography.bodySmall, color = Muted)
                 }
-                Text(
-                    "成长：${growthInline(c.growth, vm.fe.stats)}",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = TextSecondary
-                )
+                Text("基础成长", style = MaterialTheme.typography.bodySmall, color = Muted)
+                GrowthGrid(growthCells(c.growth, null, vm.fe.stats), compact = true)
             }
         }
 
@@ -179,6 +180,7 @@ private fun CharPlanCard(vm: PlannerViewModel, c: Character, data: com.fefw.plan
                             charId = c.id,
                             step = s,
                             cls = vm.classesById[s.classId],
+                            baseGrowth = c.growth,
                             done = doneSteps[s.tier] == true,
                             opened = s.classId in expandClass
                         )
@@ -259,14 +261,17 @@ private fun StepNode(
     charId: String,
     step: Step,
     cls: ClassInfo?,
+    baseGrowth: Growth,
     done: Boolean,
     opened: Boolean
 ) {
     val unitType = cls?.unitType.orEmpty()
     val needsMount = MOUNT_UNIT_REGEX.containsMatchIn(unitType)
+    // 有效成长 = 角色基础 + 职业加成；结构固定 9 格，保证所有收起态节点等高。
+    val cells = growthCells(baseGrowth, cls?.growth, vm.fe.stats)
     Column(
         modifier = Modifier
-            .width(132.dp)
+            .width(150.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(if (done) com.fefw.planner.ui.theme.OkSoft else Surface2)
             .border(1.dp, if (done) com.fefw.planner.ui.theme.Secondary else Border, RoundedCornerShape(8.dp))
@@ -277,17 +282,29 @@ private fun StepNode(
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             AssetImage(cls?.icon, step.name, Modifier.size(30.dp))
             Column {
-                Text(step.tier, style = MaterialTheme.typography.bodySmall, color = ScoutText)
-                Text(if (cls != null) cls.name else step.name, style = MaterialTheme.typography.bodyMedium, color = TextPrimary)
+                Text(step.tier, fontSize = 10.sp, color = ScoutText, maxLines = 1)
+                Text(
+                    if (cls != null) cls.name else step.name,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = TextPrimary,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
         }
-        if (cls != null) {
+        GrowthGrid(cells)
+        if (cls != null && opened) {
             val req = cls.requirement.ifBlank { "转职证" }
-            Text("需求：$req", style = MaterialTheme.typography.bodySmall, color = Muted, maxLines = 2)
+            KV("需求", req)
             if (!cls.unlock.isNullOrBlank()) {
                 Text("解锁：${cls.unlock}", style = MaterialTheme.typography.bodySmall, color = ScoutText, maxLines = 2)
             }
-            Text("成长：${growthInline(cls.growth, vm.fe.stats)}", style = MaterialTheme.typography.bodySmall, color = TextSecondary, maxLines = 2)
+            Text(
+                "成长加成：${growthInline(cls.growth, vm.fe.stats)}",
+                style = MaterialTheme.typography.bodySmall,
+                color = TextSecondary,
+                maxLines = 2
+            )
             if (cls.mastery.isNotBlank()) {
                 KV("精通", cls.mastery)
             }
@@ -309,17 +326,11 @@ private fun StepNode(
                     Text("需要坐骑 →", style = MaterialTheme.typography.bodySmall, color = WarnText)
                 }
             }
-            if (opened) {
-                ClassDetail(cls, vm)
-            }
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                CheckChip(checked = done, label = "已完成", onToggle = { vm.toggleStepDone(charId, step.tier) }, mark = "✓")
-                if (opened) {
-                    Text("▾", style = MaterialTheme.typography.bodySmall, color = Muted)
-                } else {
-                    Text("▸", style = MaterialTheme.typography.bodySmall, color = Muted)
-                }
-            }
+            ClassDetail(cls, vm)
+        }
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            CheckChip(checked = done, label = "已完成", onToggle = { vm.toggleStepDone(charId, step.tier) }, mark = "✓")
+            Text(if (opened) "▾" else "▸", style = MaterialTheme.typography.bodySmall, color = Muted)
         }
     }
 }

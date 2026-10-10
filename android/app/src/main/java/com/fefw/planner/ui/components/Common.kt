@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,8 +35,12 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.fefw.planner.data.GrowthCell
 import com.fefw.planner.ui.theme.AccentSoft
 import com.fefw.planner.ui.theme.Bg
 import com.fefw.planner.ui.theme.Border
@@ -325,5 +331,82 @@ fun EmptyHint(text: String, modifier: Modifier = Modifier) {
         contentAlignment = Alignment.Center
     ) {
         Text(text, style = MaterialTheme.typography.bodyMedium, color = Muted)
+    }
+}
+
+/**
+ * 3×3 成长率网格。每格使用固定高度与 weight 布局，
+ * 保证不同职业节点之间列对齐、行高等宽，避免纯文本成长串造成的错行与不可读。
+ */
+@Composable
+fun GrowthGrid(cells: List<GrowthCell>, modifier: Modifier = Modifier, compact: Boolean = false) {
+    val cellHeight = if (compact) 38.dp else 46.dp
+    Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        cells.chunked(3).forEach { rowCells ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                rowCells.forEach { cell ->
+                    GrowthCellView(cell = cell, height = cellHeight, compact = compact, modifier = Modifier.weight(1f))
+                }
+                repeat(3 - rowCells.size) { Spacer(Modifier.weight(1f)) }
+            }
+        }
+    }
+}
+
+@Composable
+private fun GrowthCellView(cell: GrowthCell, height: Dp, compact: Boolean, modifier: Modifier = Modifier) {
+    val valueColor = when {
+        cell.value >= 60 -> OkText
+        cell.value >= 45 -> Primary
+        cell.value >= 30 -> TextSecondary
+        else -> Muted
+    }
+    Column(
+        modifier = modifier
+            .height(height)
+            .clip(RoundedCornerShape(6.dp))
+            .background(Panel3)
+            .border(
+                1.dp,
+                if (cell.bonus > 0) Primary.copy(alpha = 0.55f) else BorderSoft,
+                RoundedCornerShape(6.dp)
+            )
+            .padding(horizontal = 4.dp, vertical = 2.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(2.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                cell.label,
+                fontSize = 9.sp,
+                color = Muted,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1f, fill = false)
+            )
+            if (cell.bonus > 0) {
+                Text("+${cell.bonus}", fontSize = 8.sp, color = Primary, maxLines = 1)
+            }
+        }
+        Text(
+            "${cell.value}",
+            fontSize = if (compact) 14.sp else 16.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = valueColor
+        )
+        Box(
+            Modifier
+                .height(3.dp)
+                .fillMaxWidth((cell.value / 80f).coerceIn(0.08f, 1f))
+                .clip(RoundedCornerShape(2.dp))
+                .background(valueColor.copy(alpha = 0.8f))
+        )
     }
 }

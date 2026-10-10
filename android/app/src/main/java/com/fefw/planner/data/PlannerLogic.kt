@@ -278,6 +278,21 @@ fun growthInline(g: Growth?, stats: List<List<String>>): String {
     return parts.joinToString(" ").ifBlank { "—" }
 }
 
+/** 单格成长数据：value 为有效成长率，bonus 单列供 UI 标注职业加成。 */
+data class GrowthCell(val key: String, val label: String, val value: Int, val bonus: Int)
+
+/**
+ * 有效成长率 = 角色基础成长 + 职业成长加成，即"角色基础后"的成长率。
+ * bonus 单独保留，供 UI 标注该职业具体提升了哪些属性。
+ */
+fun growthCells(base: Growth?, cls: Growth?, stats: List<List<String>>): List<GrowthCell> =
+    stats.map { s ->
+        val key = s.getOrNull(0).orEmpty()
+        val label = s.getOrNull(1) ?: key
+        val bonus = cls?.value(key) ?: 0
+        GrowthCell(key, label, (base?.value(key) ?: 0) + bonus, bonus)
+    }
+
 fun statLabel(stats: List<List<String>>, key: String): String =
     stats.firstOrNull { it.firstOrNull() == key }?.getOrNull(1) ?: key
 
