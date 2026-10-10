@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Node / web build artifacts
+node_modules/
+src/bundle.js
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+android/.kotlin/
+android/captures/
+*.iml
+.kotlin/
+
+# Logs / temp
+*.log
