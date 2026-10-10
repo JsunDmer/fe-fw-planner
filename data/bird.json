@@ -1,0 +1,2640 @@
+{
+ "note": "台词为本站根据英文版整理后自行翻译，与中文版游戏内文字不完全相同；反应选项名为暂译。",
+ "sources": [
+  {
+   "t": "KeenGamer《完美喂鸟时光：全角色答案》（英文）",
+   "u": "https://www.keengamer.com/articles/guides/fire-emblem-fortunes-weave-perfect-bird-time-answers-for-every-character/"
+  },
+  {
+   "t": "RaiderKing《喂食白鸦：全角色完美答案》（英文，交叉核对）",
+   "u": "https://raiderking.com/fire-emblem-fortunes-weave-feed-pale-raven-all-characters-perfect-bird-time/"
+  }
+ ],
+ "chars": [
+  {
+   "name": "凯伊",
+   "lines": [
+    {
+     "q": "到底怎样才算长大成人啊？好像每个人都得跨过一道坎才行。",
+     "r": "凝视",
+     "en": "How do you become an adult, anyway? It seems like everyone has to overcome a challenge to do it."
+    },
+    {
+     "q": "你觉得我的枪术有一天能超过我爸吗？",
+     "r": "点头",
+     "en": "Do you think I'll ever be better with a spear than my dad?"
+    },
+    {
+     "q": "偶尔放松一下也不错吧？",
+     "r": "唱首动听的歌",
+     "en": "It's nice to unwind a little sometimes, huh?"
+    },
+    {
+     "q": "有时候别人好像一眼就能猜到我在想什么。我就那么好懂吗？",
+     "r": "歪头",
+     "en": "Sometimes, it's like people can guess what's on my mind. Am I that easy to read?"
+    },
+    {
+     "q": "跟你玩捉迷藏一定很好玩！",
+     "r": "拍打翅膀",
+     "en": "I bet it'd be fun to play hide-and-seek with you!"
+    },
+    {
+     "q": "我最受不了胆小鬼。不过，总比习惯了胆小要好吧。",
+     "r": "点头",
+     "en": "I can't stand cowardice. But I guess maybe that's better than getting used to it."
+    },
+    {
+     "q": "鸟的动作好快啊，你看起来什么攻击都躲得开！",
+     "r": "展开翅膀",
+     "en": "It's neat how quick birds can move. You look like you could dodge any attack!"
+    },
+    {
+     "q": "有时候会听到好听的鸟叫声，是你在唱吗？",
+     "r": "唱首动听的歌",
+     "en": "I hear pretty birdsong sometimes. Is that you?"
+    },
+    {
+     "q": "不知道从你眼里看出去，世界是什么样子。",
+     "r": "凝视",
+     "en": "I wonder what the world looks like through your eyes."
+    },
+    {
+     "q": "今天最适合钓鱼了！下次要不要跟我一起去？",
+     "r": "展开翅膀",
+     "en": "Today's a perfect day for fishing! You wanna come along with me sometime?"
+    }
+   ]
+  },
+  {
+   "name": "迪托利希",
+   "lines": [
+    {
+     "q": "静下心来，让它成为幽静的池水，把自己交给寂静。冥想是好事。",
+     "r": "点头",
+     "en": "Still your mind. Let it be a secluded pond. Give yourself to silence. It is good to meditate."
+    },
+    {
+     "q": "我从你身上感到某种深邃而危险的东西。也许安萨拉能把它揭露出来。",
+     "r": "威吓",
+     "en": "I sense in you something profound and menacing. Perhaps Answerer can expose it."
+    },
+    {
+     "q": "我斩杀过巨鸟。但我觉得和你交手会更有乐趣。",
+     "r": "威吓",
+     "en": "I have slain giant birds. Yet I feel I would enjoy battling you even more."
+    },
+    {
+     "q": "你毫无惧色。这很少见。你很少见。",
+     "r": "凝视",
+     "en": "You show no signs of fear. That is unusual. You are unusual."
+    },
+    {
+     "q": "找不到值得一决的对手。我很渴——不是喉咙，是灵魂。",
+     "r": "唱首动听的歌",
+     "en": "I cannot find a fitting opponent for a duel. I am parched. Not my throat, but my soul."
+    },
+    {
+     "q": "一头海兽让我漂流到了这片土地。或许这就是命运之手。",
+     "r": "点头",
+     "en": "A sea beast diverted me to this land. Perhaps it was the hand of fate."
+    },
+    {
+     "q": "我厌恶束缚。你呢？",
+     "r": "歪头",
+     "en": "I detest restraints. And you?"
+    },
+    {
+     "q": "我讨厌束缚我的人……他们扼杀快乐，只带来无聊。",
+     "r": "展开翅膀",
+     "en": "I dislike those who fetter me… They constrain joy and supply boredom."
+    },
+    {
+     "q": "我喜欢你的眼睛，像阳光一样明亮。",
+     "r": "凝视",
+     "en": "I like your eyes. They are as bright as sunlight."
+    },
+    {
+     "q": "我摸摸你，你不介意吧？",
+     "r": "展开翅膀",
+     "en": "You do not mind if I touch you?"
+    }
+   ]
+  },
+  {
+   "name": "赛奥朵拉",
+   "lines": [
+    {
+     "q": "你眼中有一种鸟类少见的坚定决心。",
+     "r": "凝视",
+     "en": "There is a firm resolve in your eyes not often seen in birds."
+    },
+    {
+     "q": "老实说，我不太喜欢虫子。你常吃虫子吗？",
+     "r": "歪头",
+     "en": "In truth, I have no fondness for insects. Do you eat them often?"
+    },
+    {
+     "q": "我们自认受尤法斯的恩惠，所以不得不对她抱以应有的敬意。",
+     "r": "点头",
+     "en": "We see ourselves as indebted to Yu Phas, so we cannot help but afford her the proper reverence."
+    },
+    {
+     "q": "最近总觉得有些疲惫……",
+     "r": "唱首动听的歌",
+     "en": "I find myself somewhat weary of late…"
+    },
+    {
+     "q": "若能让这世界成为我的子民能繁荣生息之地，我便心满意足。",
+     "r": "展开翅膀",
+     "en": "If I can make this world a place where my people can thrive, I will consider myself satisfied."
+    },
+    {
+     "q": "小时候，我总是听着睡前故事和摇篮曲入睡。",
+     "r": "唱首动听的歌",
+     "en": "As a child, I used to fall asleep listening to bedtime stories and lullabies."
+    },
+    {
+     "q": "我渴望成为让尤法斯与萨拉米斯子民引以为傲的女王。",
+     "r": "展开翅膀",
+     "en": "I yearn to be a queen that Yu Phas and the people of Saramis can take pride in."
+    },
+    {
+     "q": "我的臣下一看到我爱画的素描就皱眉。都怪我这只新手臂。",
+     "r": "点头",
+     "en": "My retainer winces at the sight of the sketches I enjoy drawing. I blame this new arm of mine."
+    },
+    {
+     "q": "身为达马斯卡之子，要我信任神殿是不可能的。",
+     "r": "点头",
+     "en": "As a child of Damascar, I cannot be expected to place my trust in the temples."
+    },
+    {
+     "q": "我考虑过拿你来练枪术。你一定躲得开我的攻击吧。",
+     "r": "威吓",
+     "en": "I have considered training my spear technique against you. Surely you can avoid my blows."
+    }
+   ]
+  },
+  {
+   "name": "蕾达",
+   "lines": [
+    {
+     "q": "我常常在想，向神明祈祷到底有没有意义。",
+     "r": "凝视",
+     "en": "I often wonder if there's any point in praying to the gods."
+    },
+    {
+     "q": "最近一直睡不好。听听摇篮曲会不会有用呢？",
+     "r": "唱首动听的歌",
+     "en": "I've been having trouble sleeping. I wonder if hearing a lullaby would help."
+    },
+    {
+     "q": "弹着弹着，常常就弹回了家乡的曲子。大概是想家了吧。",
+     "r": "凝视",
+     "en": "In the middle of playing, I often find I'm returning to songs from back home. I guess I'm nostalgic."
+    },
+    {
+     "q": "为了达成目的，我愿意不择手段、付出任何牺牲。这样不对吗？",
+     "r": "歪头",
+     "en": "I'm willing to use any means, make any sacrifice, to achieve my goal. Is that wrong?"
+    },
+    {
+     "q": "我最受不了蛇。要是这里有蛇，你会帮我赶走吧？",
+     "r": "威吓",
+     "en": "I can't stand snakes. If there was a snake here, you would chase it away, right?"
+    },
+    {
+     "q": "鸟很会唱歌对吧？那我弹比维拉琴，你来唱怎么样？",
+     "r": "唱首动听的歌",
+     "en": "Birds are good at singing, aren't they? So how about I play my vihuela and you sing for me?"
+    },
+    {
+     "q": "要是看见我骑马出去，可要飞下来跟我打招呼哦。",
+     "r": "展开翅膀",
+     "en": "If you see me on a horse ride, you'd better swoop down and say hello."
+    },
+    {
+     "q": "被掌声包围的感觉真好。想体验的话，我表演时就飞到我身边来吧。",
+     "r": "展开翅膀",
+     "en": "It's nice being showered in applause. If you want to experience it, come fly to me when I'm performing."
+    },
+    {
+     "q": "下次我做饭你要不要尝尝？人类好像都不爱吃我做的菜，不过鸟的话说不定……",
+     "r": "歪头",
+     "en": "The next time I make food, will you try it? Humans don't seem to like my cooking, but maybe a bird…"
+    },
+    {
+     "q": "跳舞的关键是姿势。驼着背，只会跳出可怜兮兮的舞。",
+     "r": "跳舞",
+     "en": "The key to dancing is posture. Slouch, and you'll only give a pitiful performance."
+    }
+   ]
+  },
+  {
+   "name": "亚历珊德拉",
+   "lines": [
+    {
+     "q": "你去过我的家乡特勒斯吗？那是个富饶又悠闲的伯爵领。",
+     "r": "展开翅膀",
+     "en": "Have you ever been to my home in Tellus? It's a wealthy county and has an easiness to it."
+    },
+    {
+     "q": "你是怎么打理羽毛的？好漂亮啊。",
+     "r": "梳理羽毛",
+     "en": "How do you take care of your feathers? They're so pretty."
+    },
+    {
+     "q": "刚才听到有人在背后说我坏话。我该怎么办？",
+     "r": "威吓",
+     "en": "I heard someone talking about me behind my back earlier. What should I do about that?"
+    },
+    {
+     "q": "在野外生活一定很可怕吧。要去危险的地方的话，记得叫我！",
+     "r": "点头",
+     "en": "It must be scary to live out in the wild. Please call for me if you're ever going somewhere dangerous!"
+    },
+    {
+     "q": "想见见布克发拉斯吗？你们俩要是能成为朋友就好了！",
+     "r": "点头",
+     "en": "Would you like to meet Bucephalus? It'd be fun if you two were friends!"
+    },
+    {
+     "q": "在天上翱翔的感觉很棒吧？你能飞多高？",
+     "r": "展开翅膀",
+     "en": "It feels great to soar in the sky, doesn't it? How high can you fly?"
+    },
+    {
+     "q": "我对自己的战斗能力很有信心。改天让你见识一下！",
+     "r": "凝视",
+     "en": "I'm confident in my abilities in battle. I should show you what I can do sometime!"
+    },
+    {
+     "q": "我正努力配得上「白银少女」的名号，有布克发拉斯在，一定没问题！",
+     "r": "展开翅膀",
+     "en": "I'm trying to live up to the name of \"Silver Maiden,\" and with Bucephalus, I'm sure that I will!"
+    },
+    {
+     "q": "我偶尔会骑马远行。下次要不要一起去？",
+     "r": "展开翅膀",
+     "en": "I go on long rides every now and then. Would you like to come along sometime?"
+    },
+    {
+     "q": "关于父母，我只有幸福的回忆。可一想到他们只活在回忆里，还是会难过。",
+     "r": "唱首动听的歌",
+     "en": "I have nothing but happy memories of my parents. But I do get sad, knowing they live only in memory."
+    }
+   ]
+  },
+  {
+   "name": "班迪兹",
+   "lines": [
+    {
+     "q": "稀罕物能卖高价，所以我喜欢。反正你也不懂这些。",
+     "r": "歪头",
+     "en": "Rarities fetch a high price, which is why I like them. Not that you'd know about such things."
+    },
+    {
+     "q": "你读过《哈斯德鲁巴战记》吗？那些场面保证让你热血沸腾！",
+     "r": "翻跟头",
+     "en": "Have you read the War Chronicle of Hasdrubal? I assure you, its scenes will thrill you to the core!"
+    },
+    {
+     "q": "我年轻时可是个美男子，走到哪儿都被人称赞！",
+     "r": "唱首动听的歌",
+     "en": "I was a fine specimen of a man in my youth. No matter where I went, people sang my praises!"
+    },
+    {
+     "q": "不管失败多少次，只要人还活着，梦想就不会死。很有道理吧？",
+     "r": "展开翅膀",
+     "en": "No matter how many times you fail, your dream doesn't die until you do. Good advice, right?"
+    },
+    {
+     "q": "我英明、了不起、潇洒，而且是完美的将军！你完全同意，对吧？",
+     "r": "点头",
+     "en": "I am brilliant, amazing, dashing, and more! And I'm a perfect general! You agree fully, correct?"
+    },
+    {
+     "q": "「悔改」「后悔」「改过」这些词对我来说都很陌生。不过我猜你全都做过吧。",
+     "r": "威吓",
+     "en": "Words like \"repent,\" \"regret,\" and \"reform\" are all strange to me. But I suspect you do all of that."
+    },
+    {
+     "q": "我讨厌寡淡的饭菜，我要过奢华的生活。你也想要吧？",
+     "r": "点头",
+     "en": "I despise a bland meal. I want a life of luxury. You must want that too, yes?"
+    },
+    {
+     "q": "你迟早会明白，我才是这个时代最伟大的领袖！",
+     "r": "凝视",
+     "en": "It's only a matter of time before you realize that I was the best leader of this whole era!"
+    },
+    {
+     "q": "我的眼罩底下藏着和过去有关的秘密。不过不告诉你。哈！",
+     "r": "歪头",
+     "en": "I got a secret under my eye patch that relates to my past. I won't tell you about it though. HA!"
+    }
+   ]
+  },
+  {
+   "name": "波拿帕尔特",
+   "lines": [
+    {
+     "q": "后辈们一定会超越我们。嗯！我很期待。",
+     "r": "展开翅膀",
+     "en": "Future generations will surely surpass us. Hm! I look forward to it."
+    },
+    {
+     "q": "看得出我很用心打理胡子吗？",
+     "r": "点头",
+     "en": "Is it obvious that I take painstaking care of my beard?"
+    },
+    {
+     "q": "看着你，我有种似曾相识的感觉。你觉得是为什么？",
+     "r": "凝视",
+     "en": "Looking at you gives me a sense of déj&agrave; vu. Why do you suppose that is?"
+    },
+    {
+     "q": "最近总是陷入阴郁的思绪……",
+     "r": "唱首动听的歌",
+     "en": "Of late, I find myself mired in dismal thoughts…"
+    },
+    {
+     "q": "我说教应该没他们说的那么多吧？是吧？",
+     "r": "歪头",
+     "en": "Surely I do not lecture as much as they say. Do I?"
+    },
+    {
+     "q": "少女们听着吟游诗人的歌声，都听得入迷了。",
+     "r": "唱首动听的歌",
+     "en": "As they listened, the lovely maidens were enchanted by the bard's voice."
+    },
+    {
+     "q": "你相信萨拉米斯会有光明的未来吗？",
+     "r": "展开翅膀",
+     "en": "Do you believe a bright future awaits Saramis?"
+    },
+    {
+     "q": "我虽然上了年纪，头脑依然敏锐。你说是吧？",
+     "r": "点头",
+     "en": "I would say I remain sharp despite my age. Wouldn't you agree?"
+    },
+    {
+     "q": "一只自由自在的野鸟，被捉去献给我的女王，会觉得残忍吗？",
+     "r": "威吓",
+     "en": "Would a wild and unfettered bird consider it cruel to be captured as a gift for my queen?"
+    },
+    {
+     "q": "职责高于一切。哪怕最后落得离婚的下场。",
+     "r": "歪头",
+     "en": "One's duties must take precedence over all else. Even if the end result is divorce."
+    }
+   ]
+  },
+  {
+   "name": "巴卡尼亚",
+   "lines": [
+    {
+     "q": "年纪越大，要发的牢骚就越多。或许我该改改了。",
+     "r": "歪头",
+     "en": "The older I get, the more I find to grumble about. Perhaps I should work on that."
+    },
+    {
+     "q": "你真有韧劲。你要是人的话，我真想把你训练成骑士。",
+     "r": "展开翅膀",
+     "en": "You're tenacious. If you were human, I'd want to train you as a knight."
+    },
+    {
+     "q": "我这个年纪的人大都谈过恋爱，我却只对主君尽忠。不过这样也好，对吧？",
+     "r": "点头",
+     "en": "Most my age have had romantic relationships, I've only had loyalty to my lord. But that's fine, right?"
+    },
+    {
+     "q": "住在基多尼亚时，我教年轻人武艺。要我教你几招吗？",
+     "r": "翻跟头",
+     "en": "When I lived in Cydonia, I tutored youths in combat. Would you like me to teach you some martial arts?"
+    },
+    {
+     "q": "大小姐的心被复仇的念头占满了。要怎样才能让她解脱……",
+     "r": "唱首动听的歌",
+     "en": "Milady's heart is consumed with a desire for revenge. What I would do to free her from it…"
+    },
+    {
+     "q": "为主君效力留下的伤疤都是勋章。我这道很帅气吧？",
+     "r": "点头",
+     "en": "Any scar you get in your lord's service is a badge of honor. Mine is handsome, don't you think?"
+    },
+    {
+     "q": "眼神这么坚定的鸟真少见。",
+     "r": "凝视",
+     "en": "It's strange to see a bird with such conviction in its eyes."
+    },
+    {
+     "q": "假如敌人来袭，你要保护的人就在你身后，你会怎么做？",
+     "r": "威吓",
+     "en": "Let's say an enemy attacked while your charge stood behind you. What would you do?"
+    },
+    {
+     "q": "躲藏的那段日子，饭都是我做的。要我给你做点什么吗？",
+     "r": "点头",
+     "en": "When we were in hiding, I did all the cooking. Would you like me to make you something?"
+    }
+   ]
+  },
+  {
+   "name": "卡塔妮雅",
+   "lines": [
+    {
+     "q": "打理仪容非常重要。你有好好照顾自己吗？",
+     "r": "展开翅膀",
+     "en": "Caring for one's personal appearance is crucial. Are you taking good care of yourself?"
+    },
+    {
+     "q": "总听说有人结婚了……我的理想对象到底在哪儿？我一直在找。",
+     "r": "轻声歌唱",
+     "en": "I keep hearing about people getting married… Where is my ideal partner? I've been searching."
+    },
+    {
+     "q": "我旅行了很多年，学会了自娱自乐。想学学怎么打发时间吗？",
+     "r": "展开翅膀",
+     "en": "I've traveled for years, so I learned how to amuse myself. Care to learn how to while away the time?"
+    },
+    {
+     "q": "我衣服底下藏着一道可怕的伤疤，是我英勇作战的证明。厉害吧？",
+     "r": "点头",
+     "en": "I have a terrible scar that's hidden by my outfit. It's proof that I fight bravely. Impressive, yes?"
+    },
+    {
+     "q": "我分得出鸟的歌声是不是真的动听。你的歌声够一流吗？",
+     "r": "唱首动听的歌",
+     "en": "I can tell if a bird's singing voice is truly beautiful or not. Is your song of sterling quality?"
+    },
+    {
+     "q": "言行要得体，否则会给主君丢脸。你要是侍奉谁，也要记住这一点。",
+     "r": "点头",
+     "en": "Always conduct yourself well, or it reflects badly on your lord. Keep that in mind if you serve someone."
+    },
+    {
+     "q": "重视一流的东西，自然就有眼光。而且我可是一流的骑士哦。",
+     "r": "凝视",
+     "en": "If you value top quality, you develop an eye for it. And I am a sterling knight, you know."
+    },
+    {
+     "q": "钱包越来越瘪，肚子也越来越空。干脆在这儿吃点鸟食算了……",
+     "r": "威吓",
+     "en": "My pockets are getting emptier, and so is my stomach. Maybe I'll just eat some bird food here…"
+    },
+    {
+     "q": "我曾侍奉一位贵族，但一场可怕的变故让他失势了。真是遗憾……",
+     "r": "轻声歌唱",
+     "en": "I used to serve a noble. But a terrible incident led to his downfall. Very regrettable…"
+    },
+    {
+     "q": "我的天马口味挑剔，不合格的饲料一脚就踢开。真没规矩。",
+     "r": "轻声歌唱",
+     "en": "My pegasus has a refined palate and kicks away any food that's not up to par. It's bad behavior."
+    }
+   ]
+  },
+  {
+   "name": "大刀",
+   "lines": [
+    {
+     "q": "爱娜特莉亚对我总是很凶。你觉得她是在跟我调情吗？",
+     "r": "歪头",
+     "en": "Anatolia's always so hard on me. You think it's her way of flirting with me?"
+    },
+    {
+     "q": "建筑怎么搭的，我看一眼就知道。你呢？",
+     "r": "歪头",
+     "en": "I can tell how a building is put together with just a glance. What about you?"
+    },
+    {
+     "q": "我爹妈都不在了，但我不怎么寂寞。我可比谁都强！",
+     "r": "展开翅膀",
+     "en": "My parents are gone, but I don't really feel lonely. I'm stronger than anyone, ya know!"
+    },
+    {
+     "q": "饿肚子会让人难过。你要是需要吃的，跟我说一声。",
+     "r": "点头",
+     "en": "Being hungry can make ya sad. You ever need food, you let me know."
+    },
+    {
+     "q": "村里的人总是饿着肚子。我想让大家想吃就能吃上饭。",
+     "r": "凝视",
+     "en": "Everyone in the village is always hungry. I wanna make it so they can all eat whenever they want."
+    },
+    {
+     "q": "在村里的时候，我们会抓沙虫来吃。下次给你带点！",
+     "r": "点头",
+     "en": "Back in the village, we hunted and ate sandworms. I'll bring you some sometime!"
+    },
+    {
+     "q": "我看得出你对我有兴趣。我长得帅嘛，不怪你！",
+     "r": "凝视",
+     "en": "I can tell you're interested in me. I'm a good-lookin' guy, so I can't blame ya!"
+    },
+    {
+     "q": "不是针对你，你看起来不太好吃，全是骨头。我把你留到最后。",
+     "r": "威吓",
+     "en": "Nothing personal, but you don't really look that tasty. You're all bones for one thing. I'll save you for last."
+    },
+    {
+     "q": "跟你说，我挺喜欢你的。要不要加入大刀帮？我很强，会罩着你！",
+     "r": "展开翅膀",
+     "en": "Know what? I like you. How about if you join the Dadao Gang? I'm strong, and I'll take care of you!"
+    }
+   ]
+  },
+  {
+   "name": "丹提",
+   "lines": [
+    {
+     "q": "比起鱼那种空洞无神、什么都映不出的眼睛，我更偏爱鸟的脸。呃！",
+     "r": "凝视",
+     "en": "I'm partial to birds' faces, not like fishes', with those soulless eyes. Mirrors reflecting nothing. Gah!"
+    },
+    {
+     "q": "酒能给体验增添色彩，让任何对话都焕发新意！你不这么认为吗？",
+     "r": "歪头",
+     "en": "Intoxicants add color to one's experiences, bring out a new side to any conversation! Don't you agree?"
+    },
+    {
+     "q": "我在自然美景环绕的家中长大，每天早上都被鸟鸣唤醒。",
+     "r": "唱首动听的歌",
+     "en": "I grew up in a home surrounded by natural beauty, where I awoke each morning to birdsong."
+    },
+    {
+     "q": "我来给你朗读家父艾尼阿斯的杰作吧。连你这颗鸟儿的心都能打动！",
+     "r": "点头",
+     "en": "I will read you the masterpiece by my father Aeneus. It's powerful enough to move even your avian heart!"
+    },
+    {
+     "q": "要是有你这样的翅膀，我就能立刻飞到任何想研究的题材那里。想想看！",
+     "r": "展开翅膀",
+     "en": "Had I wings like yours, I could fly at once to any research subject I wanted. Imagine it!"
+    },
+    {
+     "q": "可惜你不会说人话。你一定有很多故事可讲。",
+     "r": "歪头",
+     "en": "It's too bad you don't speak any human languages. I'm sure you'd have tales to tell."
+    },
+    {
+     "q": "啊，我太爱城市了。坐着就能看尽喧嚣、混乱与狂欢！",
+     "r": "凝视",
+     "en": "Ahh, how I adore the city. You can sit back and witness the bustle, the confusion, the ecstasy!"
+    },
+    {
+     "q": "神殿给了我好多故事灵感！这么说来，神殿真是慷慨的赞助人。",
+     "r": "点头",
+     "en": "Through the temples, I've been given so many story ideas! In that way the temples are a generous patron."
+    },
+    {
+     "q": "我上一部作品是杰作，但下一部会更好。没错！因为我一直在进步。",
+     "r": "展开翅膀",
+     "en": "My last work was a masterpiece, but my next will be even better. Yes! For I am always improving."
+    },
+    {
+     "q": "每当沉思时，就有个恶魔嘲笑我没有才华。你也听过它的声音吗？",
+     "r": "歪头",
+     "en": "In moments of reflection, a demon taunts me, telling me I have no talent. Have you heard its voice too?"
+    }
+   ]
+  },
+  {
+   "name": "迪雅各",
+   "lines": [
+    {
+     "q": "你的目光出奇地锐利。这双眼睛在战斗中会是优势。",
+     "r": "凝视",
+     "en": "You have a strangely penetrating gaze. Your eyes would be an advantage in battle."
+    },
+    {
+     "q": "我当神殿的信使跑遍了各地，却从没见过你这样的鸟。",
+     "r": "歪头",
+     "en": "I've been all over, doing work as a messenger for a temple. But I've never seen a bird like you until now."
+    },
+    {
+     "q": "欧露赫露救过我的命。我想报答他是理所当然的吧？",
+     "r": "点头",
+     "en": "Orchel once saved my life. It's only natural that I want to return the favor, right?"
+    },
+    {
+     "q": "我不需要睡床，在哪儿都能休息。你也一样吗？",
+     "r": "点头",
+     "en": "I don't need to sleep on a bed. I can rest anywhere. Is it the same for you?"
+    },
+    {
+     "q": "我会用草药抹肉再烟熏来保存。你喜欢香味浓的食物吗？",
+     "r": "展开翅膀",
+     "en": "I know how to preserve meat by applying an herbal rub and smoking it. Do you like fragrant food?"
+    },
+    {
+     "q": "在森林里生存需要身手敏捷。你在树上也很灵活吗？",
+     "r": "翻跟头",
+     "en": "You need agility to survive in forests. I wonder, are you agile when you're in trees?"
+    },
+    {
+     "q": "这些刺青是哈尔·哈里族的标记。我多年前就离开了族人，但它们依然是我的一部分。",
+     "r": "凝视",
+     "en": "My tattoos mark me as a member of the Har Hali clan. I left them years ago, but they're still part of me."
+    },
+    {
+     "q": "毒草会害人，但也能制成药。知识永远是关键。",
+     "r": "点头",
+     "en": "Poisonous plants will harm people, but they can be made into medicine. As always, knowledge is key."
+    },
+    {
+     "q": "我对现在的生活很满意，不用为我担心。",
+     "r": "展开翅膀",
+     "en": "I'm happy with my life now. There's no reason to worry about me."
+    },
+    {
+     "q": "你信奉巴洛尔吗？我很久以前信过，现在不信了。",
+     "r": "歪头",
+     "en": "Do you worship Balor? I used to long ago, but I don't these days."
+    }
+   ]
+  },
+  {
+   "name": "艾丝梅拉尔达",
+   "lines": [
+    {
+     "q": "不知道我妈还好吗。要是能像你一样飞，我就去看她。",
+     "r": "展开翅膀",
+     "en": "I hope my mom's doing OK. If I could fly like you, I'd go see her."
+    },
+    {
+     "q": "肚子饿了就来找我！我偷偷塞给你好吃的鱼！",
+     "r": "展开翅膀",
+     "en": "If you're hungry, come find me! I'll slip you some tasty fish!"
+    },
+    {
+     "q": "一个人钓鱼的时候，我喜欢唱歌。只有我、海浪、风和我的歌声。",
+     "r": "唱首动听的歌",
+     "en": "When I'm all by myself fishing, I like to sing. Just me, the waves, the wind, and my voice."
+    },
+    {
+     "q": "关于大海的一切都是我爸教的。不知道我有没有越来越像他。",
+     "r": "点头",
+     "en": "My dad taught me everything I know about the sea. I wonder if I'm shaping up to be like him."
+    },
+    {
+     "q": "听说贵族都爱办浮华的派对。派对到底有什么好的？",
+     "r": "跳舞",
+     "en": "All the nobles like to throw flashy parties, or so I hear. What's so great about parties?"
+    },
+    {
+     "q": "我最讨厌撒谎的人。骗了别人还自己偷着乐，太不应该了。",
+     "r": "点头",
+     "en": "What I hate the most are liars. It's not good to deceive people and then laugh about it to yourself."
+    },
+    {
+     "q": "爸妈总说我的眼睛很漂亮。你觉得呢？",
+     "r": "凝视",
+     "en": "My mom and dad always said I have pretty eyes. What do you think?"
+    },
+    {
+     "q": "有时候鞑古席翁的男人会让我心动，可是……不行！我只有亲爱的！",
+     "r": "点头",
+     "en": "Sometimes the guys in Dagsion turn my head, but… No! Sweetie's the one for me!"
+    },
+    {
+     "q": "说起来，你身上的味道跟别的鸟不一样。别动，让我闻闻！",
+     "r": "威吓",
+     "en": "You know, you don't smell like other birds. Hold still. Let me check!"
+    },
+    {
+     "q": "我讨厌被人瞧不起。可是优雅的淑女不能痛揍对手……对吧？",
+     "r": "歪头",
+     "en": "I hate being looked down on. But I guess a refined lady can't wallop her foes…can she?"
+    }
+   ]
+  },
+  {
+   "name": "法毕欧",
+   "lines": [
+    {
+     "q": "这副伪装我也扮了好一阵子了。算是，嗯，习惯了。",
+     "r": "凝视",
+     "en": "I have spent some time with this guise by now. I have, hmm, acclimated to it."
+    },
+    {
+     "q": "我假扮传教士这么多年，这些单纯的野兽竟从不起疑。真是惊人。",
+     "r": "歪头",
+     "en": "I have feigned the role of a missionary for years, yet these simple beasts do not question it. Amazing."
+    },
+    {
+     "q": "你是最好的那种野兽，没有愚蠢的言语，也没有多余的动作。",
+     "r": "凝视",
+     "en": "You are the best kind of beast, no foolish words or wasted actions."
+    },
+    {
+     "q": "是这片土地奇怪，还是我变奇怪了？我也说不清。",
+     "r": "歪头",
+     "en": "Is this land strange, or have I become strange? I find I cannot say."
+    },
+    {
+     "q": "你多美啊。拿来做我手术刀下的标本正合适，嗯？",
+     "r": "威吓",
+     "en": "How beautiful you are. A fine specimen for my scalpel, hmm?"
+    },
+    {
+     "q": "光是看到美的事物，心情就会变好。",
+     "r": "唱首动听的歌",
+     "en": "Simply catching sight of a thing of beauty is enough to lift the spirits."
+    },
+    {
+     "q": "这片土地的阳光毫不留情。真希望有什么能挡一挡。",
+     "r": "展开翅膀",
+     "en": "In this land, the sun's rays are relentless. I wish for something to block them."
+    },
+    {
+     "q": "鞑古扎的植物让我很感兴趣。我还想观察、描绘更多。",
+     "r": "点头",
+     "en": "The plants of Dagda are of much interest to me. I would observe and sketch many more."
+    },
+    {
+     "q": "我不适合体力活。适合的人去做就好。这不是显而易见吗？",
+     "r": "点头",
+     "en": "I am ill-suited to physical labor. Those who are should be the ones to do it. Obvious, isn't it?"
+    },
+    {
+     "q": "那么，庆祝自己出生的日子到底有什么意义？我实在不明白。",
+     "r": "歪头",
+     "en": "What, then, is the purpose of celebrating the day of one's birth? It escapes me."
+    }
+   ]
+  },
+  {
+   "name": "绯亚娜",
+   "lines": [
+    {
+     "q": "你的眼神好温柔，让我觉得很安心……",
+     "r": "凝视",
+     "en": "Your eyes are so kind. They make me feel safe…"
+    },
+    {
+     "q": "我会被你吸引，也许是因为你和那个人一样难以捉摸……",
+     "r": "抓紧栖木",
+     "en": "Maybe the reason I'm drawn to you is because, like that person, you're hard to grasp…"
+    },
+    {
+     "q": "恋爱对我来说一直有点难懂。也许有你这样的朋友就够了。",
+     "r": "展开翅膀",
+     "en": "Romance has always been a bit tough for me to grasp. Maybe a friend like you is all I need."
+    },
+    {
+     "q": "啊……对不起……我突然好想哭……",
+     "r": "唱首动听的歌",
+     "en": "Oh… I'm sorry… I suddenly feel like crying…"
+    },
+    {
+     "q": "爱真是奇妙的东西……你有没有喜欢过谁？",
+     "r": "点头",
+     "en": "Love is a strange thing… Have you ever had feelings for someone?"
+    },
+    {
+     "q": "有时候读诗，简直就像在听音乐一样。",
+     "r": "唱首动听的歌",
+     "en": "Sometimes when I read poetry, I swear it's almost like I'm listening to music."
+    },
+    {
+     "q": "你要是受了伤就来找我，我帮你治疗。",
+     "r": "展开翅膀",
+     "en": "If you're ever hurt, come find me, and I'll heal you."
+    },
+    {
+     "q": "战争与痛苦，争斗与仇恨……这些都只让我难过……能避开的话我想避开。",
+     "r": "点头",
+     "en": "War and pain, fighting and hate… All of it just makes me sad… I'd like to avoid those things if I can."
+    },
+    {
+     "q": "有时候我满脑子都是心上人……这很正常吧？",
+     "r": "点头",
+     "en": "There are times when I can't take my mind off of the one I adore… That's normal, right?"
+    },
+    {
+     "q": "那个……跟我在一起……不会无聊吗？",
+     "r": "歪头",
+     "en": "Um… Doesn't being with me… bore you?"
+    }
+   ]
+  },
+  {
+   "name": "哥莱亚斯",
+   "lines": [
+    {
+     "q": "不管被打倒多少次，我老哥都会爬起来。那家伙真有骨气！",
+     "r": "凝视",
+     "en": "No matter how hard he gets knocked down, my brother keeps gettin' up. He's got spirit, that guy!"
+    },
+    {
+     "q": "打仗的时候大家都喜欢有我在，平时就不怎么样了。",
+     "r": "歪头",
+     "en": "People like having me around in battles, but other than that, usually not."
+    },
+    {
+     "q": "别坐在我手上，我怕把你捏扁。",
+     "r": "发抖",
+     "en": "Don't sit on my hand. I'm worried I might squish you."
+    },
+    {
+     "q": "呃，杂活真让人火大！有什么办法能让我舒坦点？",
+     "r": "唱首动听的歌",
+     "en": "Ugh, busywork makes me so mad! Is there some way for me to feel better?"
+    },
+    {
+     "q": "喂，要是有人欺负你，跟我说，我把他拧成麻花！",
+     "r": "点头",
+     "en": "Hey, if some bully ever comes at you, you talk to me. I'll twist 'em in knots!"
+    },
+    {
+     "q": "我头好晕……别人一讲复杂的事，我就头昏。",
+     "r": "唱首动听的歌",
+     "en": "My head's spinning… When people talk about stuff that's complicated, I get dizzy."
+    },
+    {
+     "q": "我从不偷懒不训练。身体练好了，就没有做不到的事！",
+     "r": "展开翅膀",
+     "en": "I never forget to train. If your body's in shape, there's nothing you can't do!"
+    },
+    {
+     "q": "我以前那个部族的族长是个混蛋。你要是见到他就告诉我，我去揍晕他。",
+     "r": "歪头",
+     "en": "The chief of my old tribe was a jerk. If you ever see him, let me know, and I'll knock him out."
+    },
+    {
+     "q": "听说我身上流着巨人的血。哇哈哈，真好笑！",
+     "r": "歪头",
+     "en": "They say I got giant's blood. Bwahaha. It's funny!"
+    }
+   ]
+  },
+  {
+   "name": "古扎岚",
+   "lines": [
+    {
+     "q": "这么安静，我都困了。你来做点什么让我清醒一下？",
+     "r": "翻跟头",
+     "en": "All this peace and quiet is making me sleepy. How about you do something to wake me up?"
+    },
+    {
+     "q": "你有没有活得痛快？不然活着还有什么意思！",
+     "r": "展开翅膀",
+     "en": "Are you living your life to the fullest? If not, why bother being alive at all!"
+    },
+    {
+     "q": "哈！刚才有位姑娘狠狠揍了我一拳。那说明她害羞，对吧？",
+     "r": "歪头",
+     "en": "Ha! A lady socked me real hard a little earlier. That just means she was shy, yeah?"
+    },
+    {
+     "q": "「不死的古扎岚」这个外号，是我一道伤疤一道伤疤挣来的。很酷吧？",
+     "r": "点头",
+     "en": "I earned my nickname, Unkillable Guzran, one scar at a time. Pretty cool, right?"
+    },
+    {
+     "q": "我喜欢你这坚决的眼神。喂，你知道不死的古扎岚是靠得住的吧？",
+     "r": "点头",
+     "en": "I like your determined look. Hey, you know you can count on the Unkillable Guzran, right?"
+    },
+    {
+     "q": "我可是这里最老练的佣兵之一！看得出我是身经百战的人吗？",
+     "r": "点头",
+     "en": "I'm one of the most seasoned mercenaries here! Do I have the look of a battle survivor?"
+    },
+    {
+     "q": "很多人能有今天都是托我的福。有个佣兵现在都当上帝国监察官了！",
+     "r": "歪头",
+     "en": "Lots of people got to where they are today because of me. One merc is now imperial inspector!"
+    },
+    {
+     "q": "给你个忠告：打仗时一定要自己拿主意。不然肯定会死。",
+     "r": "点头",
+     "en": "My advice: make certain you're the one to make the calls in battle. Otherwise, it's a sure way to die."
+    },
+    {
+     "q": "其实我的真身是一只鸟。所以我在想，你其实是人吧？",
+     "r": "歪头",
+     "en": "The truth is, my true form is that of a bird. So I wonder, are you really a person?"
+    },
+    {
+     "q": "人一辈子能吃的饭就那么多顿。想吃什么就吃什么，对吧？",
+     "r": "点头",
+     "en": "There are only so many meals we can eat in our lifetimes. Best to eat what you want, yeah?"
+    }
+   ]
+  },
+  {
+   "name": "哈尔温",
+   "lines": [
+    {
+     "q": "前几天我买了个可爱的首饰盒！可惜太便宜，第二天就坏了。",
+     "r": "轻声歌唱",
+     "en": "I bought a cute accessory case the other day! But it was cheap, and it broke the next day."
+    },
+    {
+     "q": "我很擅长手工。也许可以试着用鸟的羽毛做点东西。",
+     "r": "展开翅膀",
+     "en": "I'm good at crafts. I ought to try making something with bird feathers, maybe."
+    },
+    {
+     "q": "我看到魔术师凭空在手上变出一只鸟！我也想试试。你能变小吗？",
+     "r": "歪头",
+     "en": "I saw a magician make a bird appear in their hand from nowhere! I want to try it. Can you shrink?"
+    },
+    {
+     "q": "我打仗不如大家厉害，但也许能在别的方面派上用场，对吧？",
+     "r": "点头",
+     "en": "I can't fight as well as everybody else, but I can maybe be useful in other ways, right?"
+    },
+    {
+     "q": "我喜欢做甜点。改天也给你做点甜的吧。",
+     "r": "凝视",
+     "en": "I like making sweets. Maybe I could make something sweet for you sometime."
+    },
+    {
+     "q": "纳西姆以前很照顾我。他人好好。我现在有时还会想起他……",
+     "r": "展开翅膀",
+     "en": "Nasshim used to take care of me. He was so nice. I still think about him sometimes…"
+    },
+    {
+     "q": "我在构思下一场表演，要是我们一起变个戏法，大家一定会喜欢。",
+     "r": "翻跟头",
+     "en": "I've been thinking about my next performance, and I think people would love it if we did a trick together."
+    },
+    {
+     "q": "一想到将来，我总会担心那些自己无能为力的事。",
+     "r": "拍打翅膀",
+     "en": "When I think about the future, I always end up worrying about stuff I can't do anything about."
+    },
+    {
+     "q": "不管离开多久，一想到家人和家乡，我就好寂寞。",
+     "r": "唱首动听的歌",
+     "en": "It doesn't matter how long I'm gone, thinking of my family and my hometown makes me feel so lonely."
+    },
+    {
+     "q": "蔬菜嘛，我觉得味道比卖相重要，你说呢？",
+     "r": "点头",
+     "en": "I think taste is more important than looks when it comes to vegetables, don't you?"
+    }
+   ]
+  },
+  {
+   "name": "易尼奥尼",
+   "lines": [
+    {
+     "q": "一练起弓来我就忘了时间。所以晚上看到我的话，喊我一声！",
+     "r": "唱首动听的歌",
+     "en": "I lose all track of time when I'm practicing with my bow. So if you see me at night, give a holler!"
+    },
+    {
+     "q": "我打仗时会说些吓人的话。就像我被那具可怕遗骸附身的时候那样。",
+     "r": "唱首动听的歌",
+     "en": "When I'm fighting, I'll say some horrifying things. Like I did when I possessed those awful remains."
+    },
+    {
+     "q": "遇到困难时有家人朋友帮忙真好。要珍惜朋友哦，好吗？",
+     "r": "点头",
+     "en": "It's nice having family and friends to help when you're in trouble. Always treasure your friends, OK?"
+    },
+    {
+     "q": "我以前用弓猎过鸟。哈！想试试能不能飞得比我的箭快吗？",
+     "r": "威吓",
+     "en": "I used to hunt birds with my bow. Ha! Want to see if you can outfly one of my arrows?"
+    },
+    {
+     "q": "我这人不太给人留下印象。不过你这么漂亮，一定很让人难忘吧……",
+     "r": "歪头",
+     "en": "I don't leave much of an impression on people. But you're so beautiful I bet you do…"
+    },
+    {
+     "q": "要是没有乌戈的弓，不知道我在英雄竞技会上会表现得怎么样……",
+     "r": "歪头",
+     "en": "I wonder how I would have fared in the Heroic Games if I didn't have Ugo's bow…"
+    },
+    {
+     "q": "我不太会应付男人。要是有人骚扰我，你能帮帮我吗？",
+     "r": "威吓",
+     "en": "I'm not very skilled at dealing with men. Could you help me out if one harasses me?"
+    },
+    {
+     "q": "我们村里的人说话口音都很特别。鸟也有口音或方言吗？",
+     "r": "歪头",
+     "en": "Everyone back at my village speaks in a very unique way. Do birds have accents or dialects?"
+    },
+    {
+     "q": "你知道密特拉斯修道会吗？我劝你离他们远点。",
+     "r": "点头",
+     "en": "Do you know the Order of Mithras? I'd suggest that you steer clear of them."
+    }
+   ]
+  },
+  {
+   "name": "伊欧",
+   "lines": [
+    {
+     "q": "我有点累了。要是睡着了，请见谅。",
+     "r": "轻声歌唱",
+     "en": "I'm a bit tired. Forgive me if I fall asleep."
+    },
+    {
+     "q": "要是我说你背后有只毒蜘蛛，你会怎么做？来练习一下。把它赶走……就现在！",
+     "r": "威吓",
+     "en": "What would you do if I said there's a venomous spider behind you? Let's practice. Drive it off… now!"
+    },
+    {
+     "q": "你能让周围的气氛变得平静。介意我在这里多待一会儿吗？",
+     "r": "点头",
+     "en": "You bring a sort of calm atmosphere to a place. Mind if I linger here a little longer?"
+    },
+    {
+     "q": "接受自己心甘情愿侍奉的主君给的报酬，你觉得不对吗？",
+     "r": "歪头",
+     "en": "Do you think it wrong to accept payment from a lord you're drawn to serve?"
+    },
+    {
+     "q": "其实我脾气没那么坏。不知道你是不是也想更合群一点。",
+     "r": "歪头",
+     "en": "I'm not all that ill-tempered, really. I wonder if you'd like to be more sociable too."
+    },
+    {
+     "q": "你觉得我们需要一个领导者吗？我相信这样的理想，也欢迎你说说看法。",
+     "r": "展开翅膀",
+     "en": "Do you think we need someone to lead us? I believe in such an ideal, and I welcome your thoughts on it."
+    },
+    {
+     "q": "哈，你的脸真有意思，我怎么看都看不腻。",
+     "r": "歪头",
+     "en": "Ha, you have an interesting face. I never get tired of seeing it."
+    },
+    {
+     "q": "我的爱驹罗西南老得很有风度。你见到它时也这么觉得吗？",
+     "r": "凝视",
+     "en": "My beloved steed, Rocinan, is aging very well. Do you think that when you see him?"
+    },
+    {
+     "q": "一谈到主君和他们的职责，我就会说太多。是不是该少说点？",
+     "r": "歪头",
+     "en": "I end up saying too much when talk turns to lords and their duties. Should I say less about it all?"
+    },
+    {
+     "q": "帮助朋友和弱者是理所当然的。但做正确的事，有时需要勇气。",
+     "r": "放声高歌",
+     "en": "It's natural to help one's friends and also the weak. But it sometimes takes courage to do what's right."
+    }
+   ]
+  },
+  {
+   "name": "嘉丝敏",
+   "lines": [
+    {
+     "q": "我走遍了这片大地。你也去过很多地方吗？",
+     "r": "拍打翅膀",
+     "en": "I've traveled all over the land. Have you visited lots of places too?"
+    },
+    {
+     "q": "成天打仗，人会变得很疲惫……",
+     "r": "轻声歌唱",
+     "en": "When you do nothing but battle, you can end up feeling pretty frazzled…"
+    },
+    {
+     "q": "我有想要守护的东西。你有想守护的东西吗？",
+     "r": "展开翅膀",
+     "en": "I have things I want to protect. Is there something that you want to protect?"
+    },
+    {
+     "q": "想活下去，有时就得耍点小聪明。我是说，真的没办法的时候！",
+     "r": "点头",
+     "en": "Sometimes you've got to get sneaky if you want to survive. I mean, when you really have to!"
+    },
+    {
+     "q": "飞的时候被大雨淋到是什么感觉？",
+     "r": "翻跟头",
+     "en": "What's it like if you get hit by heavy rain while you're flying?"
+    },
+    {
+     "q": "深爱着家人，结果一切都分崩离析，没有比这更糟的了，对吧？",
+     "r": "点头",
+     "en": "When you love your family and it all falls apart, that's about as bad as it gets, right?"
+    },
+    {
+     "q": "要在某处安家的话，大家庭还是住大房子最好，对吧？",
+     "r": "点头",
+     "en": "If someone settles down somewhere, a big home is best to house a big family, right?"
+    },
+    {
+     "q": "我有过丈夫。他很早以前就走了，不知道他是不是在守望着我。",
+     "r": "望向天空",
+     "en": "I had a husband, you know. He died some time ago, but I wonder if he watches over me."
+    },
+    {
+     "q": "我不把钱看得比别的东西重。可是有些东西没有钱就守不住，不是吗？",
+     "r": "歪头",
+     "en": "I don't value money over other things. But aren't there things you can't protect without money?"
+    },
+    {
+     "q": "你好像总是独自一个。一个人在外面，不寂寞吗？",
+     "r": "歪头",
+     "en": "You always seem to be alone. Don't you get lonely out there in the world, all by yourself?"
+    }
+   ]
+  },
+  {
+   "name": "杰斯塔",
+   "lines": [
+    {
+     "q": "我不能引人怀疑。你停在我手腕上，我会不会更像个小丑？",
+     "r": "歪头",
+     "en": "I can't arouse suspicion. Will I look more like a clown if you're perched on my wrist?"
+    },
+    {
+     "q": "啊，把疯劲儿释放出来之后我感觉好极了！你呢？",
+     "r": "展开翅膀",
+     "en": "Ahh, I'm feeling great since I got to let my freak loose! How 'bout you?"
+    },
+    {
+     "q": "这身戏服是我自己做的。当地狱小丑的制服挺不错吧？",
+     "r": "展开翅膀",
+     "en": "Made this costume myself. Pretty good uniform for the Infernal Clown, don't ya think?"
+    },
+    {
+     "q": "化妆真好。能遮住你的血、你的泪……还有你的罪。你也想化一化吗？",
+     "r": "点头",
+     "en": "Makeup's great. It hides your blood, your tears… your crimes. You wanna get made up?"
+    },
+    {
+     "q": "呃。糟心的故事太多了。我要睡了，你帮我放哨。",
+     "r": "点头",
+     "en": "Guuh. Too many nasty stories. I'm gonna sleep, keep an eye out."
+    },
+    {
+     "q": "呃，我最讨厌趾高气扬的人。真想把他们的肠子扯出来！",
+     "r": "歪头",
+     "en": "Guh, there's nothing I hate more than people who act high and mighty. I wanna yank out their guts!"
+    },
+    {
+     "q": "想换个造型吗？用小鸟的血染个色怎么样？嘿嘿嘿！",
+     "r": "威吓",
+     "en": "Lookin' for a new look? How about a little birdie-blood dye job? Heh heh heh!"
+    },
+    {
+     "q": "贝特兰太一本正经了！那家伙几乎开不起玩笑。你知道这对我来说有多难熬吗？",
+     "r": "点头",
+     "en": "Bertrand's so serious! The guy hardly ever takes a joke. Y'know how hard that is for me?"
+    },
+    {
+     "q": "鸟真好。一眨眼就能飞到凶案现场！嘿嘿嘿！",
+     "r": "歪头",
+     "en": "Birds, you're so lucky. In a flash, you can fly out to murder scenes! Heh heh heh!"
+    },
+    {
+     "q": "好累，累得像生病了一样。我好消沉……受不了了！",
+     "r": "轻声歌唱",
+     "en": "I'm tired, almost like I'm sick. I'm at such a low point… I can't take it!"
+    }
+   ]
+  },
+  {
+   "name": "奇洛伊卡",
+   "lines": [
+    {
+     "q": "自从看到被我杀掉的人的亡魂，我就经常祈祷。你要是看到了也祈祷吧。",
+     "r": "点头",
+     "en": "I've been praying a lot ever since I've been seeing ghosts of those I killed. You pray too if you see 'em."
+    },
+    {
+     "q": "以前的手下都很爱戴我。希望他们过得好。你觉得他们会再跟我干吗？",
+     "r": "点头",
+     "en": "My old crew used to love me. I hope they're doing alright. You think they'll join up with me again?"
+    },
+    {
+     "q": "你该加入我的黑天鹅海盗团。跟你说，没有比当海盗更快活的了！",
+     "r": "怯怯地点头",
+     "en": "You should join my Black-Swan Pirates. I tell you, there's nothing more fun than life as a pirate!"
+    },
+    {
+     "q": "密特拉斯修道会烂到根了。他们比海盗危险多了。",
+     "r": "点头",
+     "en": "The Order of Mithras is rotten to the core. They're far more dangerous than pirates."
+    },
+    {
+     "q": "那个蠢货弄沉了我的船，可在梦里它依然好好地航行着。真是艘美丽的船！",
+     "r": "轻声歌唱",
+     "en": "That fool sank my ship, but I still see it sailing right and fine in my dreams. A beautiful vessel!"
+    },
+    {
+     "q": "我是大鹏，你是小鸟。所以要是我被人追，你会帮朋友一把吧？",
+     "r": "展开翅膀",
+     "en": "I'm the Rukh, and you're a little bird. So you'll help a friend out if I'm chased down, right?"
+    },
+    {
+     "q": "要是看到鬼，你会怎么办？说实话，我会直接吓晕。很窝囊吧……",
+     "r": "歪头",
+     "en": "What would you do if you saw a ghost? Truth be told, I just faint dead away. Pathetic, I know…"
+    },
+    {
+     "q": "等我把手下召集齐了，我发誓不害人，只寻宝。你要跟我一起去吗？",
+     "r": "歪头",
+     "en": "When I get my crew together, I swear I'll do no harm, only look for treasure. Would you come with me?"
+    },
+    {
+     "q": "你认识一个叫谭利穆恩的王族混蛋吗？见到他就啄他的眼睛，好吗？",
+     "r": "威吓",
+     "en": "You know a royal jerk who goes by Talimun? Peck out his eyes if you see him, alright?"
+    },
+    {
+     "q": "人家说我是传奇海盗德雷克的继承人。他的藏身处全归我了。了不起吧？",
+     "r": "展开翅膀",
+     "en": "They say I'm successor to the legendary pirate Drake. His hideout was all mine. Incredible, right?"
+    }
+   ]
+  },
+  {
+   "name": "莉利安",
+   "lines": [
+    {
+     "q": "你喜欢亮晶晶的东西吗？想看看我的宝石吗？",
+     "r": "凝视",
+     "en": "Do you like sparkly things? Wanna see my gems?"
+    },
+    {
+     "q": "我喜欢把存款数了又数，感觉离梦想更近了。",
+     "r": "歪头",
+     "en": "I like counting my savings over and over. Makes me feel like I'm getting closer to my dream."
+    },
+    {
+     "q": "我去打猎的时候得小心别误射到你。",
+     "r": "威吓",
+     "en": "I'll have to be careful not to shoot you by mistake when I go hunting."
+    },
+    {
+     "q": "下次去打猎，我给你带点回来。",
+     "r": "展开翅膀",
+     "en": "Next time I go hunting, I'll bring back some for you."
+    },
+    {
+     "q": "唉……真希望有一天全家人能像以前一样住在一起。",
+     "r": "凝视",
+     "en": "Urgh… I wish the day would come that my whole family could live together like we used to."
+    },
+    {
+     "q": "想到要怎么花这些存下的钱……那一天一定很美好。",
+     "r": "点头",
+     "en": "When I think about what I'll do with all this money I've saved… that's gonna be a great day."
+    },
+    {
+     "q": "一直不停地工作，偶尔喘口气真的很管用。",
+     "r": "唱首动听的歌",
+     "en": "When I've been working nonstop, sometimes a breather does me a world of good."
+    },
+    {
+     "q": "给不信任你的人干活也不算太糟，至少钱不错。",
+     "r": "点头",
+     "en": "Working for someone who doesn't trust you isn't too bad. The money's nice, at least."
+    },
+    {
+     "q": "说钱比信任更重要，会不会太冷血了？",
+     "r": "歪头",
+     "en": "Would it be coldhearted of me to say that money's more important to me than trust?"
+    },
+    {
+     "q": "你的翅膀好漂亮，让我好好看看。",
+     "r": "展开翅膀",
+     "en": "Your wings are so pretty. Let me get a better look."
+    }
+   ]
+  },
+  {
+   "name": "罗蕾塔",
+   "lines": [
+    {
+     "q": "鸟吃鱼对吧？改天我给你抓条大的！",
+     "r": "展开翅膀",
+     "en": "Birds eat fish, right? I'll catch a big one for you sometime!"
+    },
+    {
+     "q": "我不知道爸妈是谁，不过无所谓。现在过得好就行。",
+     "r": "展开翅膀",
+     "en": "I don't know who my parents are, but I don't really care. Things are good now. That's what matters."
+    },
+    {
+     "q": "神殿里有个讨厌的家伙。他要是再欺负我，我就揍他。",
+     "r": "歪头",
+     "en": "There's a horrible guy who I know from my temple. I'm going to punch him if he treats me badly again."
+    },
+    {
+     "q": "给神殿干活之前我偷过东西。被抓到就会挨罚，现在还留着伤疤呢。要看吗？",
+     "r": "移开视线",
+     "en": "I stole things before I worked for the temple. I'd get punished if caught and still have a scar. Wanna see?"
+    },
+    {
+     "q": "就算有点无聊，只要有地方睡、有饭吃，我就没什么好抱怨的。",
+     "r": "点头",
+     "en": "Even if it gets kinda boring, I can't complain if I've got a place to sleep and enough to eat."
+    },
+    {
+     "q": "你住在森林里对吧？那你说说……你怎么看鬼魂？",
+     "r": "歪头",
+     "en": "You live in the forest, right? So tell me… how do you feel about ghosts?"
+    },
+    {
+     "q": "学用刀总比坐在教室里念书强。我说得对……对吧？",
+     "r": "歪头",
+     "en": "It's better to learn how to use a blade than sit around in a classroom learning stuff. I'm right… right?"
+    },
+    {
+     "q": "我最爱甜食了。改天给你带我最喜欢的怎么样？",
+     "r": "展开翅膀",
+     "en": "I love sweets. How about I bring you my favorites sometime?"
+    },
+    {
+     "q": "欧辛教了我防身术。我想变得更强，让他不用再担心我！",
+     "r": "展开翅膀",
+     "en": "Ozin taught me how to defend myself. Now I want to be strong enough, so he doesn't have to worry!"
+    },
+    {
+     "q": "我现在过得挺开心的。但我很挂念以前一起流浪街头的孤儿朋友们……",
+     "r": "轻声歌唱",
+     "en": "I'm pretty happy with my life now. But my heart goes out to my ol' street-orphan friends…"
+    }
+   ]
+  },
+  {
+   "name": "露露蒂雅",
+   "lines": [
+    {
+     "q": "丹提的作品太棒了！来，我念一段给你听！",
+     "r": "点头",
+     "en": "Dante's work is amazing! Here, let me read you something!"
+    },
+    {
+     "q": "父亲总说我是出色的剑士。不过用斧头就从来没让他满意过……",
+     "r": "歪头",
+     "en": "Father always said I was a fantastic swordsman. Couldn't ever impress him with axes, though…"
+    },
+    {
+     "q": "我在商会拼命干活。呼！我觉得我需要休个假。",
+     "r": "唱首动听的歌",
+     "en": "I've been working so hard at the company. Whew! I think I need a vacation."
+    },
+    {
+     "q": "其实我自己也写点东西。应该写一篇以你为主角的故事。",
+     "r": "展开翅膀",
+     "en": "You know, I do a little bit of writing myself. I should write something with you as the main character."
+    },
+    {
+     "q": "前几天看到一对情侣，好热烈啊！有点让人羡慕。",
+     "r": "展开翅膀",
+     "en": "I saw this couple the other day, and they had so much passion! Kinda made me jealous."
+    },
+    {
+     "q": "要是我有翅膀？我要周游世界，看遍这一生能看的一切。",
+     "r": "展开翅膀",
+     "en": "If I had wings? I'd travel the world and see everything this life has to offer."
+    },
+    {
+     "q": "呃！黏糊糊、油腻腻的……我最讨厌脏东西了。",
+     "r": "点头",
+     "en": "Ugh! Gummy, sticky, greasy… I just hate dirty things."
+    },
+    {
+     "q": "总有一天，我想当一场伟大冒险的主角。你要跟我一起去吗？",
+     "r": "点头",
+     "en": "One day, I'd love to be the main character of some grand adventure. Would you want to come with me?"
+    },
+    {
+     "q": "呜呜。原来我喜欢的人已经有对象了……我该怎么振作起来……",
+     "r": "唱首动听的歌",
+     "en": "Ugggh. Turns out, the person I like already has a partner… How will I ever recover…"
+    },
+    {
+     "q": "作为一只鸟你真聪明。你不会是故事里那种化身成鸟的精灵吧？！",
+     "r": "歪头",
+     "en": "You're pretty smart for a bird. Are you one of those spirits in disguise like in the stories?!"
+    }
+   ]
+  },
+  {
+   "name": "莱桑达",
+   "lines": [
+    {
+     "q": "我是不是太严肃了？有时候别人的反应像是被我唠叨了一样。",
+     "r": "歪头",
+     "en": "Am I too serious? Sometimes people react to me as if I was nagging them."
+    },
+    {
+     "q": "和你在一起让我好安心，真想把你装进笼子里走到哪带到哪。",
+     "r": "威吓",
+     "en": "Being with you puts me at such ease that I wish I could cage you to take you wherever I go."
+    },
+    {
+     "q": "就算别人抱怨，我也完全有权拒绝喝酒。我酒量不好。",
+     "r": "点头",
+     "en": "Despite the complaints, I have every right to refuse a night's drinking. I don't tolerate alcohol well."
+    },
+    {
+     "q": "和你一起在云间飞翔，一定很美妙。",
+     "r": "展开翅膀",
+     "en": "I bet it would feel incredible to fly alongside you in the clouds."
+    },
+    {
+     "q": "我喜欢仰望天空。这没什么傻的……对吧？",
+     "r": "点头",
+     "en": "I like gazing at the sky. There's nothing silly about that… right?"
+    },
+    {
+     "q": "我必须努力超越父亲，才能和那些勇敢的老兵并肩！",
+     "r": "展开翅膀",
+     "en": "I must strive to surpass my father, so I can stand shoulder to shoulder with the brave veterans!"
+    },
+    {
+     "q": "有时候我会为自己的经验不足感到懊恼……",
+     "r": "唱首动听的歌",
+     "en": "I sometimes find my own inexperience frustrating…"
+    },
+    {
+     "q": "我在考虑要不要硬着头皮回家一趟。我和继父处得不太好。",
+     "r": "歪头",
+     "en": "I'm considering if I should force myself to visit home. My stepfather and I don't get along very well."
+    },
+    {
+     "q": "看着你，就像仰望天空时的感觉一样。",
+     "r": "拍打翅膀",
+     "en": "To look at you gives me the same feeling as when I gaze up at the sky."
+    },
+    {
+     "q": "拒绝热情女性的示好，身心都很疲惫……",
+     "r": "唱首动听的歌",
+     "en": "Turning down the advances of passionate women wears on me, mentally and physically…"
+    }
+   ]
+  },
+  {
+   "name": "马吉迪",
+   "lines": [
+    {
+     "q": "要是我南十字兵团的人参加了竞技会，我们肯定会赢，对吧？",
+     "r": "点头",
+     "en": "If my Southern Cross Brigade crew had battled in the games, we would have won, right?"
+    },
+    {
+     "q": "该死的密特拉斯修道会把我丢下等死。伟大的马吉迪岂是他们能抛弃的！",
+     "r": "点头",
+     "en": "That damned Order of Mithras left me for dead. They can't abandon the great Majide!"
+    },
+    {
+     "q": "无聊死了。有什么好招给我看看？",
+     "r": "翻跟头",
+     "en": "I'm bored as hell. Got a good move to show me?"
+    },
+    {
+     "q": "你不怕我，说明你不懂我有多厉害。要我露一手吗？",
+     "r": "威吓",
+     "en": "You're not scared of me, which means you don't get how great I am. How about I show you?"
+    },
+    {
+     "q": "心烦的时候，没有比揍无名小卒更爽的了。你心烦时会做什么？",
+     "r": "使劲唱",
+     "en": "Nothin' better than smacking around nobodies when I'm annoyed. What do you do when you are?"
+    },
+    {
+     "q": "我狠狠推了个嘴贱的醉鬼。得承认，挺爽的。不过现在该睡一觉了。",
+     "r": "轻声歌唱",
+     "en": "I shoved a mouthy drunk real hard. Felt pretty good, I gotta admit. But now it's time I catch some z's."
+    },
+    {
+     "q": "谁都知道伟大的马吉迪力抵十人。要我给你砸几块石头看看吗？",
+     "r": "展开翅膀",
+     "en": "Everyone knows the great Majide has the strength of 10 men. How about I smash some rocks for you?"
+    },
+    {
+     "q": "这里这些杂兵没一个打得过我。他们干嘛还要试？",
+     "r": "歪头",
+     "en": "None of these grunts around here have a chance of beating me. Why do they even try?"
+    },
+    {
+     "q": "牢房就是我的第二个家。下次我被关起来，来找我，我们玩个游戏！",
+     "r": "歪头",
+     "en": "Prison cells are my home away from home. Next time I'm locked up, find me and we'll play a game!"
+    },
+    {
+     "q": "不管谁来挑战，都不是伟大的马吉迪的对手，对吧？",
+     "r": "展开翅膀",
+     "en": "Doesn't matter who comes at me, they're no match for the great Majide, right?"
+    }
+   ]
+  },
+  {
+   "name": "米迦艾拉",
+   "lines": [
+    {
+     "q": "妈妈的婚姻失败了，不代表女儿也会犯同样的错。对吧？",
+     "r": "点头",
+     "en": "Just because a mom's marriage failed doesn't mean her daughter will make the same mistake. Right?"
+    },
+    {
+     "q": "我唱歌不太好。我喜欢唱，可是总跑调。",
+     "r": "唱首动听的歌",
+     "en": "I'm not the best singer. I enjoy it, but I can't carry a tune."
+    },
+    {
+     "q": "要是酒馆里有个家伙闹事，我得一拳揍晕他。是不是该避开脸？",
+     "r": "歪头",
+     "en": "Say there's a guy in the tavern causing a fuss and I need to punch him out. Should I avoid the face?"
+    },
+    {
+     "q": "我姐姐教我做饭。她超厉害的。尝一口心都要飞起来了。",
+     "r": "展开翅膀",
+     "en": "My sister taught me how to cook. She's incredible. One taste and your heart just soars."
+    },
+    {
+     "q": "不知道你这身子里有多大力气。要不我轻轻捏一下试试？",
+     "r": "威吓",
+     "en": "I wonder how much strength is in that body. Maybe I should just give you a little squeeze."
+    },
+    {
+     "q": "欠债可不好。只要债还压在身上，就没法好好思考。",
+     "r": "点头",
+     "en": "Owing debts is no good. As long as they're hanging over you, you can't think straight."
+    },
+    {
+     "q": "钱是苦难的根源。不过你不用担心这个！",
+     "r": "歪头",
+     "en": "Money is the root of hardship. Not that you need to worry about that!"
+    },
+    {
+     "q": "在外面要小心。看到可疑的人就赶紧飞走！",
+     "r": "点头",
+     "en": "Be careful out there. If you see someone suspicious, just fly off, quick as you can!"
+    },
+    {
+     "q": "变强是好事。这样到了该把没用的丈夫踢出门的时候，你就准备好了！",
+     "r": "歪头",
+     "en": "It's good to get strong. That way you're ready when it's time to kick out your good-for-nothing husband!"
+    },
+    {
+     "q": "你有重要的人吗？希望有。要尽你所能保护他们。",
+     "r": "展开翅膀",
+     "en": "Do you have someone dear to you? I hope so. Do whatever you can to protect them."
+    }
+   ]
+  },
+  {
+   "name": "穆",
+   "lines": [
+    {
+     "q": "不知道我爸现在在哪儿。希望他有好好吃饭什么的。",
+     "r": "歪头",
+     "en": "I don't know where my dad is now. Hope he's eating and stuff."
+    },
+    {
+     "q": "我很懂药草。你要是受伤了，我帮你治！",
+     "r": "点头",
+     "en": "I'm pretty knowledgeable about medicinal herbs. If you ever get injured, I'll fix you up!"
+    },
+    {
+     "q": "我妈很爱唱歌，可是唱得超难听。你看起来很会唱，对吧？",
+     "r": "唱首动听的歌",
+     "en": "My mom loves singing, and she's AWFUL at it. You seem like a good singer, though, right?"
+    },
+    {
+     "q": "西洛可人很好，我只是真希望他别整天拈花惹草。",
+     "r": "点头",
+     "en": "Sirocco's so great, I just really wish he didn't spend all his time womanizing."
+    },
+    {
+     "q": "改天要不要尝尝我做的菜？别人都不肯吃。",
+     "r": "怯怯地点头",
+     "en": "Wanna try my cooking sometime? No one else will eat it."
+    },
+    {
+     "q": "你的眼神很温柔，看着就让我心情变好。",
+     "r": "凝视",
+     "en": "You have kind eyes. Looking at them really makes me feel better."
+    },
+    {
+     "q": "大家都把我当小孩子。不知道这会不会有改变的一天。",
+     "r": "展开翅膀",
+     "en": "Everyone treats me like a kid. I wonder if that'll ever change."
+    },
+    {
+     "q": "我本来觉得自己和妈妈没什么共同点，不过我这爱逞强的性子也许就是遗传她的。",
+     "r": "歪头",
+     "en": "I didn't think I had much in common with my mom, but maybe she's where I got my pushiness."
+    },
+    {
+     "q": "我想帮助有困难的人。可我得变得更强才行！",
+     "r": "展开翅膀",
+     "en": "I want to help people when they're in trouble. But I gotta get way stronger to do that!"
+    },
+    {
+     "q": "以前妈妈还在家的时候会训练我！你要试试吗？",
+     "r": "威吓",
+     "en": "Back when Mom still lived at home, she'd train me! Wanna give that a shot?"
+    }
+   ]
+  },
+  {
+   "name": "哪吒",
+   "lines": [
+    {
+     "q": "你的眼睛好怪。说起来，有点像爱娜特莉亚的。",
+     "r": "歪头",
+     "en": "You've got weird eyes. Ya know, they kinda remind me of Anatolia's."
+    },
+    {
+     "q": "在村里，能弄到什么就吃什么，连虫子也吃。在那儿你可算是美味了。",
+     "r": "威吓",
+     "en": "We ate what we could get in the village. Even bugs. Back there, you woulda been a delicacy."
+    },
+    {
+     "q": "看到有人有困难，就该帮一把。就这么简单！",
+     "r": "展开翅膀",
+     "en": "If you see someone in trouble, you should help them. It's that simple!"
+    },
+    {
+     "q": "村里的人对我很好，所以我想让他们开心。",
+     "r": "凝视",
+     "en": "The people of the village were real nice to me, so I wanna try and make them happy."
+    },
+    {
+     "q": "武艺能磨砺心志、强健体魄。你也试试吧！",
+     "r": "翻跟头",
+     "en": "Martial arts tightens my mind and strengthens my body. You should give it a try too!"
+    },
+    {
+     "q": "大家总吼我让我安静点。我真的那么吵吗？",
+     "r": "点头",
+     "en": "Everybody's always yelling at me to be quiet. Am I really that loud?"
+    },
+    {
+     "q": "是不是练得太投入了？我现在好困。",
+     "r": "轻声歌唱",
+     "en": "Maybe I got a little too into my training? I'm sleepy now."
+    },
+    {
+     "q": "就因为我个子矮，大家都把我当小孩。以貌取人可不好，你知道吧？",
+     "r": "点头",
+     "en": "Everybody treats me like a kid just 'cause I'm short. It's no good to judge folks on appearances, ya know?"
+    }
+   ]
+  },
+  {
+   "name": "妮涅",
+   "lines": [
+    {
+     "q": "望着云朵总能抚慰我受伤的心。你愿意陪我一起看吗？",
+     "r": "望向天空",
+     "en": "Looking at the clouds always is a balm for my hurt and heart. Would you join me, looking?"
+    },
+    {
+     "q": "我一看向别人，他们就移开视线。看来我永远都被人畏惧。",
+     "r": "凝视",
+     "en": "When I look at someone, they in turn look away. It seems that I'm forever feared."
+    },
+    {
+     "q": "我喜欢独处。你也是吗？",
+     "r": "点头",
+     "en": "I like being alone in my solitude. Do you too?"
+    },
+    {
+     "q": "精灵们想和你说话。它们……对你很好奇。",
+     "r": "展开翅膀",
+     "en": "The spirits want to talk to you. They're… curious about you."
+    },
+    {
+     "q": "是啊，真的……很有趣呢……咦，你看不见我在和谁说话吗？",
+     "r": "歪头",
+     "en": "Yes, truly… It is wonderful fun, isn't it… What, can't you see who I'm speaking with?"
+    },
+    {
+     "q": "我非常讨厌虫子。有虫子靠近我的话，你能帮我赶走吗？",
+     "r": "点头",
+     "en": "I have a strong dislike for insects. Could you chase off any who draw too close to me?"
+    },
+    {
+     "q": "我的话似乎总会被人听成奇怪的意思。我被误解……又被疏远。",
+     "r": "歪头",
+     "en": "I fear that my words enter the ear in strange ways. I am misunderstood… and avoided."
+    },
+    {
+     "q": "死亡萦绕着我。你也被死亡萦绕吗？",
+     "r": "歪头",
+     "en": "Death haunts me. Are you haunted by death?"
+    },
+    {
+     "q": "若你愿意和我一起祈祷，让迷途的灵魂前往彼岸，我会很感激。",
+     "r": "唱首动听的歌",
+     "en": "I would be grateful if you would pray with me, that wayward souls may move on to the next world."
+    }
+   ]
+  },
+  {
+   "name": "诺克裘拉",
+   "lines": [
+    {
+     "q": "在家乡我没什么地位，可因为是族长的女儿，总被挑出来接受求婚挑战。你能理解我为什么讨厌那里了吧？",
+     "r": "点头",
+     "en": "Back home, I don't rank that high in importance, but as the chief's daughter, I'm singled out for marital challenges. Can you see why I hate it back there?"
+    },
+    {
+     "q": "我从小被教导，得嫁给在公平决斗中打败自己的人。这传统很蠢吧？反正我比家乡那些男人都强。",
+     "r": "放声高歌",
+     "en": "I grew up thinking you had to marry the person who can defeat you in a fair fight. It's a dumb tradition, right? I'm tougher than the guys back home anyway."
+    },
+    {
+     "q": "住在山上让我学会了很多，比如打猎和打铁。有本事总是好的，对吧？",
+     "r": "点头",
+     "en": "I learned a lot living on a mountain, like hunting and blacksmithing. Good to have skills, right?"
+    },
+    {
+     "q": "我喜欢用拳头战斗，打起来自由又灵活。懂我的意思吗？",
+     "r": "点头",
+     "en": "I like fighting with my fists. Keeps me feeling free and nimble in battle. Get what I mean?"
+    },
+    {
+     "q": "我这辈子大多数日子都在奥尔格斯山上上下下地训练。要我把你的栖木踢成两半吗？",
+     "r": "威吓",
+     "en": "I trained most days of my life, going up and down Mount Orgus. Want me to kick your perch in half?"
+    },
+    {
+     "q": "我想给我的摔跤舞加个新动作。有什么好点子吗？",
+     "r": "翻跟头",
+     "en": "I want to add a new move to my wrestle-dancing. Have any great ideas?"
+    },
+    {
+     "q": "我想给你取个比「鸟」更好的名字。叫「鸟鸟」怎么样？不行，不太对。有什么建议吗？",
+     "r": "歪头",
+     "en": "I'd like to call you something more than \"bird.\" How's Birdlee? Nah, that's not right. Any advice?"
+    },
+    {
+     "q": "我三哥也和我一样在周游世界。要是见到他就打个招呼，他很喜欢动物。",
+     "r": "拍打翅膀",
+     "en": "My third eldest brother is traveling the world like I am. Say hello if you see him. He loves animals."
+    },
+    {
+     "q": "很快就会有好事发生。我的直觉一向很准！",
+     "r": "凝视",
+     "en": "Something good is coming up soon. My gut is always right, you know!"
+    },
+    {
+     "q": "你总是一个人在这儿。离开鸟群了吗？我也做过类似的事。我们做朋友吧！",
+     "r": "展开翅膀",
+     "en": "You're always here alone. Did you leave your flock? I did something like that too. Let's be friends!"
+    }
+   ]
+  },
+  {
+   "name": "努佐",
+   "lines": [
+    {
+     "q": "城市生活对我这个森林子民来说还是很陌生。要是我在鞑古席翁迷路了，你能给我带路吗？",
+     "r": "拍打翅膀",
+     "en": "City life is still strange to a forest-dweller like me. If I get lost in Dagsion, would you show me the way?"
+    },
+    {
+     "q": "鸟一天要吃好几顿，对吧？希望你吃得饱饱的，飞得有力。",
+     "r": "拍打翅膀",
+     "en": "Birds have many meals each day, yes? I hope you eat well and fly vigorously."
+    },
+    {
+     "q": "我们哈尔·哈里族与自然和谐共处。你不是我结交的第一只鸟。",
+     "r": "展开翅膀",
+     "en": "We of the Har Hali live in harmony with nature. You are not the first bird I would befriend."
+    },
+    {
+     "q": "嗯。羽毛这么乱，飞起来一定很费劲。我帮你理顺。",
+     "r": "一动不动",
+     "en": "Hm. These disheveled feathers must make it hard to fly. I'll straighten them for you."
+    },
+    {
+     "q": "我想没有人能玷污你的翅膀。坚守你的生活方式，别让任何人把你关起来。",
+     "r": "展开翅膀",
+     "en": "I suspect no one could tarnish your wings. Keep true to your way of life. Let no one take you captive."
+    },
+    {
+     "q": "我的本事比不上历代族长。我对族人到底有没有用处？",
+     "r": "轻声歌唱",
+     "en": "My skills did not live up to those of previous chiefs. Have I been of use to my people at all?"
+    },
+    {
+     "q": "我们的毒箭只要擦到一下，鸟就会当场倒下。我们打猎时你离远点。",
+     "r": "威吓",
+     "en": "A mere graze from our poison arrows can fell a bird instantly. Stay well away during our hunts."
+    },
+    {
+     "q": "我的族人用动物的举动来占卜战事。姿态勇猛是吉兆。",
+     "r": "威吓",
+     "en": "My people use the behavior of animals as an omen for battle. A bold attitude is a good omen."
+    },
+    {
+     "q": "只靠力量统治只会让人民窒息。你在压迫之下一定也会喘不过气吧。",
+     "r": "点头",
+     "en": "Rule based on strength only chokes the people. I'm sure you would also feel suffocated under oppression."
+    },
+    {
+     "q": "不能因为骄傲而自我孤立。那是死路一条。别忘了这一点。",
+     "r": "点头",
+     "en": "We must not isolate ourselves out of pride. That way is death. Do not forget this."
+    }
+   ]
+  },
+  {
+   "name": "努蒂奴",
+   "lines": [
+    {
+     "q": "佣兵挑活儿比大家想的要挑剔。别人不明白这一点。",
+     "r": "点头",
+     "en": "Mercenaries are more selective about work than you'd think. People don't understand that."
+    },
+    {
+     "q": "想成长，就得什么都学一点。从你的动作里我能学到什么呢？",
+     "r": "翻跟头",
+     "en": "You have to learn a little bit about everything to grow. What can I learn from your movements?"
+    },
+    {
+     "q": "我下了很大功夫学读书写字。你觉得你也能学会吗？",
+     "r": "点头",
+     "en": "I studied hard to learn how to read and write. Do you think you could do that too?"
+    },
+    {
+     "q": "离开王国后，我学了写字，触犯了那里的律法。尤法斯一定会惩罚我吧。",
+     "r": "歪头",
+     "en": "After I left my kingdom, I broke one of its laws by learning to write. Yu Phas will surely punish me."
+    },
+    {
+     "q": "别担心，我没兴趣猎你。我连肉都不爱吃。",
+     "r": "凝视",
+     "en": "Don't worry. I have no interest in hunting you. I don't even like meat."
+    },
+    {
+     "q": "很多人依赖我，但老实说，要是我也能多依赖别人就好了。",
+     "r": "点头",
+     "en": "People rely on me a lot, but I have to admit it'd be nice if I could rely on others more."
+    },
+    {
+     "q": "我喜欢吃甜的。大家都很意外。可这真有那么出人意料吗？",
+     "r": "歪头",
+     "en": "I like eating sweet things. That surprises people. But is that really so unexpected?"
+    },
+    {
+     "q": "我离开了王国，但萨拉米斯仍有许多人敬仰我。我很感激。",
+     "r": "展开翅膀",
+     "en": "I left my kingdom behind, but there are still many in Saramis who look up to me. I'm grateful."
+    }
+   ]
+  },
+  {
+   "name": "奥琳琵娅",
+   "lines": [
+    {
+     "q": "我曾被誉为「凯卢斯的蓝玫瑰」。想听我演奏吗？",
+     "r": "展开翅膀",
+     "en": "I was recognized as the Blue Rose of Caelus. Would you like to hear me play?"
+    },
+    {
+     "q": "我发誓总有一天要胜过蕾莉达娜。希望你为我加油！",
+     "r": "展开翅膀",
+     "en": "I will best Leilidahna one day, I swear it. And I hope you'll cheer me on!"
+    },
+    {
+     "q": "卡拉大人太美了！我想你第一眼就会爱上她。",
+     "r": "点头",
+     "en": "Kalla is so lovely! I imagine you'd fall in love with her at first sight."
+    },
+    {
+     "q": "无论音乐还是舞蹈，一天不练就会退步。千万别荒废练习！",
+     "r": "唱首动听的歌",
+     "en": "In either music or dance, one missed day of practice costs you some skill. Never neglect your studies!"
+    },
+    {
+     "q": "哎呀，手工又做砸了。我真不明白自己的艺术天分怎么就不灵了。",
+     "r": "歪头",
+     "en": "Oh dear, my handicraft turned out poorly again. I understand not why my artistic talent is failing me."
+    },
+    {
+     "q": "听别人演奏时，有时能感受到对方的情绪。你也会这样吗？",
+     "r": "点头",
+     "en": "Listening to music played by another, I can sometimes feel their emotions. Do you share this?"
+    },
+    {
+     "q": "我对自己的歌喉最有信心了。你呢？",
+     "r": "轻声歌唱",
+     "en": "I have the greatest confidence in my singing. And yourself?"
+    },
+    {
+     "q": "要我为你写首诗吗？要写的话，我会尽全力让你满意……",
+     "r": "翻跟头",
+     "en": "Shall I compose a poem about you? If so, I'll do all I can to make sure it pleases you…"
+    },
+    {
+     "q": "当母亲是什么感觉呢？一想到就觉得好可怕。",
+     "r": "歪头",
+     "en": "What must motherhood be like? I can't help but find the prospect terrifying."
+    },
+    {
+     "q": "开花的树即使老了也照样开花。这证明年龄不该阻碍追求！同意吧？",
+     "r": "点头",
+     "en": "Flowering trees bloom even as they get old. It proves that age should not impede one's pursuits! Agreed?"
+    }
+   ]
+  },
+  {
+   "name": "佩佩",
+   "lines": [
+    {
+     "q": "这里的人一天比一天更爱戴朕。这就是王者对他人的影响吗？",
+     "r": "展开翅膀",
+     "en": "More of the people here grow to love us by the day. Is this the effect kings have on others?"
+    },
+    {
+     "q": "朕此刻有些无聊。你会表演什么把戏吗？",
+     "r": "翻跟头",
+     "en": "We find ourselves bored at the moment. Can you perform any tricks?"
+    },
+    {
+     "q": "朕自幼便爱吃海鲜，想与你一同品尝鞑古扎的特产。",
+     "r": "展开翅膀",
+     "en": "We have enjoyed seafood since our earliest days and would like to savor Dagdan specialties with you."
+    },
+    {
+     "q": "朕来自热爱自然的布丽吉德王国，所以和你在一起很愉快。",
+     "r": "展开翅膀",
+     "en": "We are from Brigid, which is a kingdom that loves nature. So we enjoy our time with you."
+    },
+    {
+     "q": "朕认为你值得朕庇护，若你遇到麻烦，就交给朕吧。",
+     "r": "展开翅膀",
+     "en": "We deem you worthy of our protection, so if you're ever in trouble, please let us handle it."
+    },
+    {
+     "q": "你一定要来朕的王国。朕会隆重地款待你！",
+     "r": "点头",
+     "en": "You must visit our kingdom. We would feed and entertain you magnificently!"
+    },
+    {
+     "q": "朕非常喜爱布丽吉德的子民。若你见到，务必告诉朕，好吗？",
+     "r": "点头",
+     "en": "We are very fond of the people of Brigid. So if you see any, please tell us, alright?"
+    },
+    {
+     "q": "你让朕想起故乡的精灵。也许我们之间有某种联系。",
+     "r": "凝视",
+     "en": "You remind us of the spirits of our homeland. Perhaps we are connected somehow."
+    },
+    {
+     "q": "要了解异国的风俗，没有比和当地人打成一片更好的办法了，对吧？",
+     "r": "点头",
+     "en": "To learn the ways of a foreign land, there's no better way than to mingle with its people, right?"
+    }
+   ]
+  },
+  {
+   "name": "皮特鲁",
+   "lines": [
+    {
+     "q": "我真不知道该拿对媞雅拉的这份感情怎么办。",
+     "r": "唱首动听的歌",
+     "en": "I just don't know what to do about these feelings I have for Tialla."
+    },
+    {
+     "q": "大家都在战斗。虽然害怕，但我会尽力的！",
+     "r": "展开翅膀",
+     "en": "Everyone's fighting. It's scary, but I'm doing my best!"
+    },
+    {
+     "q": "怕到腿发抖、动都动不了的时候，该怎么办？",
+     "r": "展开翅膀",
+     "en": "What should I do when I get so scared my legs start shaking and I can't move?"
+    },
+    {
+     "q": "有些动物总是吵吵闹闹的。你不会那样吧？",
+     "r": "点头",
+     "en": "Some animals make all kinds of racket. But you don't do that, do you?"
+    },
+    {
+     "q": "附近有棵金吉树。我们一起去摘果子吧！",
+     "r": "展开翅膀",
+     "en": "There's a ginji tree not far from here. We should go together and pick some of the fruit!"
+    },
+    {
+     "q": "我梦见了一只美丽的鸟……不知道是不是你的朋友。",
+     "r": "歪头",
+     "en": "I had a dream about a beautiful bird… I wonder if it was a friend of yours."
+    },
+    {
+     "q": "我喜欢云。它们好大，能变出各种形状，好有意思。",
+     "r": "展开翅膀",
+     "en": "I like clouds. They're so big, and it's neat to see all the shapes they can take."
+    },
+    {
+     "q": "一放松就想睡……喂，我要是睡着了，你会叫醒我吗？",
+     "r": "点头",
+     "en": "Taking it easy makes me sleepy… Hey, if I fall asleep, will you wake me up?"
+    },
+    {
+     "q": "在森林里散步，听着各种动物的叫声，很舒服吧？",
+     "r": "唱首动听的歌",
+     "en": "It's nice to walk around the forest and listen to all the sounds the animals make, huh?"
+    },
+    {
+     "q": "看着你……就觉得人生再难的事我也能面对。",
+     "r": "凝视",
+     "en": "I look at you and… You make me feel like I can face even the most difficult things in life."
+    }
+   ]
+  },
+  {
+   "name": "西提司",
+   "lines": [
+    {
+     "q": "我喜欢写寓言。鸟类之间有流传的故事吗？我很想听听。",
+     "r": "唱首动听的歌",
+     "en": "I enjoy writing fables. Are there any tales shared among birds? I'd love to hear them."
+    },
+    {
+     "q": "要一起去钓鱼吗？悠闲地抛着鱼线打发时间很惬意。",
+     "r": "展开翅膀",
+     "en": "Care to join me fishing? It's nice to spend time idly, casting a fishing line."
+    },
+    {
+     "q": "我喜欢帮助那些已经在努力自救的人。这算爱管闲事吗？",
+     "r": "拍打翅膀",
+     "en": "I like lending a hand to those already trying to help themselves. Does that make me a meddler?"
+    },
+    {
+     "q": "你觉得我的样子……有什么奇怪的地方吗？我不想引人注目。",
+     "r": "凝视",
+     "en": "Do you detect anything… strange about how I look? I don't want to stand out."
+    },
+    {
+     "q": "我的女儿正在长眠。希望她醒来时，我能在她身边。",
+     "r": "轻声歌唱",
+     "en": "My daughter is currently in a long slumber. I hope to be at her side by the time she awakens."
+    },
+    {
+     "q": "别看我这样，我心里挂念的事比大多数人都多。能在你身边歇一会儿吗？",
+     "r": "点头",
+     "en": "Despite appearances, I carry more concerns than most people. Could I rest at your side awhile?"
+    },
+    {
+     "q": "鞑古扎这片土地充满了有趣的东西。和你一起探索一定很有意思。",
+     "r": "拍打翅膀",
+     "en": "The land of Dagda is full of interesting things. It'd be fascinating to explore it with you."
+    },
+    {
+     "q": "你这一身洁白让我想起一个与我非常亲近的人。让我靠近点看看。",
+     "r": "展开翅膀",
+     "en": "Your white appearance reminds me of someone very close to me. I'd like a closer look."
+    }
+   ]
+  },
+  {
+   "name": "沙兰",
+   "lines": [
+    {
+     "q": "你在人身边很镇定呢。你不怕比你大的生物吗？",
+     "r": "展开翅膀",
+     "en": "You're quite calm around humans. Aren't you afraid of creatures bigger than you?"
+    },
+    {
+     "q": "我们的使命、村民的期望……都很重要，但保护家人也一样重要，对吧？",
+     "r": "点头",
+     "en": "Our mission, the hopes of the villagers… It's all important, but so is protecting family, right?"
+    },
+    {
+     "q": "我完全不知道鸟吃什么。改天能让我尝尝你的饭吗？",
+     "r": "点头",
+     "en": "I have no idea what birds eat. Maybe you could let me try one of your meals sometime?"
+    },
+    {
+     "q": "我总是被比我年长的人吸引。我的初恋就是那样。所以才忘不掉吗？",
+     "r": "唱首动听的歌",
+     "en": "I'm always drawn to people older than me. My first love was like that. Is that why I can't forget them?"
+    },
+    {
+     "q": "在外面的世界旅行有时很美好，但有时也会害怕。",
+     "r": "轻声歌唱",
+     "en": "It can be wonderful traveling the outside world. But it does get scary sometimes."
+    },
+    {
+     "q": "你的眼睛好迷人。不知道在你看来，我的眼睛是什么样子？",
+     "r": "凝视",
+     "en": "Your eyes are so charming. I wonder how mine look to you?"
+    },
+    {
+     "q": "我喜欢照顾别人。改天能让我帮你梳理羽毛吗？",
+     "r": "展开翅膀",
+     "en": "I love taking care of others. Do you think I could preen your feathers sometime?"
+    },
+    {
+     "q": "要是我留在村里，现在或许已经抱着孩子了。",
+     "r": "歪头",
+     "en": "If I'd remained in the village, I could be holding a baby in my arms."
+    },
+    {
+     "q": "你从天上看过这个世界。真希望我会说鸟语，你一定有很多故事。",
+     "r": "拍打翅膀",
+     "en": "You've seen the world from up in the sky. I wish I spoke bird language. I bet you have a lot of stories."
+    },
+    {
+     "q": "和神殿的人说话时我总有点戒备。你呢？",
+     "r": "点头",
+     "en": "I'm always a little wary of talking to people from the temples. What about you?"
+    }
+   ]
+  },
+  {
+   "name": "希蒙",
+   "lines": [
+    {
+     "q": "当佣兵其实没那么难。飞过战场的话，说不定能看到他们打仗！",
+     "r": "拍打翅膀",
+     "en": "It's not too hard to be a merc, really. Fly over a battlefield, and maybe you'll see some in action!"
+    },
+    {
+     "q": "爱打听的人真让我受不了。你懂我的意思吧？",
+     "r": "点头",
+     "en": "Nosy people drive me up the wall. You know what I mean?"
+    },
+    {
+     "q": "我祖上来自达马斯卡，不代表我也信奉尤法斯。",
+     "r": "点头",
+     "en": "Just because my ancestors were from Damascar doesn't mean I pray to Yu Phas too."
+    },
+    {
+     "q": "要是能从一个战场飞到另一个战场？老兄，那才叫生活。",
+     "r": "使劲唱",
+     "en": "Now, if I could fly from battlefield to battlefield? Man, that would be the life."
+    },
+    {
+     "q": "你真是个怪家伙，对吧？想活得久的动物通常都更小心。",
+     "r": "威吓",
+     "en": "You're a strange one, aren't you? An animal that cares about living longer is usually more careful."
+    },
+    {
+     "q": "会飞的话，偷袭大概更容易吧？只要附近没有弓箭手。",
+     "r": "翻跟头",
+     "en": "Launching a surprise attack is probably easier if you can fly, huh? As long as no archers are around."
+    },
+    {
+     "q": "有时候就算不在战场上，我也会觉得……浑身紧绷，你懂吧？",
+     "r": "唱首动听的歌",
+     "en": "Sometimes, even when I'm not on the battlefield, I feel this… tension in me, you know?"
+    },
+    {
+     "q": "说起来，我一直喜欢雕小木像。也许哪天我会雕一个你。",
+     "r": "一动不动",
+     "en": "You know, I've always liked carving little wooden statues. Maybe, one day, I'll carve you."
+    },
+    {
+     "q": "你身体真健康，好像在哪儿都能活下去。",
+     "r": "展开翅膀",
+     "en": "You're in the pink of health. Like you could survive anywhere."
+    },
+    {
+     "q": "在战场上，好人总是死得最快。前一刻还在说笑，下一刻……就没了。",
+     "r": "唱首动听的歌",
+     "en": "In the field, nice guys always die fast. One minute, they're cracking jokes, and the next… they're gone."
+    }
+   ]
+  },
+  {
+   "name": "西洛可",
+   "lines": [
+    {
+     "q": "我厌恶邋遢的男人，看到就心情变差。你有没有同样讨厌的东西？",
+     "r": "点头",
+     "en": "I detest shabby men. The sight of them sours my spirits. Is there something you similarly loathe?"
+    },
+    {
+     "q": "大多数男人都嫉妒我。这也难怪。你看看我这模样？",
+     "r": "凝视",
+     "en": "I'm envied by most men. Not that it's any wonder why. I mean, have you looked at me?"
+    },
+    {
+     "q": "我是在一场冰雹中被遗弃在卡拉神殿的。所以你看到冰雹时，就想起我吧。",
+     "r": "点头",
+     "en": "It was during a hailstorm that I was left at Kalla's temple. So when you see hail, think of me."
+    },
+    {
+     "q": "鸟的乐器是啼鸣，而我对自己的乐器同样拿手。想听听吗？",
+     "r": "点头",
+     "en": "A bird's instrument is its chirp, but I'm no less skilled with my own. Would you like to hear?"
+    },
+    {
+     "q": "论音乐造诣，我想我们一起合奏一曲会很愉快。你意下如何？",
+     "r": "唱首动听的歌",
+     "en": "Considering my own skill in music, I thought we might enjoy playing a song together. What say you?"
+    },
+    {
+     "q": "我对自己的记忆力很有信心。就算在一群飞鸟中我也认得出你。",
+     "r": "展开翅膀",
+     "en": "I am confident in my memory. No doubt I could recognize you amidst a flock of winged creatures."
+    },
+    {
+     "q": "卡拉大人美得无法言喻。你应该亲眼瞻仰她有多么非凡。",
+     "r": "凝视",
+     "en": "Kalla is too resplendent for words. You ought to admire for yourself what a marvel she is."
+    },
+    {
+     "q": "要像我这样融化人心，就得看遍世界的每一面。",
+     "r": "凝视",
+     "en": "One must see the world in all its contours to melt others' hearts as I do."
+    },
+    {
+     "q": "卡拉大人赐给我的名字真是太棒了。你喜欢自己的名字吗？",
+     "r": "点头",
+     "en": "The name given to me by my lady Kalla is so excellent. Do you like your own name?"
+    },
+    {
+     "q": "卡拉神殿的女性已经不再被我的诗打动了。我还能怎么追求她们呢？",
+     "r": "唱首动听的歌",
+     "en": "The women of Kalla's temple are no longer seduced by my poetry. What else could I do to woo them?"
+    }
+   ]
+  },
+  {
+   "name": "索绯雅",
+   "lines": [
+    {
+     "q": "我饿极了的时候，你可别离我太近。很抱歉，你看起来真的很好吃。",
+     "r": "凝视",
+     "en": "Be careful not to get too near me when I'm really hungry. You do look delicious, I'm sorry to say."
+    },
+    {
+     "q": "索雷尔大人很棒吧？他那么温柔、厉害，就是好得不得了！",
+     "r": "点头",
+     "en": "Don't you think Lord Solel is wonderful? He's so kind, amazing, and just plain great!"
+    },
+    {
+     "q": "我从小就在爸爸和朋友们的宴会上大吃大喝。要是我办那样的大派对，你要来吗？",
+     "r": "展开翅膀",
+     "en": "I grew up enjoying food at my dad's feasts with his friends. If I have a big party like that, want to come?"
+    },
+    {
+     "q": "我胃口超好。神殿给的薪水根本不够我吃饭。很惨吧？",
+     "r": "轻声歌唱",
+     "en": "I have a VERY healthy appetite. The pay I get from the temple can't cover my meals. Tragic, right?"
+    },
+    {
+     "q": "我喜欢给大家取可爱的小名。希望是可爱的啦。会不会有点怪？",
+     "r": "歪头",
+     "en": "I like to give everyone cute little names. I hope it's cute anyway. Maybe it's kind of weird?"
+    },
+    {
+     "q": "我最爱吃辣了。可惜总是一下就被吃光。这是为什么呢？",
+     "r": "歪头",
+     "en": "I love spicy food more than anything. Too bad it always gets eaten up quick. Why is that, I wonder?"
+    },
+    {
+     "q": "不管喝多少杯麦酒我都不会醉。你呢？",
+     "r": "歪头",
+     "en": "I never get tipsy, no matter how many mugs of suds I drink. How about you?"
+    },
+    {
+     "q": "我在里奥珊堡出生长大。你要是去那儿，可要当心那里的地痞！",
+     "r": "点头",
+     "en": "I was born and raised at Lyoshan Fort. If you ever go there, watch out for all the ruffians!"
+    },
+    {
+     "q": "觉得谁可爱，我就忍不住给他取个有趣的名字。我要叫你「小鸟鸟」！",
+     "r": "展开翅膀",
+     "en": "If I think someone's cute, I can't help calling them a fun name. I'm going to call you Li'l Birdie!"
+    },
+    {
+     "q": "嗯，烤的？炖的？啊！对不起，我没别的意思。你看起来一点都不好吃！",
+     "r": "威吓",
+     "en": "Mmm, roasted? Braised? Oh! Sorry, I didn't mean anything by it. You don't look tasty at all!"
+    }
+   ]
+  },
+  {
+   "name": "媞雅拉",
+   "lines": [
+    {
+     "q": "我从你的眼睛里看到了智慧。我觉得我们会合得来！",
+     "r": "凝视",
+     "en": "I can see such intelligence in your eyes. I think we could get along!"
+    },
+    {
+     "q": "你的羽毛好漂亮。介意我凑近看看吗？",
+     "r": "展开翅膀",
+     "en": "You have such beautiful plumage. Do you mind if I take a closer look?"
+    },
+    {
+     "q": "我好想变成鸟。我要从敞开的窗户直接飞进神殿的书库。",
+     "r": "拍打翅膀",
+     "en": "I'd love to be a bird. I'd fly through the open windows and right into the temple library."
+    },
+    {
+     "q": "我喜欢躺着晒暖和的太阳。你也喜欢吗？",
+     "r": "展开翅膀",
+     "en": "I like to lie in the warm sun. Do you like it too?"
+    },
+    {
+     "q": "这副眼镜很不错吧？是我爷爷传给我的。",
+     "r": "点头",
+     "en": "These glasses are pretty nice, don't you think? They're a hand-me-down from my grandfather."
+    },
+    {
+     "q": "技巧固然重要。但不懂其中的原理，就派不上多大用场。",
+     "r": "点头",
+     "en": "Technique is important, yes. But without knowledge of why it works, it won't be of much use."
+    },
+    {
+     "q": "我永远记得小时候和爷爷在一起，听吟游诗人唱了一首最动听的歌。",
+     "r": "唱首动听的歌",
+     "en": "I'll always remember being with Grandpa when I was little. We heard a bard sing the prettiest song."
+    },
+    {
+     "q": "我也许经验不足，但我努力学习，懂的比大多数人都多！",
+     "r": "展开翅膀",
+     "en": "I might be inexperienced, but I've studied hard and learned more than most people!"
+    },
+    {
+     "q": "如果坏事无论如何都会发生，那抵抗还有意义吗？",
+     "r": "歪头",
+     "en": "If something bad is going to happen no matter what, is there any point in fighting it?"
+    },
+    {
+     "q": "想太多不好吧？脑袋会变得一团浆糊。",
+     "r": "唱首动听的歌",
+     "en": "It's bad to overthink things, isn't it? It makes your head go all fuzzy."
+    }
+   ]
+  },
+  {
+   "name": "托比亚斯",
+   "lines": [
+    {
+     "q": "（哈欠）好想打个盹。",
+     "r": "唱首动听的歌",
+     "en": "(yawn) I'm in the mood for some shuteye."
+    },
+    {
+     "q": "上了年纪也不妨碍在战场上称霸。你懂我的意思吧？",
+     "r": "点头",
+     "en": "Gettin' old doesn't stop a guy from dominating on the battlefield. You know what I'm saying?"
+    },
+    {
+     "q": "喂，喝得稍微过量几杯没问题吧？",
+     "r": "歪头",
+     "en": "Hey, is it a problem to go a few glasses past your limit?"
+    },
+    {
+     "q": "我还能跟年纪只有我一半的人较量！",
+     "r": "展开翅膀",
+     "en": "I can still hold my own against anyone half my age!"
+    },
+    {
+     "q": "我干活时喜欢唱歌，心情会变好。",
+     "r": "唱首动听的歌",
+     "en": "I like to sing when I work. Puts me in a good mood."
+    },
+    {
+     "q": "又来了！有人看见我就绕到街对面去。我长得真有那么吓人吗？",
+     "r": "凝视",
+     "en": "It happened again! Some folks saw me and crossed the street. Am I really that scary-lookin'?"
+    },
+    {
+     "q": "喝到睡着也不是什么坏事，对吧？",
+     "r": "歪头",
+     "en": "It's not a bad thing to drink until you fall asleep, is it?"
+    },
+    {
+     "q": "我最爱热闹的宴会了！真希望天天都有。",
+     "r": "点头",
+     "en": "Love a good party! I wish we could have one every day."
+    },
+    {
+     "q": "葡萄酒、蜂蜜酒、肉和鱼！这才叫一顿饱饭！",
+     "r": "展开翅膀",
+     "en": "Wine, mead, meat, and fish! That's what I call a full meal!"
+    },
+    {
+     "q": "你看起来不太好吃。",
+     "r": "威吓",
+     "en": "You look like you wouldn't taste so good."
+    }
+   ]
+  },
+  {
+   "name": "乌尔坦德",
+   "lines": [
+    {
+     "q": "钱我是存得下来，但我觉得它自己变多的可能性很低。",
+     "r": "歪头",
+     "en": "I can save money, yes, but I feel like the odds are low that it'll start increasing on its own."
+    },
+    {
+     "q": "我觉得这个发型很好看。你觉得呢？",
+     "r": "点头",
+     "en": "I think this hairstyle is quite lovely. What do you think?"
+    },
+    {
+     "q": "你觉得我将来会有一个幸福的家庭吗？",
+     "r": "点头",
+     "en": "Do you think I'll have a happy family in the future?"
+    },
+    {
+     "q": "我发现了一件有意思的事。光是看着你，就让我格外平静。",
+     "r": "凝视",
+     "en": "I've noticed something interesting. I find just looking at you to be unusually soothing."
+    },
+    {
+     "q": "我喜欢吃鱼，但总不能天天只吃鱼吧？",
+     "r": "歪头",
+     "en": "I enjoy a good fish dinner, but you can't eat nothing but fish every day, can you?"
+    },
+    {
+     "q": "有了喜欢的人，想让对方注意到自己时，你会怎么做？",
+     "r": "展开翅膀",
+     "en": "What do you do when there's someone you like and you want them to notice you?"
+    },
+    {
+     "q": "吟游诗人的歌我能听一整天。他们的歌太动听了。",
+     "r": "唱首动听的歌",
+     "en": "I could listen to bards sing all day. Their songs are so lovely."
+    },
+    {
+     "q": "我觉得有时候就是忍不住要顶撞上司。",
+     "r": "点头",
+     "en": "I feel like sometimes there's just no avoiding snapping at your superiors."
+    },
+    {
+     "q": "你好可爱！可以带你回家吗？",
+     "r": "威吓",
+     "en": "You're so cute! Can I take you home with me?"
+    },
+    {
+     "q": "我最近累坏了。真想被人好好宠一宠……",
+     "r": "唱首动听的歌",
+     "en": "I've been so exhausted lately. I could really do with some pampering…"
+    }
+   ]
+  },
+  {
+   "name": "乌修拉",
+   "lines": [
+    {
+     "q": "我知道我回不去了……可是……有时还是忍不住怀念失去的一切……",
+     "r": "凝视",
+     "en": "I know I can't return home… But… sometimes I can't help but pine for what's gone…"
+    },
+    {
+     "q": "在故乡，我过着东躲西藏的生活……可在鞑古扎，我能做自己。你喜欢这里吗？",
+     "r": "点头",
+     "en": "In my homeland, I lived a life of hiding… But in Dagda, I'm free to be myself. Do you like it here?"
+    },
+    {
+     "q": "我受不了乱糟糟的桌子。只要有一点点乱，我就忍不住想收拾。",
+     "r": "点头",
+     "en": "I can't stand a messy desk. If it's just a little bit out of sorts, I get an overwhelming urge to clean it."
+    },
+    {
+     "q": "你看起来比一般的鸟聪明多了。要不要来商会当宠物？",
+     "r": "威吓",
+     "en": "You seem far sharper than the average bird. How would you like to be a pet at the company?"
+    },
+    {
+     "q": "说实话，我有时会对自己的嫉妒心感到很烦。真希望能控制得更好……",
+     "r": "唱首动听的歌",
+     "en": "To be honest, sometimes I get so annoyed at my own jealous feelings. I wish I could control them better…"
+    },
+    {
+     "q": "你的羽毛真是太美了。也许哪天我能为你画一幅肖像。",
+     "r": "展开翅膀",
+     "en": "Your feathers are simply gorgeous. Perhaps, one day, I can draw your portrait."
+    },
+    {
+     "q": "喂……要是你看到我变成野兽，记住千万别靠近我，好吗？",
+     "r": "歪头",
+     "en": "Hey… If you ever see me become a beast, remember that you mustn't approach me, alright?"
+    },
+    {
+     "q": "我没法像读其他动物那样读出你的想法……你真的是鸟吗？",
+     "r": "歪头",
+     "en": "I can't read your thoughts like other animals… Are you really a bird?"
+    },
+    {
+     "q": "那时我因为纹章被人追杀，心想要是我是只鸟，也许就能飞走了。",
+     "r": "展开翅膀",
+     "en": "Back then, when I was being hunted for my crest, I thought if I was a bird, maybe I could just fly away."
+    },
+    {
+     "q": "谭利穆恩在很多方面都救过我。陪他胡闹只是小小的代价。",
+     "r": "凝视",
+     "en": "Talimun has saved me in far more ways than one. Attending his misadventures is a small price to pay."
+    }
+   ]
+  },
+  {
+   "name": "杨界",
+   "lines": [
+    {
+     "q": "等我肉身消亡、化为灵魂飘浮时，我们一起在天上嬉戏吧。你说呢？",
+     "r": "展开翅膀",
+     "en": "When my body has perished, and I float as a soul, let's frolic in the sky. What do you say?"
+    },
+    {
+     "q": "有句话说，飞出笼的鸟其实离家很近。你觉得对吗？",
+     "r": "点头",
+     "en": "There is a saying that a bird flown from the coop is truly still close to home. Does that sound right?"
+    },
+    {
+     "q": "生或死……醉或醒……在这无常的世间都相差无几。你不同意吗？",
+     "r": "歪头",
+     "en": "To live or die… To be tipsy or sober… These are similar states in a fleeting world. Don't you agree?"
+    },
+    {
+     "q": "鸟鸣让一切都更美好，配上一杯好酒尤其相宜。你说是不是？",
+     "r": "唱首动听的歌",
+     "en": "Birdsong makes everything better. It pairs especially well with a fine drink. Wouldn't you say?"
+    },
+    {
+     "q": "我听说有一种怪鸟，会把好好的酒变成毒酒。应该不是你吧？",
+     "r": "歪头",
+     "en": "I've heard of a monstrous bird who turned perfectly good wine into poison. I trust that's not you?"
+    },
+    {
+     "q": "我身上酒气熏天，你却不介意。你也喜欢微醺吗？",
+     "r": "歪头",
+     "en": "I have the odor of hitting the bottles too heavily. Yet you don't mind. Do you enjoy a tipsy drink?"
+    },
+    {
+     "q": "有人说信仰等于不思考。我不同意。不思考完全是另一回事。",
+     "r": "点头",
+     "en": "Some say that belief is the same as not thinking. I disagree. Not thinking is entirely different."
+    },
+    {
+     "q": "练习沉默是我修行的一部分。你要不要也试试？",
+     "r": "凝视",
+     "en": "Practicing silence was part of my training. How about you give it a try?"
+    },
+    {
+     "q": "如果鸟也有心，不知道你羽毛下跳动的是怎样一颗心。",
+     "r": "展开翅膀",
+     "en": "If birds have hearts, I wonder what kind beats under those feathers of yours."
+    }
+   ]
+  },
+  {
+   "name": "札可捏",
+   "lines": [
+    {
+     "q": "看起来太危险的人就别去招惹，这主意不错。活得最久的人……才是赢家，对吧？",
+     "r": "点头",
+     "en": "Good idea not fighting anyone who looks too dangerous. Whoever lasts longest… wins, right?"
+    },
+    {
+     "q": "有爹妈吗？要是没有，你跟我和兄弟们肯定合得来。你可以加入我们山贼团！",
+     "r": "歪头",
+     "en": "Got parents? If you don't, you'd fit in with me and my pals just fine. You could join our bandit crew!"
+    },
+    {
+     "q": "我以为靠抢和打什么都能到手。可我要怎样才能有个家呢……",
+     "r": "轻声歌唱",
+     "en": "I thought I could get anything I want through plunder and fighting. But how can I get myself a family…"
+    },
+    {
+     "q": "被抢被杀的人……是他们自己太弱！要我说，就该更拼命地打！",
+     "r": "威吓",
+     "en": "If anyone gets robbed or snuffed out… they shouldn't be so weak! Fight harder, that's what I say!"
+    },
+    {
+     "q": "打仗先挑弱的收拾是常识。在我看来你就是好下手的猎物！",
+     "r": "威吓",
+     "en": "It's common sense to pick off the weaklings in battle. You look like easy prey to me!"
+    },
+    {
+     "q": "大家都以为山贼只吃肉。我可是只吃蔬菜。记住了。",
+     "r": "点头",
+     "en": "People think bandits eat nothin' but meat. It's vegetables all the way with me. Keep that in mind."
+    },
+    {
+     "q": "我们在竞技会上一输，盖亚兵团那帮家伙就把我丢下等死。很残忍吧？",
+     "r": "点头",
+     "en": "The guys in the Gaia Brigade left me for dead as soon as we lost our battle in the games. Cruel, huh?"
+    },
+    {
+     "q": "山就像我的家。我应该在山上给我和兄弟们盖座城堡，对吧？",
+     "r": "展开翅膀",
+     "en": "The mountains are like home to me. I should build me and my pals a castle up there, right?"
+    },
+    {
+     "q": "现在可不能金盆洗手！你知道我干了多少年了吗？",
+     "r": "歪头",
+     "en": "There's no way I can give up on pillaging now! You know how many years I've been at it?"
+    },
+    {
+     "q": "像你这样的弱者最后都会变成晚餐。所以尽量飞高点，别被箭射中。",
+     "r": "拍打翅膀",
+     "en": "Weaklings like you end up as dinner. So try to fly extra-high so the arrows don't get you."
+    }
+   ]
+  }
+ ]
+}
