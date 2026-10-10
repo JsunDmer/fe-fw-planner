@@ -37,6 +37,7 @@ import com.fefw.planner.ui.components.BadgeKind
 import com.fefw.planner.ui.components.CheckChip
 import com.fefw.planner.ui.components.EmptyHint
 import com.fefw.planner.ui.components.FefwTextField
+import com.fefw.planner.ui.components.TagPill
 import com.fefw.planner.ui.theme.AccentSoft
 import com.fefw.planner.ui.theme.Border
 import com.fefw.planner.ui.theme.Muted
@@ -138,6 +139,22 @@ private fun CharRow(c: Character, route: String, data: SlotData, routeKeys: List
                     rec = data.recruitsFor(k)[c.id],
                     modifier = Modifier.weight(1f)
                 )
+            }
+        }
+        if (c.skills.isNotEmpty()) {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text("特技", style = MaterialTheme.typography.bodySmall, color = Muted)
+                c.skills.forEach { sk ->
+                    Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        TagPill(sk.kind)
+                        Text(
+                            sk.text,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = TextSecondary,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
             }
         }
     }

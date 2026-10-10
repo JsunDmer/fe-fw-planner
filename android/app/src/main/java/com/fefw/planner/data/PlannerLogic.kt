@@ -5,8 +5,10 @@ import java.util.Locale
 
 val FALLBACK_ROUTE_KEYS = listOf("凯伊", "迪托利希", "赛奥朵拉", "蕾达")
 val CUSTOM_TIERS = listOf("初级", "中级", "上级", "最上级", "神将")
-val MOUNT_TYPES = listOf("马", "飞鸵", "天马", "飞龙", "战象")
 val MOUNT_UNIT_REGEX = Regex("骑兵|飞行")
+/** 凯伊线坐骑选择可选类型（按需求排除战象）。 */
+val SELECTABLE_MOUNT_TYPES = listOf("马", "天马", "飞龙", "飞鸵")
+const val KAI_ROUTE = "凯伊"
 val DIFF_RANK = mapOf("低" to 0, "中" to 1, "高" to 2, "超高" to 3)
 
 const val KIND_STORY = "story"
@@ -244,29 +246,6 @@ fun customSteps(ids: List<String>, classesById: Map<String, ClassInfo>): List<St
         Step(tier = CUSTOM_TIERS.getOrNull(i) ?: cls.tier, name = cls.name, classId = id)
     }
 
-data class NeededMount(val char: Character, val classes: List<String>)
-
-fun mountNeeded(
-    characters: List<Character>,
-    recruits: Map<String, RecruitState>,
-    paths: Map<String, PathState>,
-    classesById: Map<String, ClassInfo>
-): List<NeededMount> = characters
-    .filter { isPlannedOrDone(recruits, it.id) }
-    .mapNotNull { c ->
-        val names = resolveSteps(c, paths[c.id], classesById)
-            .mapNotNull { classesById[it.classId] }
-            .filter { MOUNT_UNIT_REGEX.containsMatchIn(it.unitType ?: "") }
-            .map { it.name }
-        if (names.isNotEmpty()) NeededMount(c, names) else null
-    }
-
-/** 只有 where 明确提到某个主角篇名或「救世篇」时，才标注为特定路线限定。 */
-fun mountFlagged(m: Mount, routeKeys: List<String>): Boolean {
-    if (m.where.contains("救世篇")) return true
-    return routeKeys.any { m.where.contains(it) }
-}
-
 fun growthInline(g: Growth?, stats: List<List<String>>): String {
     if (g == null) return "—"
     val parts = stats.mapNotNull { s ->
@@ -282,15 +261,59 @@ fun growthInline(g: Growth?, stats: List<List<String>>): String {
 data class GrowthCell(val key: String, val label: String, val value: Int, val bonus: Int)
 
 /**
- * 有效成长率 = 角色基础成长 + 职业成长加成，即"角色基础后"的成长率。
- * bonus 单独保留，供 UI 标注该职业具体提升了哪些属性。
+ * 表格单格：有效成长 = 角色基础成长 + 职业加成 + 额外(坐骑)加成。
+ * bonus 为职业+坐骑的总加成，单独保留供 UI 标注与高亮。
  */
-fun growthCells(base: Growth?, cls: Growth?, stats: List<List<String>>): List<GrowthCell> =
+fun growthCells(
+    base: Growth?,
+    cls: Growth?,
+    stats: List<List<String>>,
+    extra: Growth? = null
+): List<GrowthCell> =
     stats.map { s ->
         val key = s.getOrNull(0).orEmpty()
         val label = s.getOrNull(1) ?: key
-        val bonus = cls?.value(key) ?: 0
+        val bonus = (cls?.value(key) ?: 0) + (extra?.value(key) ?: 0)
         GrowthCell(key, label, (base?.value(key) ?: 0) + bonus, bonus)
+    }
+
+/** 坐骑成长字符串 → Growth。格式如 "HP5 速5 技5 防5 魔防5"；魔防必须先于魔匹配。 */
+private val RE_MOUNT_GROWTH = Regex("(魔防|HP|力|魔|速|技|防|幸|魅)(\\d+)")
+
+fun parseMountGrowth(raw: String?): Growth {
+    if (raw.isNullOrBlank()) return Growth()
+    var hp = 0; var str = 0; var mag = 0; var spd = 0; var dex = 0
+    var def = 0; var res = 0; var lck = 0; var cha = 0
+    RE_MOUNT_GROWTH.findAll(raw).forEach { m ->
+        val n = m.groupValues[2].toIntOrNull() ?: 0
+        when (m.groupValues[1]) {
+            "HP" -> hp = n
+            "力" -> str = n
+            "魔" -> mag = n
+            "速" -> spd = n
+            "技" -> dex = n
+            "防" -> def = n
+            "魔防" -> res = n
+            "幸" -> lck = n
+            "魅" -> cha = n
+        }
+    }
+    return Growth(hp, str, mag, spd, dex, def, res, lck, cha)
+}
+
+/** 逐项相加。 */
+fun addGrowth(a: Growth, b: Growth): Growth = Growth(
+    a.hp + b.hp, a.str + b.str, a.mag + b.mag, a.spd + b.spd, a.dex + b.dex,
+    a.def + b.def, a.res + b.res, a.lck + b.lck, a.cha + b.cha
+)
+
+/** 坐骑选择存储键：每角色每档位一个坐骑。 */
+fun stepMountKey(charId: String, tier: String): String = "$charId::$tier"
+
+/** 取某坐骑的成长；名字为空或找不到返回 null。 */
+fun mountGrowthOf(mounts: List<Mount>, name: String?): Growth? =
+    name?.takeIf { it.isNotBlank() }?.let { n ->
+        mounts.firstOrNull { it.name == n }?.let { parseMountGrowth(it.growth) }
     }
 
 fun statLabel(stats: List<List<String>>, key: String): String =

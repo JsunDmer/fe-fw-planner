@@ -42,12 +42,17 @@ import com.fefw.planner.data.CUSTOM_TIERS
 import com.fefw.planner.data.Character
 import com.fefw.planner.data.ClassInfo
 import com.fefw.planner.data.Growth
+import com.fefw.planner.data.KAI_ROUTE
 import com.fefw.planner.data.MOUNT_UNIT_REGEX
+import com.fefw.planner.data.SELECTABLE_MOUNT_TYPES
 import com.fefw.planner.data.Step
+import com.fefw.planner.data.addGrowth
 import com.fefw.planner.data.growthCells
 import com.fefw.planner.data.growthInline
+import com.fefw.planner.data.mountGrowthOf
 import com.fefw.planner.data.recruitsFor
 import com.fefw.planner.data.resolveSteps
+import com.fefw.planner.data.stepMountKey
 import com.fefw.planner.ui.components.AssetImage
 import com.fefw.planner.ui.components.Badge
 import com.fefw.planner.ui.components.BadgeKind
@@ -69,8 +74,6 @@ import com.fefw.planner.ui.theme.Surface2
 import com.fefw.planner.ui.theme.Tertiary
 import com.fefw.planner.ui.theme.TextPrimary
 import com.fefw.planner.ui.theme.TextSecondary
-import com.fefw.planner.ui.theme.WarnSoft
-import com.fefw.planner.ui.theme.WarnText
 import com.fefw.planner.viewmodel.PlannerViewModel
 import com.fefw.planner.viewmodel.activeDataOrNull
 
@@ -134,6 +137,16 @@ private fun CharPlanCard(
     val doneSteps = pd?.doneSteps.orEmpty()
     val doneCount = steps.count { doneSteps[it.tier] == true }
 
+    val route = data.route
+    val stepMounts = data.stepMounts
+    val mountSum: Growth? = if (route == KAI_ROUTE) {
+        steps.mapNotNull { stepMounts[stepMountKey(c.id, it.tier)] }
+            .filter { it.isNotBlank() }
+            .distinct()
+            .mapNotNull { mountGrowthOf(vm.fe.mounts, it) }
+            .fold<Growth, Growth?>(null) { acc, g -> acc?.let { addGrowth(it, g) } ?: g }
+    } else null
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -154,8 +167,12 @@ private fun CharPlanCard(
                 if (start.isNotBlank()) {
                     Text("初始职业：$start", style = MaterialTheme.typography.bodySmall, color = Muted)
                 }
-                Text("基础成长", style = MaterialTheme.typography.bodySmall, color = Muted)
-                GrowthGrid(growthCells(c.growth, null, vm.fe.stats), compact = true)
+                Text(
+                    if (mountSum != null) "基础成长（含坐骑）" else "基础成长",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Muted
+                )
+                GrowthGrid(growthCells(c.growth, null, vm.fe.stats, mountSum), compact = true)
             }
         }
 
@@ -195,14 +212,14 @@ private fun CharPlanCard(
                 if (steps.isEmpty()) {
                     Text("尚未选择职业，点「重新编辑」。", style = MaterialTheme.typography.bodySmall, color = Muted)
                 } else {
-                    StepFlow(vm, c, steps, doneSteps, expandClass)
+                    StepFlow(vm, c, steps, doneSteps, expandClass, route, stepMounts)
                 }
                 ChoiceChip("重新编辑", selected = false, onClick = { vm.editCustom(c.id) })
             }
         } else if (steps.isEmpty()) {
             Text("该方案暂无推荐转职详情，可切到「自定义」。", style = MaterialTheme.typography.bodySmall, color = Muted)
         } else {
-            StepFlow(vm, c, steps, doneSteps, expandClass)
+            StepFlow(vm, c, steps, doneSteps, expandClass, route, stepMounts)
         }
 
         Text(
@@ -226,7 +243,9 @@ private fun StepFlow(
     c: Character,
     steps: List<Step>,
     doneSteps: Map<String, Boolean>,
-    expandClass: Set<String>
+    expandClass: Set<String>,
+    route: String,
+    stepMounts: Map<String, String>
 ) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
         steps.forEachIndexed { i, s ->
@@ -240,6 +259,8 @@ private fun StepFlow(
                     step = s,
                     cls = vm.classesById[s.classId],
                     baseGrowth = c.growth,
+                    route = route,
+                    mountName = stepMounts[stepMountKey(c.id, s.tier)],
                     done = doneSteps[s.tier] == true,
                     opened = s.classId in expandClass
                 )
@@ -306,13 +327,17 @@ private fun StepNode(
     step: Step,
     cls: ClassInfo?,
     baseGrowth: Growth,
+    route: String,
+    mountName: String?,
     done: Boolean,
     opened: Boolean
 ) {
     val unitType = cls?.unitType.orEmpty()
     val needsMount = MOUNT_UNIT_REGEX.containsMatchIn(unitType)
-    // 有效成长 = 角色基础 + 职业加成；结构固定 9 格，保证所有收起态节点等高。
-    val cells = growthCells(baseGrowth, cls?.growth, vm.fe.stats)
+    val mountEligible = route == KAI_ROUTE && needsMount && cls != null
+    val mountGrowth = if (mountEligible) mountGrowthOf(vm.fe.mounts, mountName) else null
+    // 有效成长 = 角色基础 + 职业加成 + 坐骑加成；结构固定 9 格，保证所有收起态节点等高。
+    val cells = growthCells(baseGrowth, cls?.growth, vm.fe.stats, mountGrowth)
     Column(
         modifier = Modifier
             .width(150.dp)
@@ -355,26 +380,83 @@ private fun StepNode(
             if (cls.innate.isNotEmpty()) {
                 KV("固有", cls.innate.joinToString("、"))
             }
-            if (needsMount) {
-                Row(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(6.dp))
-                        .background(WarnSoft)
-                        .border(1.dp, Tertiary.copy(alpha = 0.5f), RoundedCornerShape(6.dp))
-                        .clickable { vm.gotoMount(charId) }
-                        .padding(horizontal = 6.dp, vertical = 3.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Text("🐴", fontSize = 11.sp)
-                    Text("需要坐骑 →", style = MaterialTheme.typography.bodySmall, color = WarnText)
-                }
+            if (mountEligible) {
+                MountPicker(vm, charId, step.tier, mountName)
+            } else if (needsMount) {
+                Text(
+                    "需要坐骑（仅凯伊线可选）",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Muted
+                )
             }
             ClassDetail(cls, vm)
         }
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             CheckChip(checked = done, label = "已完成", onToggle = { vm.toggleStepDone(charId, step.tier) }, mark = "✓")
             Text(if (opened) "▾" else "▸", style = MaterialTheme.typography.bodySmall, color = Muted)
+        }
+    }
+}
+
+@Composable
+private fun MountPicker(vm: PlannerViewModel, charId: String, tier: String, current: String?) {
+    var open by remember { mutableStateOf(false) }
+    val mounts = remember(vm.fe.mounts) {
+        vm.fe.mounts.filter { it.type in SELECTABLE_MOUNT_TYPES }
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            Text("坐骑", style = MaterialTheme.typography.bodySmall, color = Muted)
+            Box {
+                OutlinedButton(
+                    onClick = { open = true },
+                    border = BorderStroke(1.dp, if (current.isNullOrBlank()) Border else Primary),
+                    shape = RoundedCornerShape(6.dp),
+                    contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp)
+                ) {
+                    Text(
+                        current ?: "选择坐骑…",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = if (current.isNullOrBlank()) TextSecondary else Primary
+                    )
+                }
+                DropdownMenu(
+                    expanded = open,
+                    onDismissRequest = { open = false },
+                    containerColor = Surface2,
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("（不选坐骑）", color = Muted) },
+                        onClick = { vm.setStepMount(charId, tier, ""); open = false }
+                    )
+                    mounts.forEach { m ->
+                        DropdownMenuItem(
+                            text = {
+                                Column {
+                                    Text("${m.type}｜${m.name}", color = TextPrimary)
+                                    if (m.growth.isNotBlank()) {
+                                        Text(
+                                            "成长 ${m.growth}",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = Muted
+                                        )
+                                    }
+                                }
+                            },
+                            onClick = { vm.setStepMount(charId, tier, m.name); open = false }
+                        )
+                    }
+                }
+            }
+        }
+        val g = mountGrowthOf(vm.fe.mounts, current)
+        if (g != null) {
+            Text(
+                "坐骑成长：${growthInline(g, vm.fe.stats)}",
+                style = MaterialTheme.typography.bodySmall,
+                color = TextSecondary
+            )
         }
     }
 }

@@ -8,7 +8,6 @@ import com.fefw.planner.data.FALLBACK_ROUTE_KEYS
 import com.fefw.planner.data.FeData
 import com.fefw.planner.data.FeDataLoader
 import com.fefw.planner.data.ImportResult
-import com.fefw.planner.data.MountState
 import com.fefw.planner.data.PathState
 import com.fefw.planner.data.RecruitState
 import com.fefw.planner.data.Recommend
@@ -18,6 +17,7 @@ import com.fefw.planner.data.SlotData
 import com.fefw.planner.data.Store
 import com.fefw.planner.data.UiState
 import com.fefw.planner.data.recruitsFor
+import com.fefw.planner.data.stepMountKey
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -62,9 +62,6 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _showAllPaths = MutableStateFlow(false)
     val showAllPaths: StateFlow<Boolean> = _showAllPaths.asStateFlow()
-
-    private val _mountHighlight = MutableStateFlow<String?>(null)
-    val mountHighlight: StateFlow<String?> = _mountHighlight.asStateFlow()
 
     private val _charsQ = MutableStateFlow("")
     val charsQ: StateFlow<String> = _charsQ.asStateFlow()
@@ -122,7 +119,6 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
         _filterRepMin.value = d.ui.repMin
         _filterOnlyPlanned.value = d.ui.onlyPlanned
         _rulesOpen.value = false
-        _mountHighlight.value = null
     }
 
     fun setTab(tab: String) {
@@ -227,36 +223,12 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
         mutate { it.copy(notes = it.notes + (id to text)) }
     }
 
-    fun toggleMountPlanned(name: String) = toggleMount(name) { it.copy(planned = !it.planned) }
-
-    fun toggleMountCaptured(name: String) = toggleMount(name) { it.copy(captured = !it.captured) }
-
-    private fun toggleMount(name: String, block: (MountState) -> MountState) {
+    fun setStepMount(charId: String, tier: String, mountName: String) {
         mutate { d ->
-            val m = d.mounts[name] ?: MountState()
-            d.copy(mounts = d.mounts + (name to block(m)))
+            val key = stepMountKey(charId, tier)
+            val next = if (mountName.isBlank()) d.stepMounts - key else d.stepMounts + (key to mountName)
+            d.copy(stepMounts = next)
         }
-    }
-
-    fun assignMount(name: String, charId: String) {
-        if (charId.isBlank()) return
-        mutate { d ->
-            val m = d.mounts[name] ?: MountState()
-            if (charId in m.assigned) d
-            else d.copy(mounts = d.mounts + (name to m.copy(assigned = m.assigned + charId)))
-        }
-    }
-
-    fun unassignMount(name: String, charId: String) {
-        mutate { d ->
-            val m = d.mounts[name] ?: return@mutate d
-            d.copy(mounts = d.mounts + (name to m.copy(assigned = m.assigned.filter { it != charId })))
-        }
-    }
-
-    fun gotoMount(charId: String) {
-        setTab("mounts")
-        _mountHighlight.value = charId
     }
 
     fun setCharsQ(q: String) {

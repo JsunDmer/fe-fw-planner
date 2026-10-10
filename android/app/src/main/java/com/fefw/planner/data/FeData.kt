@@ -56,6 +56,12 @@ data class PersonalSkill(
 )
 
 @Serializable
+data class CharacterSkill(
+    val kind: String = "",
+    val text: String = ""
+)
+
+@Serializable
 data class Step(
     val tier: String = "",
     val name: String = "",
@@ -101,6 +107,7 @@ data class Character(
     val recruit: String = "",
     val joinChapter: List<String> = emptyList(),
     val personalSkill: PersonalSkill? = null,
+    val skills: List<CharacterSkill> = emptyList(),
     val paths: List<PathReco> = emptyList(),
     val recruitByRoute: Map<String, RecruitInfo> = emptyMap()
 )

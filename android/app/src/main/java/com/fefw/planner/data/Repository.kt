@@ -21,13 +21,6 @@ data class PathState(
 )
 
 @Serializable
-data class MountState(
-    val planned: Boolean = false,
-    val captured: Boolean = false,
-    val assigned: List<String> = emptyList()
-)
-
-@Serializable
 data class UiState(
     val tab: String = "recruit",
     val sort: String = "rep",
@@ -50,7 +43,11 @@ data class SlotData(
      */
     val recruits: Map<String, RecruitState> = emptyMap(),
     val paths: Map<String, PathState> = emptyMap(),
-    val mounts: Map<String, MountState> = emptyMap(),
+    /**
+     * 凯伊线坐骑选择：key = "charId::tier" → 坐骑名。
+     * 仅凯伊线生效，用于把坐骑成长叠加进角色/职业成长显示。
+     */
+    val stepMounts: Map<String, String> = emptyMap(),
     val notes: Map<String, String> = emptyMap(),
     val onboarded: Boolean? = null,
     val ui: UiState = UiState()
