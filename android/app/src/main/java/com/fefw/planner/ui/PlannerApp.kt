@@ -33,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -181,7 +182,7 @@ private fun AppHeader(vm: PlannerViewModel, route: String) {
     }
 }
 
-private fun Modifier.rotate45(): Modifier = this.then(androidx.compose.ui.draw.rotate(45f))
+private fun Modifier.rotate45(): Modifier = this.rotate(45f)
 
 @Composable
 private fun RouteBar(vm: PlannerViewModel, route: String, onHelp: () -> Unit) {
