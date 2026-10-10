@@ -17,6 +17,20 @@ def load(n):
     with open(os.path.join(DATA, n + ".json"), encoding="utf-8") as f:
         return json.load(f)
 
+
+# 说明「为什么」按此顺序合并：同名技能可能同时存在于「特技/战技/魔法/血印」，
+# 而职业的 mastery/innate 指向的是「特技」表，故把 skills 放最后，命中同名时以特技说明为准。
+def skill_desc_map():
+    sk = load("skills")
+    out = {}
+    for cat in ("arts", "magic", "blood", "skills"):
+        for x in sk.get(cat, []):
+            n = (x.get("name") or "").strip()
+            t = (x.get("text") or "").strip()
+            if n and t:
+                out[n] = t
+    return out
+
 def data_uri(relpath):
     if not relpath:
         return ""
@@ -187,6 +201,7 @@ def build(image_ref=data_uri):
         "characters": out_chars, "classes": out_classes, "recommend": recommend,
         "mounts": misc.get("mounts", []),
         "materials": materials,
+        "skillDesc": skill_desc_map(),
         "guides": {k: re.sub(r"<[^>]+>", "", g.get("body", "")) for k, g in guides.items() if k in ("g-scout", "g-hero", "g-fame")},
     }
 

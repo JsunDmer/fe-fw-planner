@@ -197,6 +197,7 @@ data class FeData(
     val recommend: List<Recommend> = emptyList(),
     val mounts: List<Mount> = emptyList(),
     val materials: Map<String, Material> = emptyMap(),
+    val skillDesc: Map<String, String> = emptyMap(),
     val guides: Guides = Guides()
 )
 

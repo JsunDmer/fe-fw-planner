@@ -59,7 +59,6 @@ import com.fefw.planner.ui.components.ChoiceChip
 import com.fefw.planner.ui.components.EmptyHint
 import com.fefw.planner.ui.components.FefwTextField
 import com.fefw.planner.ui.components.GrowthGrid
-import com.fefw.planner.ui.components.KV
 import com.fefw.planner.ui.components.PanelCard
 import com.fefw.planner.ui.components.TagPill
 import com.fefw.planner.ui.theme.Border
@@ -378,15 +377,8 @@ private fun StepNode(
         }
         GrowthGrid(cells)
         if (cls != null && opened) {
-            if (cls.usableSkills.isNotEmpty()) {
-                KV("职业特技", cls.usableSkills.joinToString("、"))
-            }
-            if (cls.innate.isNotEmpty()) {
-                KV("固有", cls.innate.joinToString("、"))
-            }
-            if (cls.mastery.isNotBlank()) {
-                KV("精通特技", cls.mastery)
-            }
+            SkillList("职业特技", cls.innate, vm.fe.skillDesc)
+            SkillList("精通特技", listOf(cls.mastery), vm.fe.skillDesc)
             if (mountEligible) {
                 MountPicker(vm, charId, step.tier, mountName, mountTypes)
             } else if (needsMount) {
@@ -404,6 +396,23 @@ private fun StepNode(
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             CheckChip(checked = done, label = "已完成", onToggle = { vm.toggleStepDone(charId, step.tier) }, mark = "✓")
             Text(if (opened) "▾" else "▸", style = MaterialTheme.typography.bodySmall, color = Muted)
+        }
+    }
+}
+
+@Composable
+private fun SkillList(label: String, names: List<String>, desc: Map<String, String>) {
+    val items = names.filter { it.isNotBlank() }
+    if (items.isEmpty()) return
+    Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
+        Text(label, style = MaterialTheme.typography.bodySmall, color = Muted)
+        items.forEach { name ->
+            val t = desc[name]
+            Text(
+                if (t.isNullOrBlank()) name else "$name：$t",
+                style = MaterialTheme.typography.bodySmall,
+                color = TextSecondary
+            )
         }
     }
 }
