@@ -1,5 +1,6 @@
 package com.fefw.planner.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -7,6 +8,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -60,6 +62,7 @@ import com.fefw.planner.ui.components.TagPill
 import com.fefw.planner.ui.theme.Border
 import com.fefw.planner.ui.theme.Muted
 import com.fefw.planner.ui.theme.OkText
+import com.fefw.planner.ui.theme.Primary
 import com.fefw.planner.ui.theme.ScoutText
 import com.fefw.planner.ui.theme.Surface1
 import com.fefw.planner.ui.theme.Surface2
@@ -77,6 +80,7 @@ fun ClassScreen(vm: PlannerViewModel) {
     val data = store.activeDataOrNull ?: return
     val showAll by vm.showAllPaths.collectAsStateWithLifecycle()
     val expandClass by vm.expandClass.collectAsStateWithLifecycle()
+    val customConfirmed by vm.customConfirmed.collectAsStateWithLifecycle()
 
     val all = remember(vm.fe.characters) { vm.fe.characters.filter { it.paths.isNotEmpty() } }
     val chars = remember(all, data, showAll) {
@@ -108,7 +112,7 @@ fun ClassScreen(vm: PlannerViewModel) {
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 items(chars, key = { it.id }) { c ->
-                    CharPlanCard(vm, c, data, expandClass)
+                    CharPlanCard(vm, c, data, expandClass, customConfirmed)
                 }
             }
         }
@@ -116,7 +120,13 @@ fun ClassScreen(vm: PlannerViewModel) {
 }
 
 @Composable
-private fun CharPlanCard(vm: PlannerViewModel, c: Character, data: com.fefw.planner.data.SlotData, expandClass: Set<String>) {
+private fun CharPlanCard(
+    vm: PlannerViewModel,
+    c: Character,
+    data: com.fefw.planner.data.SlotData,
+    expandClass: Set<String>,
+    customConfirmed: Set<String>
+) {
     val pd = data.paths[c.id]
     val rec = data.recruitsFor(data.route)[c.id]
     val steps = resolveSteps(c, pd, vm.classesById)
@@ -163,30 +173,36 @@ private fun CharPlanCard(vm: PlannerViewModel, c: Character, data: com.fefw.plan
         }
 
         if (customMode) {
-            CUSTOM_TIERS.forEachIndexed { i, tier ->
-                CustomTierRow(vm, c.id, tier, pd?.custom?.getOrNull(i))
+            if (c.id !in customConfirmed) {
+                CUSTOM_TIERS.forEachIndexed { i, tier ->
+                    CustomTierRow(vm, c.id, tier, pd?.custom?.getOrNull(i))
+                }
+                val hasAny = pd?.custom?.any { it.isNotBlank() } == true
+                OutlinedButton(
+                    onClick = { vm.confirmCustom(c.id) },
+                    enabled = hasAny,
+                    border = BorderStroke(1.dp, if (hasAny) Primary else Border),
+                    shape = RoundedCornerShape(6.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 6.dp)
+                ) {
+                    Text(
+                        "确认路线",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = if (hasAny) TextPrimary else Muted
+                    )
+                }
+            } else {
+                if (steps.isEmpty()) {
+                    Text("尚未选择职业，点「重新编辑」。", style = MaterialTheme.typography.bodySmall, color = Muted)
+                } else {
+                    StepFlow(vm, c, steps, doneSteps, expandClass)
+                }
+                ChoiceChip("重新编辑", selected = false, onClick = { vm.editCustom(c.id) })
             }
         } else if (steps.isEmpty()) {
             Text("该方案暂无推荐转职详情，可切到「自定义」。", style = MaterialTheme.typography.bodySmall, color = Muted)
         } else {
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
-                steps.forEachIndexed { i, s ->
-                    if (i > 0) {
-                        item { Text("→", color = Muted, fontSize = 14.sp) }
-                    }
-                    item(key = s.classId.ifBlank { "$i" }) {
-                        StepNode(
-                            vm = vm,
-                            charId = c.id,
-                            step = s,
-                            cls = vm.classesById[s.classId],
-                            baseGrowth = c.growth,
-                            done = doneSteps[s.tier] == true,
-                            opened = s.classId in expandClass
-                        )
-                    }
-                }
-            }
+            StepFlow(vm, c, steps, doneSteps, expandClass)
         }
 
         Text(
@@ -201,6 +217,34 @@ private fun CharPlanCard(vm: PlannerViewModel, c: Character, data: com.fefw.plan
             placeholder = "备注（如该角色需要的凹点、支援对象）…",
             modifier = Modifier.fillMaxWidth()
         )
+    }
+}
+
+@Composable
+private fun StepFlow(
+    vm: PlannerViewModel,
+    c: Character,
+    steps: List<Step>,
+    doneSteps: Map<String, Boolean>,
+    expandClass: Set<String>
+) {
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
+        steps.forEachIndexed { i, s ->
+            if (i > 0) {
+                item { Text("→", color = Muted, fontSize = 14.sp) }
+            }
+            item(key = s.classId.ifBlank { "$i" }) {
+                StepNode(
+                    vm = vm,
+                    charId = c.id,
+                    step = s,
+                    cls = vm.classesById[s.classId],
+                    baseGrowth = c.growth,
+                    done = doneSteps[s.tier] == true,
+                    opened = s.classId in expandClass
+                )
+            }
+        }
     }
 }
 

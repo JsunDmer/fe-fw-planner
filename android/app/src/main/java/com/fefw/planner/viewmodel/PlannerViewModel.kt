@@ -84,6 +84,9 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
     private val _expandClass = MutableStateFlow<Set<String>>(emptySet())
     val expandClass: StateFlow<Set<String>> = _expandClass.asStateFlow()
 
+    private val _customConfirmed = MutableStateFlow<Set<String>>(emptySet())
+    val customConfirmed: StateFlow<Set<String>> = _customConfirmed.asStateFlow()
+
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
@@ -215,6 +218,10 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun toggleClassInfo(key: String) = _expandClass.update { if (key in it) it - key else it + key }
+
+    fun confirmCustom(id: String) = _customConfirmed.update { it + id }
+
+    fun editCustom(id: String) = _customConfirmed.update { it - id }
 
     fun setNote(id: String, text: String) {
         mutate { it.copy(notes = it.notes + (id to text)) }

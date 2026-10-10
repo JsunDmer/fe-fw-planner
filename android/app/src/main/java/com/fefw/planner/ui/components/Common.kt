@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -366,7 +367,7 @@ private fun GrowthCellView(cell: GrowthCell, height: Dp, compact: Boolean, modif
     }
     Column(
         modifier = modifier
-            .height(height)
+            .heightIn(min = height)
             .clip(RoundedCornerShape(6.dp))
             .background(Panel3)
             .border(
@@ -397,16 +398,18 @@ private fun GrowthCellView(cell: GrowthCell, height: Dp, compact: Boolean, modif
         }
         Text(
             "${cell.value}",
-            fontSize = if (compact) 14.sp else 16.sp,
+            fontSize = if (compact) 13.sp else 16.sp,
             fontWeight = FontWeight.SemiBold,
             color = valueColor
         )
-        Box(
-            Modifier
-                .height(3.dp)
-                .fillMaxWidth((cell.value / 80f).coerceIn(0.08f, 1f))
-                .clip(RoundedCornerShape(2.dp))
-                .background(valueColor.copy(alpha = 0.8f))
-        )
+        if (!compact) {
+            Box(
+                Modifier
+                    .height(3.dp)
+                    .fillMaxWidth((cell.value / 80f).coerceIn(0.08f, 1f))
+                    .clip(RoundedCornerShape(2.dp))
+                    .background(valueColor.copy(alpha = 0.8f))
+            )
+        }
     }
 }
