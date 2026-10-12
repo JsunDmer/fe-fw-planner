@@ -75,7 +75,7 @@ fun OnboardingScreen(vm: PlannerViewModel) {
 
         vm.fe.routes.forEach { route ->
             OnboardingRouteCard(route = route, active = route.key == data.route) {
-                vm.chooseRoute(route.key, goRecruit = true)
+                vm.chooseRoute(route.key, goPlan = true)
             }
         }
 

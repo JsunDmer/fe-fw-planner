@@ -66,6 +66,7 @@ import com.fefw.planner.viewmodel.activeDataOrNull
  * - 「已招募」(done) 不在本页切换，只以绿色填充对勾 + 底色高亮呈现，避免窄格塞两个控件。
  * - 剧情/不可挖的格子不可点：剧情自动入队无需计划，不可挖无从计划。
  * - 列头点按即切换当前主角线（复用 vm.chooseRoute），省去回到顶部换线。
+ * - 角色名点按即跳转到「角色信息」页并定位该角色（vm.openChar），用于查看其成长率与个人特技。
  * - 筛选状态与「角色信息」页共享（charsQ / charsOnlyScout / charsShowLate），避免重复的输入状态。
  */
 @OptIn(ExperimentalFoundationApi::class)
@@ -106,7 +107,7 @@ fun OverviewScreen(vm: PlannerViewModel) {
             CheckChip(showLate, "显示后期角色", vm::toggleCharsShowLate)
         }
         Text(
-            "显示 ${list.size} / ${all.size} 人 · 点列头可切换主角线",
+            "显示 ${list.size} / ${all.size} 人 · 点列头切主角线 · 点角色名看详情",
             style = MaterialTheme.typography.bodySmall,
             color = Muted
         )
@@ -203,7 +204,11 @@ private fun OverviewRow(
             style = MaterialTheme.typography.bodyMedium,
             color = if (c.isHero) Primary else TextPrimary,
             maxLines = 1,
-            modifier = Modifier.weight(1.2f)
+            modifier = Modifier
+                .weight(1.2f)
+                .clip(RoundedCornerShape(4.dp))
+                .clickable { vm.openChar(c) }
+                .padding(vertical = 2.dp)
         )
         routeKeys.forEach { k ->
             val r = c.recruitByRoute[k]

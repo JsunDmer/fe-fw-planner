@@ -22,7 +22,7 @@ data class PathState(
 
 @Serializable
 data class UiState(
-    val tab: String = "recruit"
+    val tab: String = "class"
 )
 
 @Serializable
@@ -171,7 +171,7 @@ class Repository(context: Context) {
     companion object {
         fun normalize(d: SlotData, defaultRoute: String): SlotData {
             val route = d.route.ifBlank { defaultRoute }
-            val tab = if (d.ui.tab == "settings" || d.ui.tab.isBlank()) "recruit" else d.ui.tab
+            val tab = if (d.ui.tab == "settings" || d.ui.tab == "recruit" || d.ui.tab.isBlank()) "class" else d.ui.tab
             // 旧存档的扁平 recruits 没有线路维度，归入其当前主角线，升级后不丢勾选；之后该字段不再写入。
             val byRoute = if (d.recruitsByRoute.isEmpty() && d.recruits.isNotEmpty()) {
                 mapOf(route to d.recruits)

@@ -42,7 +42,7 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
     private val _store = MutableStateFlow(repo.load(defaultRoute))
     val store: StateFlow<Store> = _store.asStateFlow()
 
-    private val _tab = MutableStateFlow("recruit")
+    private val _tab = MutableStateFlow("class")
     val tab: StateFlow<String> = _tab.asStateFlow()
 
     private val _rulesOpen = MutableStateFlow(false)
@@ -98,7 +98,7 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun restoreUi() {
         val d = currentData()
-        _tab.value = d.ui.tab
+        _tab.value = if (d.ui.tab == "recruit") "class" else d.ui.tab
         _rulesOpen.value = false
     }
 
@@ -111,15 +111,21 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
         _rulesOpen.value = !_rulesOpen.value
     }
 
-    fun chooseRoute(key: String, goRecruit: Boolean = false) {
+    fun chooseRoute(key: String, goPlan: Boolean = false) {
         mutate { d ->
             d.copy(
                 route = key,
                 onboarded = true,
-                ui = if (goRecruit) d.ui.copy(tab = "recruit") else d.ui
+                ui = if (goPlan) d.ui.copy(tab = "class") else d.ui
             )
         }
-        if (goRecruit) _tab.value = "recruit"
+        if (goPlan) _tab.value = "class"
+    }
+
+    /** 四线总览点角色名 → 切到「角色信息」页，并以角色名作为搜索词把列表定位到该角色。 */
+    fun openChar(c: Character) {
+        _charsQ.value = c.name
+        setTab("chars")
     }
 
     fun togglePlanned(route: String, id: String) {

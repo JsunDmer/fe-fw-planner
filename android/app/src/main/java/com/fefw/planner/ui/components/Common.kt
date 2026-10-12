@@ -247,20 +247,6 @@ fun RouteChip(
 }
 
 @Composable
-fun CondChip(text: String, isOther: Boolean, modifier: Modifier = Modifier) {
-    Text(
-        text = text,
-        fontSize = 11.sp,
-        color = if (isOther) Muted else TextSecondary,
-        modifier = modifier
-            .clip(RoundedCornerShape(6.dp))
-            .background(Panel3)
-            .border(1.dp, BorderSoft, RoundedCornerShape(6.dp))
-            .padding(horizontal = 8.dp, vertical = 3.dp)
-    )
-}
-
-@Composable
 fun SectionHeader(title: String, hint: String? = null, modifier: Modifier = Modifier) {
     Column(modifier = modifier.fillMaxWidth().padding(top = 16.dp, bottom = 8.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
