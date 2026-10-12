@@ -96,22 +96,6 @@ fun isPlannedOrDone(recruits: Map<String, RecruitState>, id: String): Boolean {
     return r?.planned == true || r?.done == true
 }
 
-fun matchFilter(
-    row: RecruitRow,
-    q: String,
-    onlyPlanned: Boolean,
-    repMin: Int,
-    recruits: Map<String, RecruitState>
-): Boolean {
-    val c = row.char
-    val rec = recruits[c.id]
-    if (q.isNotEmpty() && !c.name.contains(q) && !c.id.contains(q)) return false
-    if (onlyPlanned && rec?.planned != true && rec?.done != true) return false
-    val r = row.r
-    if (r != null && r.kind == KIND_SCOUT && r.rep != null && r.rep < repMin) return false
-    return true
-}
-
 private fun supOf(r: RecruitInfo?): Int = r?.sup ?: 99
 private fun repOf(r: RecruitInfo?): Int = r?.rep ?: 99
 
@@ -149,24 +133,6 @@ fun groupScoutsByRep(rows: List<RecruitRow>): List<Pair<String, List<RecruitRow>
                 if (primary != 0) primary else zhCompare(a.char.name, b.char.name)
             })
         }
-}
-
-data class CompareRow(val route: String, val label: String, val isBest: Boolean, val isCur: Boolean)
-
-fun fourCompare(c: Character, curRoute: String, routeKeys: List<String>): List<CompareRow> {
-    val by = c.recruitByRoute
-    val scouts = routeKeys.mapNotNull { by[it] }.filter { it.kind == KIND_SCOUT }
-    val best = scouts.minByOrNull { cmpScore(it) }
-    return routeKeys.map { k ->
-        val r = by[k] ?: RecruitInfo(route = k, kind = KIND_NO)
-        val label = when (r.kind) {
-            KIND_SCOUT -> "名声${r.rep ?: "?"} · 支援${r.sup ?: "?"} · ${r.diff ?: "?"}"
-            KIND_STORY -> "剧情加入"
-            else -> "不可挖"
-        }
-        val isBest = best != null && r.kind == KIND_SCOUT && cmpScore(r) == cmpScore(best)
-        CompareRow(k, label, isBest, k == curRoute)
-    }
 }
 
 fun bestScoutScore(c: Character, routeKeys: List<String>): Int? {

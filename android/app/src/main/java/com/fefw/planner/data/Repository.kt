@@ -22,11 +22,7 @@ data class PathState(
 
 @Serializable
 data class UiState(
-    val tab: String = "recruit",
-    val sort: String = "rep",
-    val repMin: Int = 0,
-    val onlyPlanned: Boolean = false,
-    val q: String = ""
+    val tab: String = "recruit"
 )
 
 @Serializable

@@ -48,18 +48,6 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
     private val _rulesOpen = MutableStateFlow(false)
     val rulesOpen: StateFlow<Boolean> = _rulesOpen.asStateFlow()
 
-    private val _filterQ = MutableStateFlow("")
-    val filterQ: StateFlow<String> = _filterQ.asStateFlow()
-
-    private val _filterSort = MutableStateFlow("rep")
-    val filterSort: StateFlow<String> = _filterSort.asStateFlow()
-
-    private val _filterRepMin = MutableStateFlow(0)
-    val filterRepMin: StateFlow<Int> = _filterRepMin.asStateFlow()
-
-    private val _filterOnlyPlanned = MutableStateFlow(false)
-    val filterOnlyPlanned: StateFlow<Boolean> = _filterOnlyPlanned.asStateFlow()
-
     private val _showAllPaths = MutableStateFlow(false)
     val showAllPaths: StateFlow<Boolean> = _showAllPaths.asStateFlow()
 
@@ -71,9 +59,6 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _charsShowLate = MutableStateFlow(false)
     val charsShowLate: StateFlow<Boolean> = _charsShowLate.asStateFlow()
-
-    private val _expandCmp = MutableStateFlow<Set<String>>(emptySet())
-    val expandCmp: StateFlow<Set<String>> = _expandCmp.asStateFlow()
 
     private val _expandItem = MutableStateFlow<Set<String>>(emptySet())
     val expandItem: StateFlow<Set<String>> = _expandItem.asStateFlow()
@@ -114,10 +99,6 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
     private fun restoreUi() {
         val d = currentData()
         _tab.value = d.ui.tab
-        _filterQ.value = d.ui.q
-        _filterSort.value = d.ui.sort
-        _filterRepMin.value = d.ui.repMin
-        _filterOnlyPlanned.value = d.ui.onlyPlanned
         _rulesOpen.value = false
     }
 
@@ -160,30 +141,7 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun toggleCmp(id: String) = _expandCmp.update { if (id in it) it - id else it + id }
-
     fun toggleItem(name: String) = _expandItem.update { if (name in it) it - name else it + name }
-
-    fun setFilterQ(q: String) {
-        _filterQ.value = q
-        mutate { it.copy(ui = it.ui.copy(q = q)) }
-    }
-
-    fun setSort(sort: String) {
-        _filterSort.value = sort
-        mutate { it.copy(ui = it.ui.copy(sort = sort)) }
-    }
-
-    fun setRepMin(min: Int) {
-        _filterRepMin.value = min
-        mutate { it.copy(ui = it.ui.copy(repMin = min)) }
-    }
-
-    fun toggleOnlyPlanned() {
-        val next = !_filterOnlyPlanned.value
-        _filterOnlyPlanned.value = next
-        mutate { it.copy(ui = it.ui.copy(onlyPlanned = next)) }
-    }
 
     fun toggleShowAllPaths() = _showAllPaths.update { !it }
 
@@ -218,10 +176,6 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
     fun confirmCustom(id: String) = _customConfirmed.update { it + id }
 
     fun editCustom(id: String) = _customConfirmed.update { it - id }
-
-    fun setNote(id: String, text: String) {
-        mutate { it.copy(notes = it.notes + (id to text)) }
-    }
 
     fun setStepMount(charId: String, tier: String, mountName: String) {
         mutate { d ->
