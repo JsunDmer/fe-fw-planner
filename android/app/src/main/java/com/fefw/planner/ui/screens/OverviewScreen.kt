@@ -94,8 +94,6 @@ fun OverviewScreen(vm: PlannerViewModel) {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CheckChip(onlyScout, "只看可挖", vm::toggleCharsOnlyScout)
-            CheckChip(showLate, "显示后期角色", vm::toggleCharsShowLate)
         }
         Text(
             "显示 ${list.size} / ${all.size} 人 · 点列头切主角线 · 点角色名看详情",

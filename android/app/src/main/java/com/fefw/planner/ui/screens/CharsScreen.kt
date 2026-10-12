@@ -80,8 +80,6 @@ fun CharsScreen(vm: PlannerViewModel) {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CheckChip(onlyScout, "只看可挖", vm::toggleCharsOnlyScout)
-            CheckChip(showLate, "显示后期角色", vm::toggleCharsShowLate)
         }
         Text("显示 ${list.size} / ${all.size} 人", style = MaterialTheme.typography.bodySmall, color = Muted)
 
@@ -122,7 +120,7 @@ private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean)
                 Text(c.startClass.orEmpty(), style = MaterialTheme.typography.bodySmall, color = Muted)
             }
         }
-        GrowthGrid(growthCells(c.growth, null, stats), compact = true)
+        GrowthGrid(growthCells(c.growth, null, stats), mini = true)
         // 个人特技 与 skills[].kind=="个人特技" 是 1:1 等价的，直接用 skills 完整列表即可覆盖
         // 「个人特技 + 血印 + Lv特技」，因此无需再单独渲染 personalSkill 字段。
         if (c.skills.isNotEmpty()) {
