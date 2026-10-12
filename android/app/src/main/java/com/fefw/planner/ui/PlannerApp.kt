@@ -50,6 +50,7 @@ import com.fefw.planner.ui.components.parseHexColor
 import com.fefw.planner.ui.screens.CharsScreen
 import com.fefw.planner.ui.screens.ClassScreen
 import com.fefw.planner.ui.screens.OnboardingScreen
+import com.fefw.planner.ui.screens.OverviewScreen
 import com.fefw.planner.ui.screens.RecruitScreen
 import com.fefw.planner.ui.screens.SavesScreen
 import com.fefw.planner.ui.theme.AccentSoft
@@ -68,8 +69,8 @@ import com.fefw.planner.viewmodel.PlannerViewModel
 import com.fefw.planner.viewmodel.activeDataOrNull
 import com.fefw.planner.viewmodel.activeSlot
 
-private val TAB_LABELS = listOf("挖角规划", "转职规划", "角色信息", "存档")
-private val TAB_KEYS = listOf("recruit", "class", "chars", "saves")
+private val TAB_LABELS = listOf("挖角规划", "转职规划", "角色信息", "四线总览", "存档")
+private val TAB_KEYS = listOf("recruit", "class", "chars", "overview", "saves")
 
 @Composable
 fun PlannerApp(vm: PlannerViewModel) {
@@ -125,6 +126,7 @@ fun PlannerApp(vm: PlannerViewModel) {
                     when (tab) {
                         "class" -> ClassScreen(vm)
                         "chars" -> CharsScreen(vm)
+                        "overview" -> OverviewScreen(vm)
                         "saves" -> SavesScreen(vm)
                         else -> RecruitScreen(vm)
                     }
