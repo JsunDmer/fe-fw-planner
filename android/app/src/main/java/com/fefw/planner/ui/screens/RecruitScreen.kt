@@ -35,7 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.fefw.planner.data.KIND_NO
 import com.fefw.planner.data.KIND_SCOUT
@@ -44,7 +43,6 @@ import com.fefw.planner.data.RecruitRow
 import com.fefw.planner.data.aggregateConditions
 import com.fefw.planner.data.formatMoney
 import com.fefw.planner.data.groupScoutsByRep
-import com.fefw.planner.data.matchFilter
 import com.fefw.planner.data.recruitPool
 import com.fefw.planner.data.recruitsFor
 import com.fefw.planner.data.repThresholds
@@ -54,21 +52,17 @@ import com.fefw.planner.ui.components.AssetImage
 import com.fefw.planner.ui.components.Badge
 import com.fefw.planner.ui.components.BadgeKind
 import com.fefw.planner.ui.components.CheckChip
-import com.fefw.planner.ui.components.ChoiceChip
 import com.fefw.planner.ui.components.CondChip
 import com.fefw.planner.ui.components.EmptyHint
-import com.fefw.planner.ui.components.FefwTextField
 import com.fefw.planner.ui.components.KV
 import com.fefw.planner.ui.components.PanelCard
 import com.fefw.planner.ui.components.SectionHeader
-import com.fefw.planner.ui.theme.AccentSoft
 import com.fefw.planner.ui.theme.Bg
 import com.fefw.planner.ui.theme.Border
 import com.fefw.planner.ui.theme.DangerSoft
 import com.fefw.planner.ui.theme.DangerText
 import com.fefw.planner.ui.theme.Muted
 import com.fefw.planner.ui.theme.Muted2
-import com.fefw.planner.ui.theme.OkSoft
 import com.fefw.planner.ui.theme.Primary
 import com.fefw.planner.ui.theme.Surface1
 import com.fefw.planner.ui.theme.TextPrimary
@@ -77,22 +71,15 @@ import com.fefw.planner.ui.theme.WarnText
 import com.fefw.planner.viewmodel.PlannerViewModel
 import com.fefw.planner.viewmodel.activeDataOrNull
 
-private val REP_OPTIONS = listOf(0, 2, 4, 6, 8, 10, 12)
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RecruitScreen(vm: PlannerViewModel) {
     val store by vm.store.collectAsStateWithLifecycle()
     val data = store.activeDataOrNull ?: return
-    val q by vm.filterQ.collectAsStateWithLifecycle()
-    val sort by vm.filterSort.collectAsStateWithLifecycle()
-    val repMin by vm.filterRepMin.collectAsStateWithLifecycle()
-    val onlyPlanned by vm.filterOnlyPlanned.collectAsStateWithLifecycle()
 
     val route = data.route
     val routeRecruits = data.recruitsFor(route)
     val pool = remember(vm.fe.characters, route) { recruitPool(vm.fe.characters, route) }
-    val shown = pool.filter { matchFilter(it, q, onlyPlanned, repMin, routeRecruits) }
     val scoutAll = pool.count { it.r?.kind == KIND_SCOUT }
     val plannedCount = pool.count { routeRecruits[it.char.id]?.planned == true }
 
@@ -104,100 +91,43 @@ fun RecruitScreen(vm: PlannerViewModel) {
     }
 
     Column(Modifier.fillMaxSize()) {
-        FilterBar(vm = vm, q = q, sort = sort, repMin = repMin, onlyPlanned = onlyPlanned)
         SummaryStrip(plannedCount = plannedCount, scoutAll = scoutAll) { sheetOpen = true }
 
-        if (shown.isEmpty()) {
-            EmptyHint("没有符合筛选条件的角色。", Modifier.padding(16.dp))
-        } else {
-            val story = shown.filter { it.r?.kind == KIND_STORY }
-            val scouts = shown.filter { it.r?.kind == KIND_SCOUT }
-            val no = shown.filter { it.r == null || it.r.kind == KIND_NO }
-            var noOpen by remember { mutableStateOf(false) }
+        val story = pool.filter { it.r?.kind == KIND_STORY }
+        val scouts = pool.filter { it.r?.kind == KIND_SCOUT }
+        val no = pool.filter { it.r == null || it.r.kind == KIND_NO }
+        var noOpen by remember { mutableStateOf(false) }
 
-            LazyColumn(
-                modifier = Modifier.weight(1f),
-                contentPadding = PaddingValues(bottom = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                if (!onlyPlanned && story.isNotEmpty()) {
-                    stickyHeader {
-                        GroupHeader("本线固定出场 · ${story.size} 人", "剧情加入，无需交涉。")
-                    }
-                    items(story.sortedWith(storyOrderComparator), key = { it.char.id }) { row ->
-                        FixedRow(row)
-                    }
-                }
-                if (scouts.isNotEmpty()) {
-                    val title = when (sort) {
-                        "sup" -> "可挖角 · 按支援等级"
-                        "name" -> "可挖角 · 按名字"
-                        else -> "可挖角 · 按名声等级"
-                    }
-                    stickyHeader { GroupHeader(title, "已计划 $plannedCount 人 · 共可挖 $scoutAll 人") }
-                    if (sort == "rep") {
-                        groupScoutsByRep(scouts).forEach { (lv, list) ->
-                            item(key = "rep-$lv") { RankHead("名声 LV$lv", "${list.size} 人") }
-                            items(list, key = { it.char.id }) { row -> ScoutRow(vm, row, data) }
-                        }
-                    } else {
-                        items(scouts.sortedWith(scoutComparator(sort)), key = { it.char.id }) { row ->
-                            ScoutRow(vm, row, data)
-                        }
-                    }
-                }
-                if (!onlyPlanned && no.isNotEmpty()) {
-                    item {
-                        NoGroupHeader(count = no.size, open = noOpen) { noOpen = !noOpen }
-                    }
-                    if (noOpen) {
-                        items(no.sortedWith(scoutComparator("name")), key = { it.char.id }) { row ->
-                            NoRow(row)
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun FilterBar(
-    vm: PlannerViewModel,
-    q: String,
-    sort: String,
-    repMin: Int,
-    onlyPlanned: Boolean
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            FefwTextField(
-                value = q,
-                onValueChange = vm::setFilterQ,
-                placeholder = "搜索角色名…",
-                modifier = Modifier.weight(1f)
-            )
-            CheckChip(onlyPlanned, "只看已计划", vm::toggleOnlyPlanned)
-        }
-        Row(
-            modifier = Modifier.horizontalScroll(rememberScrollState()),
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-            verticalAlignment = Alignment.CenterVertically
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            contentPadding = PaddingValues(bottom = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            REP_OPTIONS.forEach { n ->
-                ChoiceChip(
-                    label = if (n == 0) "全部" else "名声≥$n",
-                    selected = repMin == n,
-                    onClick = { vm.setRepMin(n) }
-                )
+            if (story.isNotEmpty()) {
+                stickyHeader {
+                    GroupHeader("本线固定出场 · ${story.size} 人", "剧情加入，无需交涉。")
+                }
+                items(story.sortedWith(storyOrderComparator), key = { it.char.id }) { row ->
+                    FixedRow(row)
+                }
             }
-            Box(Modifier.size(1.dp, 16.dp).clip(RoundedCornerShape(1.dp)).background(Border))
-            ChoiceChip("按名声", selected = sort == "rep", onClick = { vm.setSort("rep") })
-            ChoiceChip("按支援", selected = sort == "sup", onClick = { vm.setSort("sup") })
-            ChoiceChip("按名字", selected = sort == "name", onClick = { vm.setSort("name") })
+            if (scouts.isNotEmpty()) {
+                stickyHeader { GroupHeader("可挖角", "已计划 $plannedCount 人 · 共可挖 $scoutAll 人") }
+                groupScoutsByRep(scouts).forEach { (lv, list) ->
+                    item(key = "rep-$lv") { RankHead("名声 LV$lv", "${list.size} 人") }
+                    items(list, key = { it.char.id }) { row -> ScoutRow(vm, row, data) }
+                }
+            }
+            if (no.isNotEmpty()) {
+                item {
+                    NoGroupHeader(count = no.size, open = noOpen) { noOpen = !noOpen }
+                }
+                if (noOpen) {
+                    items(no.sortedWith(scoutComparator("name")), key = { it.char.id }) { row ->
+                        NoRow(row)
+                    }
+                }
+            }
         }
     }
 }
