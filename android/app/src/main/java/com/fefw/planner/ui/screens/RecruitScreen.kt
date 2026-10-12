@@ -237,8 +237,8 @@ private fun ScoutRow(vm: PlannerViewModel, row: RecruitRow, data: com.fefw.plann
                     Text(start, style = MaterialTheme.typography.bodySmall, color = Muted)
                 }
             }
-            CheckChip(checked = done, label = "已招募", onToggle = { vm.toggleDone(c.id) }, mark = "✓")
-            CheckChip(checked = planned, label = "计划招募", plan = true, onToggle = { vm.togglePlanned(c.id) }, mark = "☆")
+            CheckChip(checked = done, label = "已招募", onToggle = { vm.toggleDone(data.route, c.id) }, mark = "✓")
+            CheckChip(checked = planned, label = "计划招募", plan = true, onToggle = { vm.togglePlanned(data.route, c.id) }, mark = "☆")
         }
         Row(
             modifier = Modifier.horizontalScroll(rememberScrollState()),

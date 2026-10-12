@@ -2,6 +2,7 @@ package com.fefw.planner.ui.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,24 +43,29 @@ import com.fefw.planner.ui.components.CheckChip
 import com.fefw.planner.ui.components.EmptyHint
 import com.fefw.planner.ui.components.FefwTextField
 import com.fefw.planner.ui.components.parseHexColor
+import com.fefw.planner.ui.theme.Border
 import com.fefw.planner.ui.theme.Muted
 import com.fefw.planner.ui.theme.Muted2
 import com.fefw.planner.ui.theme.OkText
+import com.fefw.planner.ui.theme.OnPrimary
 import com.fefw.planner.ui.theme.Primary
+import com.fefw.planner.ui.theme.Secondary
 import com.fefw.planner.ui.theme.Surface1
+import com.fefw.planner.ui.theme.Tertiary
 import com.fefw.planner.ui.theme.TextPrimary
 import com.fefw.planner.ui.theme.TextSecondary
 import com.fefw.planner.viewmodel.PlannerViewModel
 import com.fefw.planner.viewmodel.activeDataOrNull
 
 /**
- * 四线总览：把「全角色 × 4 条主角线」的挖角关系摊成一张矩阵，一屏看清
- * 每个角色会出现在哪几条线、以什么身份出现（剧情/可挖/不可）。
+ * 四线总览：把「全角色 × 4 条主角线」的挖角关系摊成一张矩阵，既是视图也是操作台。
  *
  * 设计取舍：
+ * - 每格对「可挖角」角色提供勾选：点按切换该角色在「这一条线」的计划招募状态
+ *   （vm.togglePlanned(route, id)，按线定向，不会误落到当前主角线），与挖角规划页实时同步。
+ * - 「已招募」(done) 不在本页切换，只以绿色填充对勾 + 底色高亮呈现，避免窄格塞两个控件。
+ * - 剧情/不可挖的格子不可点：剧情自动入队无需计划，不可挖无从计划。
  * - 列头点按即切换当前主角线（复用 vm.chooseRoute），省去回到顶部换线。
- * - 每格只放「身份 + 该线规划标记（✓已招募 / ☆已计划）」，窄列下用极简文本而非徽章，
- *   避免手机竖屏 4 列等宽时的换行/挤压（与旧挖角页的 CompareBlock 相比更省横向空间）。
  * - 筛选状态与「角色信息」页共享（charsQ / charsOnlyScout / charsShowLate），避免重复的输入状态。
  */
 @OptIn(ExperimentalFoundationApi::class)
@@ -115,6 +121,7 @@ fun OverviewScreen(vm: PlannerViewModel) {
                 itemsIndexed(list, key = { _, c -> c.id }) { idx, c ->
                     OverviewRow(
                         c = c,
+                        vm = vm,
                         data = data,
                         routeKeys = routeKeys,
                         best = bestScoutScore(c, routeKeys),
@@ -178,6 +185,7 @@ private fun OverviewHeader(
 @Composable
 private fun OverviewRow(
     c: Character,
+    vm: PlannerViewModel,
     data: SlotData,
     routeKeys: List<String>,
     best: Int?,
@@ -203,7 +211,8 @@ private fun OverviewRow(
                 OverviewCell(
                     r = r,
                     rec = data.recruitsFor(k)[c.id],
-                    isBest = r != null && r.kind == KIND_SCOUT && best != null && cmpScore(r) == best
+                    isBest = r != null && r.kind == KIND_SCOUT && best != null && cmpScore(r) == best,
+                    onToggle = { vm.togglePlanned(k, c.id) }
                 )
             }
         }
@@ -211,21 +220,50 @@ private fun OverviewRow(
 }
 
 @Composable
-private fun OverviewCell(r: RecruitInfo?, rec: RecruitState?, isBest: Boolean) {
-    val mark = when {
-        rec?.done == true -> "✓"
-        rec?.planned == true -> "☆"
-        else -> ""
+private fun OverviewCell(
+    r: RecruitInfo?,
+    rec: RecruitState?,
+    isBest: Boolean,
+    onToggle: () -> Unit
+) {
+    if (r == null || r.kind == KIND_NO) {
+        Text("—", fontSize = 11.sp, color = Muted2, maxLines = 1)
+        return
     }
-    val (text, color) = when {
-        r == null || r.kind == KIND_NO -> "—" to Muted2
-        r.kind == KIND_STORY -> "剧情" to OkText
-        else -> ("名${r.rep ?: "?"}" + if (isBest) "★" else "") to (if (isBest) OkText else TextSecondary)
+    if (r.kind == KIND_STORY) {
+        Text("剧情", fontSize = 11.sp, color = OkText, maxLines = 1)
+        return
     }
-    Text(
-        text = if (mark.isEmpty()) text else "$mark$text",
-        fontSize = 11.sp,
-        color = color,
-        maxLines = 1
-    )
+    val planned = rec?.planned == true
+    val done = rec?.done == true
+    Column(
+        modifier = Modifier
+            .clip(RoundedCornerShape(6.dp))
+            .background(if (done) Secondary.copy(alpha = 0.16f) else Color.Transparent)
+            .clickable { onToggle() }
+            .padding(horizontal = 2.dp, vertical = 3.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(2.dp)
+    ) {
+        Text(
+            "名${r.rep ?: "?"}" + if (isBest) "★" else "",
+            fontSize = 10.sp,
+            color = if (done || isBest) OkText else TextSecondary,
+            maxLines = 1
+        )
+        Box(
+            modifier = Modifier
+                .size(14.dp)
+                .clip(RoundedCornerShape(4.dp))
+                .background(if (done) Primary else if (planned) Tertiary else Color.Transparent)
+                .border(1.dp, if (done) Primary else if (planned) Tertiary else Border, RoundedCornerShape(4.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            if (done) {
+                Text("✓", fontSize = 9.sp, color = OnPrimary, lineHeight = 9.sp)
+            } else if (planned) {
+                Text("☆", fontSize = 9.sp, color = Color(0xFF2A1C00), lineHeight = 9.sp)
+            }
+        }
+    }
 }

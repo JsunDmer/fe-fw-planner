@@ -122,22 +122,22 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
         if (goRecruit) _tab.value = "recruit"
     }
 
-    fun togglePlanned(id: String) {
+    fun togglePlanned(route: String, id: String) {
         mutate { d ->
-            val map = d.recruitsFor(d.route)
+            val map = d.recruitsFor(route)
             val rec = map[id] ?: RecruitState()
             val next = map + (id to rec.copy(planned = !rec.planned))
-            d.copy(recruitsByRoute = d.recruitsByRoute + (d.route to next))
+            d.copy(recruitsByRoute = d.recruitsByRoute + (route to next))
         }
     }
 
-    fun toggleDone(id: String) {
+    fun toggleDone(route: String, id: String) {
         mutate { d ->
-            val map = d.recruitsFor(d.route)
+            val map = d.recruitsFor(route)
             val rec = map[id] ?: RecruitState()
             val done = !rec.done
             val next = map + (id to rec.copy(done = done, planned = if (done) true else rec.planned))
-            d.copy(recruitsByRoute = d.recruitsByRoute + (d.route to next))
+            d.copy(recruitsByRoute = d.recruitsByRoute + (route to next))
         }
     }
 
