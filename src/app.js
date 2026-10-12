@@ -103,7 +103,7 @@
     state = {
       activeId: store.activeId, tab: "recruit", error: "", scrollTo: null, showAllPaths: false, rulesOpen: false,
       filters: { q: "", onlyPlanned: false, sort: "rep", repMin: 0, repMax: 99 },
-      chars: { q: "", onlyScout: false, showLate: false },
+      chars: { q: "" },
       expandCmp: {}, expandItem: {}, expandClass: {}
     };
     restoreUi();
@@ -688,17 +688,21 @@
     var cf = state.chars;
     return "<div class=\"toolbar\">" +
       "<input type=\"text\" class=\"grow\" id=\"chars-search\" placeholder=\"搜索角色名…\" value=\"" + esc(cf.q) + "\">" +
-      "<button class=\"chk" + (cf.onlyScout ? " plan" : "") + "\" aria-pressed=\"" + !!cf.onlyScout + "\" data-act=\"toggle-char-scout\"><span class=\"box\">" + (cf.onlyScout ? "✓" : "") + "</span>只看可挖</button>" +
-      "<button class=\"chk" + (cf.showLate ? " plan" : "") + "\" aria-pressed=\"" + !!cf.showLate + "\" data-act=\"toggle-late\"><span class=\"box\">" + (cf.showLate ? "✓" : "") + "</span>显示后期角色</button>" +
-      "<span class=\"muted\">显示 " + charsList().length + " / " + (FE.characters || []).length + " 人</span></div>" +
+      "<span class=\"muted\">显示 " + charsList().length + " 人（已隐藏后期角色与其它三线主角）</span></div>" +
       "<div id=\"chars-matrix\">" + charsMatrixHTML() + "</div>";
+  }
+
+  function isCurrentRouteHero(c) {
+    var route = data().route;
+    var rec = (c.recruitByRoute || {})[route];
+    return !!(c.isHero && rec && rec.hero && rec.kind === "story");
   }
 
   function charsList() {
     var cf = state.chars;
     return (FE.characters || []).filter(function (c) {
-      if (c.late && !cf.showLate) return false;
-      if (cf.onlyScout && !hasScout(c)) return false;
+      if (c.late) return false;
+      if (c.isHero && !isCurrentRouteHero(c)) return false;
       if (cf.q && c.name.indexOf(cf.q) < 0 && c.id.indexOf(cf.q) < 0) return false;
       return true;
     });
@@ -901,8 +905,6 @@
     if (act === "dismiss-error") { render(); return; }
     if (act === "tab") { state.tab = t.getAttribute("data-tab"); syncUi(); save(); render(); return; }
     if (act === "toggle-rules") { state.rulesOpen = !state.rulesOpen; return render(); }
-    if (act === "toggle-char-scout") { state.chars.onlyScout = !state.chars.onlyScout; return render(); }
-    if (act === "toggle-late") { state.chars.showLate = !state.chars.showLate; return render(); }
     if (act === "route-from-chars") {
       data().route = t.getAttribute("data-route");
       state.tab = "recruit"; syncUi(); save(); render(); return;

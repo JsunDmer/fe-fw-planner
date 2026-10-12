@@ -324,8 +324,23 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
 
 .char-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--r); padding: var(--sp-4); margin-bottom: var(--sp-3); }
 .char-head { display: flex; gap: var(--sp-3); align-items: flex-start; margin-bottom: var(--sp-3); }
-.growth-grid { display: flex; flex-wrap: wrap; gap: var(--sp-2); font-size: var(--fs-xs); color: var(--muted); }
-.growth-grid span { background: var(--panel-3); border: 1px solid var(--border-soft); border-radius: var(--r-sm); padding: 2px 6px; }
+.growth-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  font-size: 10px;
+  line-height: 1.25;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.growth-grid span {
+  background: var(--panel-3);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-sm);
+  padding: 2px 5px;
+  text-align: center;
+  white-space: nowrap;
+}
 .path-picker { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-3); }
 .radio {
   cursor: pointer; font-size: var(--fs-sm); color: var(--text-2);
@@ -474,4 +489,5 @@ select:focus, input:focus, textarea:focus, button:focus-visible {
   .row-actions { grid-column: 1 / -1; flex-direction: row; }
   .portrait { width: 44px; height: 44px; }
   .portrait.sm { width: 36px; height: 36px; }
+  .growth-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
