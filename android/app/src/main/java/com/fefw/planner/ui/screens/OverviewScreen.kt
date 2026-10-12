@@ -41,7 +41,6 @@ import com.fefw.planner.data.hasScout
 import com.fefw.planner.data.recruitsFor
 import com.fefw.planner.ui.components.CheckChip
 import com.fefw.planner.ui.components.EmptyHint
-import com.fefw.planner.ui.components.FefwTextField
 import com.fefw.planner.ui.components.parseHexColor
 import com.fefw.planner.ui.theme.Border
 import com.fefw.planner.ui.theme.Muted
@@ -66,15 +65,14 @@ import com.fefw.planner.viewmodel.activeDataOrNull
  * - 「已招募」(done) 不在本页切换，只以绿色填充对勾 + 底色高亮呈现，避免窄格塞两个控件。
  * - 剧情/不可挖的格子不可点：剧情自动入队无需计划，不可挖无从计划。
  * - 列头点按即切换当前主角线（复用 vm.chooseRoute），省去回到顶部换线。
- * - 角色名点按即跳转到「角色信息」页并定位该角色（vm.openChar），用于查看其成长率与个人特技。
- * - 筛选状态与「角色信息」页共享（charsQ / charsOnlyScout / charsShowLate），避免重复的输入状态。
+ * - 角色名点按即跳转到「角色信息」页并滚动定位该角色（vm.openChar），用于查看其成长率与个人特技。
+ * - 筛选状态与「角色信息」页共享（charsOnlyScout / charsShowLate），避免重复的输入状态。
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OverviewScreen(vm: PlannerViewModel) {
     val store by vm.store.collectAsStateWithLifecycle()
     val data = store.activeDataOrNull ?: return
-    val q by vm.charsQ.collectAsStateWithLifecycle()
     val onlyScout by vm.charsOnlyScout.collectAsStateWithLifecycle()
     val showLate by vm.charsShowLate.collectAsStateWithLifecycle()
 
@@ -83,11 +81,10 @@ fun OverviewScreen(vm: PlannerViewModel) {
     val routeColors = remember(vm.fe.routes) {
         vm.fe.routes.associate { it.key to parseHexColor(it.color, Primary) }
     }
-    val list = remember(all, q, onlyScout, showLate, routeKeys) {
+    val list = remember(all, onlyScout, showLate, routeKeys) {
         all.filter { c ->
             if (c.late && !showLate) return@filter false
             if (onlyScout && !hasScout(c, routeKeys)) return@filter false
-            if (q.isNotEmpty() && !c.name.contains(q) && !c.id.contains(q)) return@filter false
             true
         }
     }
@@ -96,12 +93,6 @@ fun OverviewScreen(vm: PlannerViewModel) {
         modifier = Modifier.fillMaxSize().padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        FefwTextField(
-            value = q,
-            onValueChange = vm::setCharsQ,
-            placeholder = "搜索角色名…",
-            modifier = Modifier.fillMaxWidth()
-        )
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             CheckChip(onlyScout, "只看可挖", vm::toggleCharsOnlyScout)
             CheckChip(showLate, "显示后期角色", vm::toggleCharsShowLate)

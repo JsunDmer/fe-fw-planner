@@ -51,8 +51,8 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
     private val _showAllPaths = MutableStateFlow(false)
     val showAllPaths: StateFlow<Boolean> = _showAllPaths.asStateFlow()
 
-    private val _charsQ = MutableStateFlow("")
-    val charsQ: StateFlow<String> = _charsQ.asStateFlow()
+    private val _locateCharId = MutableStateFlow<String?>(null)
+    val locateCharId: StateFlow<String?> = _locateCharId.asStateFlow()
 
     private val _charsOnlyScout = MutableStateFlow(false)
     val charsOnlyScout: StateFlow<Boolean> = _charsOnlyScout.asStateFlow()
@@ -122,9 +122,13 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
         if (goPlan) _tab.value = "class"
     }
 
-    /** 四线总览点角色名 → 切到「角色信息」页，并以角色名作为搜索词把列表定位到该角色。 */
+    /** 四线总览点角色名 → 切到「角色信息」页并滚动定位到该角色（搜索框已移除，改用 locateCharId 通知列表滚动）。 */
     fun openChar(c: Character) {
-        _charsQ.value = c.name
+        // 搜索框已移除，列表只剩 late / onlyScout 两个过滤条件；先重置它们，确保目标角色此刻一定在列表里，
+        // 否则滚动定位会因找不到该角色而落空。
+        if (c.late) _charsShowLate.value = true
+        _charsOnlyScout.value = false
+        _locateCharId.value = c.id
         setTab("chars")
     }
 
@@ -191,8 +195,9 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun setCharsQ(q: String) {
-        _charsQ.value = q
+    /** 列表完成一次滚动定位后清空，避免重组时反复触发 Scroll。 */
+    fun consumeLocate() {
+        _locateCharId.value = null
     }
 
     fun toggleCharsOnlyScout() = _charsOnlyScout.update { !it }

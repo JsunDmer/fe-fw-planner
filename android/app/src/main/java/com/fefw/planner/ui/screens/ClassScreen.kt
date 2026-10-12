@@ -42,6 +42,7 @@ import com.fefw.planner.data.Character
 import com.fefw.planner.data.ClassInfo
 import com.fefw.planner.data.Growth
 import com.fefw.planner.data.KAI_ROUTE
+import com.fefw.planner.data.KIND_STORY
 import com.fefw.planner.data.MOUNT_UNIT_REGEX
 import com.fefw.planner.data.Step
 import com.fefw.planner.data.addGrowth
@@ -84,6 +85,9 @@ fun ClassScreen(vm: PlannerViewModel) {
     val chars = remember(all, data, showAll) {
         if (showAll) all
         else all.filter { c ->
+            // 默认也要露出 4 位主角与本路线剧情加入角色，否则首次进入该页几乎为空、无法规划他们。
+            if (c.isHero) return@filter true
+            if (c.recruitByRoute[data.route]?.kind == KIND_STORY) return@filter true
             val rec = data.recruitsFor(data.route)[c.id]
             if (rec?.planned == true || rec?.done == true) return@filter true
             val p = data.paths[c.id]

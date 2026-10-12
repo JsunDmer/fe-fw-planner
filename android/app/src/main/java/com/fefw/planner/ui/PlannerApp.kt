@@ -120,7 +120,9 @@ fun PlannerApp(vm: PlannerViewModel) {
         ) { padding ->
             Column(Modifier.fillMaxSize().padding(padding)) {
                 AppHeader(vm, data.route)
-                RouteBar(vm, data.route) { rulesOpen = true }
+                if (tab == "class") {
+                    RouteBar(vm, data.route) { rulesOpen = true }
+                }
                 Box(Modifier.weight(1f)) {
                     when (tab) {
                         "chars" -> CharsScreen(vm)
