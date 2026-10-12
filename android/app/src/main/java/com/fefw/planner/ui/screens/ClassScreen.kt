@@ -45,7 +45,6 @@ import com.fefw.planner.data.KAI_ROUTE
 import com.fefw.planner.data.KIND_STORY
 import com.fefw.planner.data.MOUNT_UNIT_REGEX
 import com.fefw.planner.data.Step
-import com.fefw.planner.data.addGrowth
 import com.fefw.planner.data.growthCells
 import com.fefw.planner.data.mountGrowthOf
 import com.fefw.planner.data.mountTypesForClass
@@ -59,8 +58,6 @@ import com.fefw.planner.ui.components.CheckChip
 import com.fefw.planner.ui.components.ChoiceChip
 import com.fefw.planner.ui.components.EmptyHint
 import com.fefw.planner.ui.components.GrowthGrid
-import com.fefw.planner.ui.components.PanelCard
-import com.fefw.planner.ui.components.TagPill
 import com.fefw.planner.ui.theme.Border
 import com.fefw.planner.ui.theme.Muted
 import com.fefw.planner.ui.theme.OkText
@@ -85,8 +82,8 @@ fun ClassScreen(vm: PlannerViewModel) {
     val chars = remember(all, data, showAll) {
         if (showAll) all
         else all.filter { c ->
-            // 默认也要露出 4 位主角与本路线剧情加入角色，否则首次进入该页几乎为空、无法规划他们。
-            if (c.isHero && c.recruitByRoute[data.route]?.kind == KIND_STORY) return@filter true
+            // 默认也要露出本路线剧情加入角色（主角在本线即剧情加入），否则首次进入该页几乎为空、无法规划他们。
+            if (c.recruitByRoute[data.route]?.kind == KIND_STORY) return@filter true
             val rec = data.recruitsFor(data.route)[c.id]
             if (rec?.planned == true || rec?.done == true) return@filter true
             val p = data.paths[c.id]
@@ -137,13 +134,6 @@ private fun CharPlanCard(
 
     val route = data.route
     val stepMounts = data.stepMounts
-    val mountSum: Growth? = if (route == KAI_ROUTE) {
-        steps.mapNotNull { stepMounts[stepMountKey(c.id, it.tier)] }
-            .filter { it.isNotBlank() }
-            .distinct()
-            .mapNotNull { mountGrowthOf(vm.fe.mounts, it) }
-            .fold<Growth, Growth?>(null) { acc, g -> acc?.let { addGrowth(it, g) } ?: g }
-    } else null
 
     Column(
         modifier = Modifier
@@ -164,29 +154,6 @@ private fun CharPlanCard(
                 val start = c.startClass.orEmpty()
                 if (start.isNotBlank()) {
                     Text("初始职业：$start", style = MaterialTheme.typography.bodySmall, color = Muted)
-                }
-                Text(
-                    if (mountSum != null) "基础成长（含坐骑）" else "基础成长",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Muted
-                )
-                GrowthGrid(growthCells(c.growth, null, vm.fe.stats, mountSum), compact = true, mini = true)
-            }
-        }
-
-        if (c.skills.isNotEmpty()) {
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text("特性", style = MaterialTheme.typography.bodySmall, color = Muted)
-                c.skills.forEach { sk ->
-                    Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                        TagPill(sk.kind)
-                        Text(
-                            sk.text,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = TextSecondary,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
                 }
             }
         }
