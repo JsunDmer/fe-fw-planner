@@ -57,7 +57,6 @@ import com.fefw.planner.ui.components.BadgeKind
 import com.fefw.planner.ui.components.CheckChip
 import com.fefw.planner.ui.components.ChoiceChip
 import com.fefw.planner.ui.components.EmptyHint
-import com.fefw.planner.ui.components.FefwTextField
 import com.fefw.planner.ui.components.GrowthGrid
 import com.fefw.planner.ui.components.PanelCard
 import com.fefw.planner.ui.components.TagPill
@@ -239,13 +238,6 @@ private fun CharPlanCard(
             "进度 $doneCount / ${steps.size}",
             style = MaterialTheme.typography.bodySmall,
             color = if (doneCount == steps.size && steps.isNotEmpty()) OkText else Muted
-        )
-
-        FefwTextField(
-            value = data.notes[c.id].orEmpty(),
-            onValueChange = { vm.setNote(c.id, it) },
-            placeholder = "备注（如该角色需要的凹点、支援对象）…",
-            modifier = Modifier.fillMaxWidth()
         )
     }
 }

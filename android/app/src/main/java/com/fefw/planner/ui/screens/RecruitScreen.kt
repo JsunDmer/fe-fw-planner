@@ -42,7 +42,6 @@ import com.fefw.planner.data.KIND_SCOUT
 import com.fefw.planner.data.KIND_STORY
 import com.fefw.planner.data.RecruitRow
 import com.fefw.planner.data.aggregateConditions
-import com.fefw.planner.data.fourCompare
 import com.fefw.planner.data.formatMoney
 import com.fefw.planner.data.groupScoutsByRep
 import com.fefw.planner.data.matchFilter
@@ -70,7 +69,6 @@ import com.fefw.planner.ui.theme.DangerText
 import com.fefw.planner.ui.theme.Muted
 import com.fefw.planner.ui.theme.Muted2
 import com.fefw.planner.ui.theme.OkSoft
-import com.fefw.planner.ui.theme.OkText
 import com.fefw.planner.ui.theme.Primary
 import com.fefw.planner.ui.theme.Surface1
 import com.fefw.planner.ui.theme.TextPrimary
@@ -90,7 +88,6 @@ fun RecruitScreen(vm: PlannerViewModel) {
     val sort by vm.filterSort.collectAsStateWithLifecycle()
     val repMin by vm.filterRepMin.collectAsStateWithLifecycle()
     val onlyPlanned by vm.filterOnlyPlanned.collectAsStateWithLifecycle()
-    val expandCmp by vm.expandCmp.collectAsStateWithLifecycle()
 
     val route = data.route
     val routeRecruits = data.recruitsFor(route)
@@ -141,11 +138,11 @@ fun RecruitScreen(vm: PlannerViewModel) {
                     if (sort == "rep") {
                         groupScoutsByRep(scouts).forEach { (lv, list) ->
                             item(key = "rep-$lv") { RankHead("名声 LV$lv", "${list.size} 人") }
-                            items(list, key = { it.char.id }) { row -> ScoutRow(vm, row, data, expandCmp) }
+                            items(list, key = { it.char.id }) { row -> ScoutRow(vm, row, data) }
                         }
                     } else {
                         items(scouts.sortedWith(scoutComparator(sort)), key = { it.char.id }) { row ->
-                            ScoutRow(vm, row, data, expandCmp)
+                            ScoutRow(vm, row, data)
                         }
                     }
                 }
@@ -283,13 +280,12 @@ private fun FixedRow(row: RecruitRow) {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun ScoutRow(vm: PlannerViewModel, row: RecruitRow, data: com.fefw.planner.data.SlotData, expandCmp: Set<String>) {
+private fun ScoutRow(vm: PlannerViewModel, row: RecruitRow, data: com.fefw.planner.data.SlotData) {
     val c = row.char
     val r = row.r
     val rec = data.recruitsFor(data.route)[c.id]
     val planned = rec?.planned == true
     val done = rec?.done == true
-    val cmpOpen = c.id in expandCmp
 
     Column(
         modifier = Modifier
@@ -305,7 +301,6 @@ private fun ScoutRow(vm: PlannerViewModel, row: RecruitRow, data: com.fefw.plann
             Column(Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(c.name, style = MaterialTheme.typography.titleSmall, color = TextPrimary)
-                    Badge("可挖角", BadgeKind.Scout)
                 }
                 val start = c.startClass.orEmpty()
                 if (start.isNotBlank()) {
@@ -349,43 +344,6 @@ private fun ScoutRow(vm: PlannerViewModel, row: RecruitRow, data: com.fefw.plann
         if (conds.isNotEmpty()) {
             FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 conds.forEach { CondChip(it, isOther = false) }
-            }
-        }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                if (cmpOpen) "四线对比 ▾" else "四线对比 ▸",
-                style = MaterialTheme.typography.bodySmall,
-                color = Primary,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(4.dp))
-                    .clickable { vm.toggleCmp(c.id) }
-                    .padding(2.dp)
-            )
-        }
-        if (cmpOpen) {
-            CompareBlock(vm, c, data)
-        }
-    }
-}
-
-@Composable
-private fun CompareBlock(vm: PlannerViewModel, c: com.fefw.planner.data.Character, data: com.fefw.planner.data.SlotData) {
-    val rows = fourCompare(c, data.route, vm.routeKeys)
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(8.dp))
-            .background(com.fefw.planner.ui.theme.Surface2)
-            .padding(8.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
-        Text("四线对比", style = MaterialTheme.typography.bodySmall, color = Muted)
-        rows.forEach { r ->
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text(r.route, style = MaterialTheme.typography.bodyMedium, color = if (r.isCur) TextPrimary else TextSecondary)
-                Text(r.label, style = MaterialTheme.typography.bodyMedium, color = if (r.isBest) OkText else TextSecondary)
-                if (r.isBest) Badge("最优", BadgeKind.Story)
-                if (r.isCur) Badge("当前线", BadgeKind.Default)
             }
         }
     }
