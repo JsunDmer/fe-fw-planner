@@ -94,7 +94,7 @@ fun ClassScreen(vm: PlannerViewModel) {
 
     Column(Modifier.fillMaxSize()) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -107,7 +107,7 @@ fun ClassScreen(vm: PlannerViewModel) {
             LazyColumn(
                 modifier = Modifier.weight(1f),
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
+                verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 items(chars, key = { it.id }) { c ->
                     CharPlanCard(vm, c, data, expandClass, customConfirmed)
@@ -138,22 +138,22 @@ private fun CharPlanCard(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(8.dp))
             .background(Surface1)
-            .border(1.dp, Border, RoundedCornerShape(10.dp))
-            .padding(12.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+            .border(1.dp, Border, RoundedCornerShape(8.dp))
+            .padding(6.dp),
+        verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            AssetImage(c.portrait, c.name, Modifier.size(40.dp))
+            AssetImage(c.portrait, c.name, Modifier.size(22.dp))
             Column(Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Text(c.name, style = MaterialTheme.typography.titleSmall, color = TextPrimary)
+                    Text(c.name, style = MaterialTheme.typography.labelMedium, color = TextPrimary)
                     if (c.isHero) Badge("主角", BadgeKind.Hero)
                 }
                 val start = c.startClass.orEmpty()
                 if (start.isNotBlank()) {
-                    Text("初始职业：$start", style = MaterialTheme.typography.bodySmall, color = Muted)
+                    Text("初始职业：$start", style = MaterialTheme.typography.labelSmall, color = Muted)
                 }
             }
         }
@@ -161,7 +161,7 @@ private fun CharPlanCard(
         if (c.paths.isNotEmpty()) {
             Row(
                 modifier = Modifier.horizontalScroll(rememberScrollState()),
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 c.paths.forEachIndexed { i, _ ->
@@ -182,11 +182,11 @@ private fun CharPlanCard(
                     enabled = hasAny,
                     border = BorderStroke(1.dp, if (hasAny) Primary else Border),
                     shape = RoundedCornerShape(6.dp),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 6.dp)
+                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp)
                 ) {
                     Text(
                         "确认路线",
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.labelMedium,
                         color = if (hasAny) TextPrimary else Muted
                     )
                 }
@@ -206,7 +206,7 @@ private fun CharPlanCard(
 
         Text(
             "进度 $doneCount / ${steps.size}",
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.labelSmall,
             color = if (doneCount == steps.size && steps.isNotEmpty()) OkText else Muted
         )
     }
@@ -222,10 +222,10 @@ private fun StepFlow(
     route: String,
     stepMounts: Map<String, String>
 ) {
-    LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
         steps.forEachIndexed { i, s ->
             if (i > 0) {
-                item { Text("→", color = Muted, fontSize = 14.sp) }
+                item { Text("→", color = Muted, fontSize = 10.sp) }
             }
             item(key = s.classId.ifBlank { "$i" }) {
                 StepNode(
@@ -255,7 +255,7 @@ private fun CustomTierRow(vm: PlannerViewModel, charId: String, tier: String, cu
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(tier, style = MaterialTheme.typography.bodyMedium, color = Muted, modifier = Modifier.width(52.dp))
+        Text(tier, style = MaterialTheme.typography.labelMedium, color = Muted, modifier = Modifier.width(40.dp))
         TierPicker(tier = tier, currentName = currentName, classes = classes) { picked ->
             vm.setCustomStep(charId, CUSTOM_TIERS.indexOf(tier), picked ?: "")
         }
@@ -270,11 +270,11 @@ private fun TierPicker(tier: String, currentName: String?, classes: List<ClassIn
             onClick = { open = true },
             border = androidx.compose.foundation.BorderStroke(1.dp, Border),
             shape = RoundedCornerShape(6.dp),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp, vertical = 4.dp)
+            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
         ) {
             Text(
                 currentName ?: "选${tier}职业…",
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.labelMedium,
                 color = if (currentName != null) TextPrimary else Muted
             )
         }
@@ -316,28 +316,28 @@ private fun StepNode(
     val cells = growthCells(baseGrowth, cls?.growth, vm.fe.stats, mountGrowth)
     Column(
         modifier = Modifier
-            .width(150.dp)
+            .width(100.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(if (done) com.fefw.planner.ui.theme.OkSoft else Surface2)
             .border(1.dp, if (done) com.fefw.planner.ui.theme.Secondary else Border, RoundedCornerShape(8.dp))
-            .padding(8.dp)
+            .padding(4.dp)
             .clickable { if (cls != null) vm.toggleClassInfo(cls.id) },
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            AssetImage(cls?.icon, step.name, Modifier.size(30.dp))
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            AssetImage(cls?.icon, step.name, Modifier.size(16.dp))
             Column {
-                Text(step.tier, fontSize = 10.sp, color = ScoutText, maxLines = 1)
+                Text(step.tier, fontSize = 8.sp, color = ScoutText, maxLines = 1)
                 Text(
                     if (cls != null) cls.name else step.name,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.labelMedium,
                     color = TextPrimary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
             }
         }
-        GrowthGrid(cells)
+        GrowthGrid(cells, mini = true)
         if (cls != null && opened) {
             SkillList("职业特技", cls.innate, vm.fe.skillDesc)
             SkillList("精通特技", listOf(cls.mastery), vm.fe.skillDesc)
@@ -355,7 +355,7 @@ private fun StepNode(
                 )
             }
         }
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             CheckChip(checked = done, label = "已完成", onToggle = { vm.toggleStepDone(charId, step.tier) }, mark = "✓")
             Text(if (opened) "▾" else "▸", style = MaterialTheme.typography.bodySmall, color = Muted)
         }

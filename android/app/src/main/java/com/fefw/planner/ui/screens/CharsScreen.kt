@@ -76,12 +76,10 @@ fun CharsScreen(vm: PlannerViewModel) {
     }
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(12.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = Modifier.fillMaxSize().padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        }
-        Text("显示 ${list.size} / ${all.size} 人", style = MaterialTheme.typography.bodySmall, color = Muted)
+        Text("显示 ${list.size} / ${all.size} 人", style = MaterialTheme.typography.labelSmall, color = Muted)
 
         if (list.isEmpty()) {
             EmptyHint("没有符合筛选条件的角色。")
@@ -89,7 +87,7 @@ fun CharsScreen(vm: PlannerViewModel) {
             LazyColumn(
                 modifier = Modifier.weight(1f),
                 state = listState,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 items(list, key = { it.id }) { c ->
                     CharRow(c = c, stats = stats, highlight = locate == c.id)
@@ -104,34 +102,34 @@ private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean)
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(8.dp))
             .background(Surface1)
-            .border(if (highlight) 2.dp else 1.dp, if (highlight) Primary else Border, RoundedCornerShape(10.dp))
-            .padding(10.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .border(if (highlight) 2.dp else 1.dp, if (highlight) Primary else Border, RoundedCornerShape(8.dp))
+            .padding(6.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            AssetImage(c.portrait, c.name, Modifier.size(36.dp))
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            AssetImage(c.portrait, c.name, Modifier.size(22.dp))
             Column {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Text(c.name, style = MaterialTheme.typography.titleSmall, color = TextPrimary)
+                    Text(c.name, style = MaterialTheme.typography.labelMedium, color = TextPrimary)
                     if (c.isHero) Badge("主角", BadgeKind.Hero)
                 }
-                Text(c.startClass.orEmpty(), style = MaterialTheme.typography.bodySmall, color = Muted)
+                Text(c.startClass.orEmpty(), style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         }
         GrowthGrid(growthCells(c.growth, null, stats), mini = true)
         // 个人特技 与 skills[].kind=="个人特技" 是 1:1 等价的，直接用 skills 完整列表即可覆盖
         // 「个人特技 + 血印 + Lv特技」，因此无需再单独渲染 personalSkill 字段。
         if (c.skills.isNotEmpty()) {
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text("特性", style = MaterialTheme.typography.bodySmall, color = Muted)
+            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text("特性", style = MaterialTheme.typography.labelSmall, color = Muted)
                 c.skills.forEach { sk ->
-                    Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                         TagPill(sk.kind)
                         Text(
                             sk.text,
-                            style = MaterialTheme.typography.bodySmall,
+                            style = MaterialTheme.typography.labelSmall,
                             color = TextSecondary,
                             modifier = Modifier.weight(1f)
                         )
