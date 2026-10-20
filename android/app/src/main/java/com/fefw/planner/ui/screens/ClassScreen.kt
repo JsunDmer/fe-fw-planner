@@ -45,6 +45,7 @@ import com.fefw.planner.data.KAI_ROUTE
 import com.fefw.planner.data.KIND_STORY
 import com.fefw.planner.data.MOUNT_UNIT_REGEX
 import com.fefw.planner.data.Step
+import com.fefw.planner.data.availableOnRoute
 import com.fefw.planner.data.growthCells
 import com.fefw.planner.data.mountGrowthOf
 import com.fefw.planner.data.mountTypesForClass
@@ -79,13 +80,21 @@ fun ClassScreen(vm: PlannerViewModel) {
     val customConfirmed by vm.customConfirmed.collectAsStateWithLifecycle()
 
     val all = remember(vm.fe.characters) { vm.fe.characters.filter { it.paths.isNotEmpty() } }
+    // 只保留「本线登场」角色：先做后期排除 + story/scout 白名单收口。
+    // 若不先收口，切换路线后其它线角色（含其它三线主角、late 角色）会经 showAll 或下方
+    // 全局 paths/notes 分支残留在此页 —— 与网页版 classHTML 的过滤顺序一致。
     val chars = remember(all, data, showAll) {
-        if (showAll) all
-        else all.filter { c ->
-            // 默认也要露出本路线剧情加入角色（主角在本线即剧情加入），否则首次进入该页几乎为空、无法规划他们。
+        all.filter { c ->
+            if (c.late) return@filter false
+            if (!availableOnRoute(c, data.route)) return@filter false
+            // 本线剧情角色没有挖角计划按钮（视为自动入队），默认也展示，否则连本线主角都不出现。
             if (c.recruitByRoute[data.route]?.kind == KIND_STORY) return@filter true
+            // 「显示全部角色」同样只在本线可用集合内放开；all 已保证 paths.isNotEmpty()，与网页版等价。
+            if (showAll) return@filter true
             val rec = data.recruitsFor(data.route)[c.id]
             if (rec?.planned == true || rec?.done == true) return@filter true
+            // 本线可用且已留下规划痕迹（自定义路线/进度/备注）的角色继续露出便于续规划；
+            // 前面已按 availableOnRoute 收口，该分支不会再把其它线的痕迹带进来。
             val p = data.paths[c.id]
             if (p == null) return@filter false
             p.srcPathIndex != 0 || p.custom.isNotEmpty() || p.doneSteps.isNotEmpty() || !data.notes[c.id].isNullOrBlank()

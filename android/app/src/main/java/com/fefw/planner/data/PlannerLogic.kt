@@ -52,6 +52,16 @@ fun bestScoutScore(c: Character, routeKeys: List<String>): Int? {
 fun hasScout(c: Character, routeKeys: List<String>): Boolean =
     routeKeys.any { c.recruitByRoute[it]?.kind == KIND_SCOUT }
 
+/**
+ * 「属于某条线」的判定：本线剧情固定出场或可挖角。
+ * 用白名单（story/scout）而非「非 no」——先按本线可用性收口，
+ * 切换路线后别的线角色（含其它三线主角）就不会残留；与网页版 availableOnRoute 一致。
+ */
+fun availableOnRoute(c: Character, route: String): Boolean {
+    val r = c.recruitByRoute[route] ?: return false
+    return r.kind == KIND_STORY || r.kind == KIND_SCOUT
+}
+
 fun resolveSteps(char: Character, pathState: PathState?, classesById: Map<String, ClassInfo>): List<Step> {
     val idx = pathState?.srcPathIndex ?: 0
     if (idx == -1) return customSteps(pathState?.custom ?: emptyList(), classesById)
