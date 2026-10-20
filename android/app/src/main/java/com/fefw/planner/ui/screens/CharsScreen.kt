@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -27,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.fefw.planner.data.Character
+import com.fefw.planner.data.artsBySkill
 import com.fefw.planner.data.growthCells
 import com.fefw.planner.data.hasScout
 import com.fefw.planner.ui.components.AssetImage
@@ -61,6 +63,7 @@ fun CharsScreen(vm: PlannerViewModel) {
     val all = vm.fe.characters
     val routeKeys = vm.routeKeys
     val stats = vm.fe.stats
+    val artWeapon = vm.fe.artWeapon
     val list = remember(all, onlyScout, showLate, routeKeys) {
         all.filter { c ->
             if (c.late && !showLate) return@filter false
@@ -93,7 +96,7 @@ fun CharsScreen(vm: PlannerViewModel) {
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 items(list, key = { it.id }) { c ->
-                    CharRow(c = c, stats = stats, highlight = locate == c.id)
+                    CharRow(c = c, stats = stats, highlight = locate == c.id, artWeapon = artWeapon)
                 }
             }
         }
@@ -101,7 +104,7 @@ fun CharsScreen(vm: PlannerViewModel) {
 }
 
 @Composable
-private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean) {
+private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean, artWeapon: Map<String, String>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -142,7 +145,7 @@ private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean)
         }
         // 战技/魔法/擅长来自 learn 与 skillsGood，与网页版 ch-detail 对齐；
         // 移动端空间有限，只保留高信号三类（可习得技能/升级技能在职业页已有，避免重复占屏）。
-        LearnChips("战技", c.learn.arts)
+        LearnSkillGroups(remember(c, artWeapon) { artsBySkill(c.learn, artWeapon) })
         LearnChips("魔法", c.learn.magic)
         LearnChips("擅长", c.skillsGood)
     }
@@ -170,6 +173,45 @@ private fun LearnChips(label: String, items: List<String>) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 list.forEach { name -> TagPill(name) }
+            }
+        }
+    }
+}
+
+/**
+ * 战技按武器/技能类别分组：一类一行（左定宽标签 + 右横滑胶囊），节奏与上方「特性」块一致。
+ * 移动端一行藏多类虽省纵向空间，但「有哪些武器类别」需滑动才可见、等于没分组；
+ * 实测均值 ~4 类/人、最多 8 类，纵向由 LazyColumn 承担，故取一类一行。
+ */
+@Composable
+private fun LearnSkillGroups(groups: List<Pair<String, List<String>>>) {
+    val total = groups.sumOf { it.second.size }
+    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Text(
+            if (groups.isEmpty()) "战技" else "战技 · $total",
+            style = MaterialTheme.typography.labelSmall,
+            color = Muted
+        )
+        if (groups.isEmpty()) {
+            Text("—", style = MaterialTheme.typography.labelSmall, color = Muted2)
+        } else {
+            groups.forEach { (cat, names) ->
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text(
+                        cat,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Muted2,
+                        maxLines = 1,
+                        modifier = Modifier.width(40.dp)
+                    )
+                    Row(
+                        modifier = Modifier.weight(1f).horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        names.forEach { name -> TagPill(name) }
+                    }
+                }
             }
         }
     }

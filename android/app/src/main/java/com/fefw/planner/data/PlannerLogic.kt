@@ -132,3 +132,37 @@ fun mountGrowthOf(mounts: List<Mount>, name: String?): Growth? =
     name?.takeIf { it.isNotBlank() }?.let { n ->
         mounts.firstOrNull { it.name == n }?.let { parseMountGrowth(it.growth) }
     }
+
+/** 12 类技能的固定展示顺序；分组按此排序，未知类别按出现顺序垫底，保证卡片之间顺序稳定。 */
+val SKILL_CATEGORY_ORDER = listOf(
+    "剑术", "枪术", "斧术", "箭术", "格斗术", "白魔术",
+    "黑魔术", "指挥术", "重装术", "步兵术", "马术", "飞行术"
+)
+
+/**
+ * skills.json arts[].weapon → learn.ranks[].sk 词表归一，仅当战技缺 sk 时兜底。
+ * 数据实测：「非任意」武器的战技，weapon→sk 与 ranks.sk 100% 一致（仅「任意」发散，
+ * 而「任意」战技全部有 sk），故该映射不会制造错误分组。
+ */
+val WEAPON_TO_SKILL = mapOf(
+    "剑" to "剑术", "枪" to "枪术", "斧" to "斧术", "弓" to "箭术",
+    "手甲" to "格斗术", "圣焰" to "白魔术"
+)
+
+/**
+ * 战技按武器/技能类别分组：优先 learn.ranks[name].sk（347/425），
+ * 缺失时用 artWeapon + WEAPON_TO_SKILL 兜底（78/425）→ 覆盖 425/425。
+ * 返回有序 (类别, 战技名列表)：类别按 SKILL_CATEGORY_ORDER（稳定排序），组内保持 learn.arts 原序。
+ */
+fun artsBySkill(learn: Learn, artWeapon: Map<String, String>): List<Pair<String, List<String>>> {
+    val buckets = LinkedHashMap<String, MutableList<String>>()
+    learn.arts.filter { it.isNotBlank() }.forEach { name ->
+        val cat = learn.ranks[name]?.sk?.takeIf { it.isNotBlank() }
+            ?: artWeapon[name]?.let { WEAPON_TO_SKILL[it] ?: it }
+            ?: "未分类"
+        buckets.getOrPut(cat) { mutableListOf() }.add(name)
+    }
+    return buckets.entries
+        .sortedBy { e -> SKILL_CATEGORY_ORDER.indexOf(e.key).takeIf { it >= 0 } ?: Int.MAX_VALUE }
+        .map { it.key to it.value }
+}
