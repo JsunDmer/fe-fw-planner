@@ -33,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,6 +60,7 @@ import com.fefw.planner.ui.components.CheckChip
 import com.fefw.planner.ui.components.ChoiceChip
 import com.fefw.planner.ui.components.EmptyHint
 import com.fefw.planner.ui.components.GrowthGrid
+import com.fefw.planner.ui.theme.AccentSoft
 import com.fefw.planner.ui.theme.Border
 import com.fefw.planner.ui.theme.Muted
 import com.fefw.planner.ui.theme.OkText
@@ -346,6 +348,20 @@ private fun StepNode(
             }
         }
         GrowthGrid(cells, mini = true)
+        // 可用武器常驻显示：它是选方案/对比转职目标时的核心信息，与成长网格同级；
+        // 藏进展开区会失去对比意义，故折叠态也展示。单行横滑，节点仅增高约 14dp。
+        if (cls != null && cls.usableSkills.isNotEmpty()) {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text("可用武器", fontSize = 8.sp, color = Muted, maxLines = 1)
+                Row(
+                    modifier = Modifier.weight(1f).horizontalScroll(rememberScrollState()),
+                    horizontalArrangement = Arrangement.spacedBy(3.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    cls.usableSkills.forEach { WeaponChip(it) }
+                }
+            }
+        }
         if (cls != null && opened) {
             SkillList("职业特技", cls.innate, vm.fe.skillDesc)
             SkillList("精通特技", listOf(cls.mastery), vm.fe.skillDesc)
@@ -368,6 +384,22 @@ private fun StepNode(
             Text(if (opened) "▾" else "▸", style = MaterialTheme.typography.bodySmall, color = Muted)
         }
     }
+}
+
+/** StepNode 内的紧凑武器胶囊：TagPill 小一号（11sp→9sp、横向 padding 8→5dp），适配 100dp 宽节点。 */
+@Composable
+private fun WeaponChip(text: String) {
+    Text(
+        text = text,
+        fontSize = 9.sp,
+        color = ScoutText,
+        maxLines = 1,
+        modifier = Modifier
+            .clip(RoundedCornerShape(999.dp))
+            .background(AccentSoft)
+            .border(1.dp, Color(0x4D3D9AC0), RoundedCornerShape(999.dp))
+            .padding(horizontal = 5.dp, vertical = 1.dp)
+    )
 }
 
 @Composable
