@@ -13,8 +13,8 @@ android {
         applicationId = "com.fefw.planner"
         minSdk = 26
         targetSdk = 35
-        versionCode = 19
-        versionName = "1.1.16"
+        versionCode = 20
+        versionName = "1.1.17"
         vectorDrawables { useSupportLibrary = true }
     }
 
