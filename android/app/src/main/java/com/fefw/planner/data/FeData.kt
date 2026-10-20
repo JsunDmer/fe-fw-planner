@@ -220,6 +220,8 @@ data class FeData(
     val mounts: List<Mount> = emptyList(),
     val materials: Map<String, Material> = emptyMap(),
     val skillDesc: Map<String, String> = emptyMap(),
+    /** 战技名 → 武器类型（剑/枪/斧/弓/手甲/圣焰/任意）；learn.ranks 缺 sk 时用于战技分组兜底。 */
+    val artWeapon: Map<String, String> = emptyMap(),
     val guides: Guides = Guides()
 )
 

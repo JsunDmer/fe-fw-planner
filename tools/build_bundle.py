@@ -31,6 +31,18 @@ def skill_desc_map():
                 out[n] = t
     return out
 
+def art_weapon_map():
+    """战技名 → 原始武器类型（data/skills.json arts[].weapon，剑/枪/斧/弓/手甲/圣焰/任意）。
+    learn.ranks 有 78 个战技缺 sk，Android 按武器分组战技时用它兜底
+    （剑→剑术 等词表归一在 Kotlin 侧做，见 PlannerLogic.WEAPON_TO_SKILL）。"""
+    out = {}
+    for x in load("skills").get("arts", []):
+        n = (x.get("name") or "").strip()
+        w = (x.get("weapon") or "").strip()
+        if n and w:
+            out[n] = w
+    return out
+
 def data_uri(relpath):
     if not relpath:
         return ""
@@ -202,6 +214,7 @@ def build(image_ref=data_uri):
         "mounts": misc.get("mounts", []),
         "materials": materials,
         "skillDesc": skill_desc_map(),
+        "artWeapon": art_weapon_map(),
         "guides": {k: re.sub(r"<[^>]+>", "", g.get("body", "")) for k, g in guides.items() if k in ("g-scout", "g-hero", "g-fame")},
     }
 
