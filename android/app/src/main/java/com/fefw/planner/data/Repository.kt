@@ -17,7 +17,14 @@ data class RecruitState(val planned: Boolean = false, val done: Boolean = false)
 data class PathState(
     val srcPathIndex: Int = 0,
     val custom: List<String> = emptyList(),
-    val doneSteps: Map<String, Boolean> = emptyMap()
+    val doneSteps: Map<String, Boolean> = emptyMap(),
+    /**
+     * 该转职痕迹属于哪几条主角线：每次写入时记录当时的 SlotData.route。
+     * ClassScreen 只在 routes 包含当前线时才凭痕迹露出角色，修复
+     * 「A 线规划过 → 切到 B 线仍显示」的跨线残留（42/63 角色在 ≥2 线可挖，会被带出来）。
+     * 旧存档无此键（读出为空集），由 Repository.normalize() 迁移补齐。
+     */
+    val routes: Set<String> = emptySet()
 )
 
 @Serializable
@@ -178,10 +185,21 @@ class Repository(context: Context) {
             } else {
                 d.recruitsByRoute
             }
+            // 旧存档的 paths 没有线路维度：绑定到「已计划/已招募该角色的线」（用户真实投入过的线）；
+            // 一条都没有（如经 showAll 直接规划、从未勾选）时退回存档当前线 —— 与扁平 recruits 归线口径一致。
+            // routes 非空的条目原样保留，故本函数对新存档幂等（load() 每次都会调用）。
+            val paths = d.paths.mapValues { (id, p) ->
+                if (p.routes.isNotEmpty()) p
+                else {
+                    val engaged = byRoute.filterValues { it[id]?.planned == true || it[id]?.done == true }.keys
+                    p.copy(routes = engaged.ifEmpty { setOf(route) })
+                }
+            }
             return d.copy(
                 route = route,
                 recruitsByRoute = byRoute,
                 recruits = emptyMap(),
+                paths = paths,
                 onboarded = d.onboarded ?: true,
                 ui = d.ui.copy(tab = tab)
             )

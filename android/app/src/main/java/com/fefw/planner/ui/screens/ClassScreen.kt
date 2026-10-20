@@ -80,9 +80,8 @@ fun ClassScreen(vm: PlannerViewModel) {
     val customConfirmed by vm.customConfirmed.collectAsStateWithLifecycle()
 
     val all = remember(vm.fe.characters) { vm.fe.characters.filter { it.paths.isNotEmpty() } }
-    // 只保留「本线登场」角色：先做后期排除 + story/scout 白名单收口。
-    // 若不先收口，切换路线后其它线角色（含其它三线主角、late 角色）会经 showAll 或下方
-    // 全局 paths/notes 分支残留在此页 —— 与网页版 classHTML 的过滤顺序一致。
+    // 只保留「本线登场」角色：先做后期排除 + story/scout 白名单收口，
+    // 再看本线勾选与本线规划痕迹（p.routes 记录痕迹所属线），与网页版 classHTML 的过滤顺序一致。
     val chars = remember(all, data, showAll) {
         all.filter { c ->
             if (c.late) return@filter false
@@ -93,10 +92,10 @@ fun ClassScreen(vm: PlannerViewModel) {
             if (showAll) return@filter true
             val rec = data.recruitsFor(data.route)[c.id]
             if (rec?.planned == true || rec?.done == true) return@filter true
-            // 本线可用且已留下规划痕迹（自定义路线/进度/备注）的角色继续露出便于续规划；
-            // 前面已按 availableOnRoute 收口，该分支不会再把其它线的痕迹带进来。
-            val p = data.paths[c.id]
-            if (p == null) return@filter false
+            // 规划痕迹只在留下它的那条线上续露（自定义路线/进度/备注）；
+            // 不加 routes 门控时，42 个跨线可挖角色会在每条可挖线残留 —— 即本次修复的跨线泄漏。
+            val p = data.paths[c.id] ?: return@filter false
+            if (data.route !in p.routes) return@filter false
             p.srcPathIndex != 0 || p.custom.isNotEmpty() || p.doneSteps.isNotEmpty() || !data.notes[c.id].isNullOrBlank()
         }
     }

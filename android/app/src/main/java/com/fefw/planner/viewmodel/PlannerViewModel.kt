@@ -155,30 +155,35 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
 
     fun toggleShowAllPaths() = _showAllPaths.update { !it }
 
-    fun selectPath(id: String, index: Int) {
+    /**
+     * paths 唯一写入口：所有转职痕迹（方案选择 / 自定义 / 进度勾选）都会把当时主角线
+     * 记进 PathState.routes，ClassScreen 据此只在留下痕迹的线上露出角色。
+     * 绕过本函数直接写 d.paths 会漏记线路，重新引入跨线残留。
+     */
+    private fun mutatePath(id: String, block: (PathState) -> PathState) {
         mutate { d ->
             val pd = d.paths[id] ?: PathState()
-            d.copy(paths = d.paths + (id to pd.copy(srcPathIndex = index)))
+            val next = block(pd)
+            val routed = if (d.route.isBlank() || d.route in next.routes) next
+            else next.copy(routes = next.routes + d.route)
+            d.copy(paths = d.paths + (id to routed))
         }
     }
 
-    fun setCustomStep(id: String, tierIndex: Int, classId: String) {
-        mutate { d ->
-            val pd = d.paths[id] ?: PathState()
-            val custom = pd.custom.toMutableList()
-            while (custom.size <= tierIndex) custom.add("")
-            custom[tierIndex] = classId
-            d.copy(paths = d.paths + (id to pd.copy(custom = custom, srcPathIndex = -1)))
-        }
+    fun selectPath(id: String, index: Int) =
+        mutatePath(id) { it.copy(srcPathIndex = index) }
+
+    fun setCustomStep(id: String, tierIndex: Int, classId: String) = mutatePath(id) { pd ->
+        val custom = pd.custom.toMutableList()
+        while (custom.size <= tierIndex) custom.add("")
+        custom[tierIndex] = classId
+        pd.copy(custom = custom, srcPathIndex = -1)
     }
 
-    fun toggleStepDone(id: String, tier: String) {
-        mutate { d ->
-            val pd = d.paths[id] ?: PathState()
-            val done = pd.doneSteps.toMutableMap()
-            done[tier] = !(done[tier] ?: false)
-            d.copy(paths = d.paths + (id to pd.copy(doneSteps = done)))
-        }
+    fun toggleStepDone(id: String, tier: String) = mutatePath(id) { pd ->
+        val done = pd.doneSteps.toMutableMap()
+        done[tier] = !(done[tier] ?: false)
+        pd.copy(doneSteps = done)
     }
 
     fun toggleClassInfo(key: String) = _expandClass.update { if (key in it) it - key else it + key }
