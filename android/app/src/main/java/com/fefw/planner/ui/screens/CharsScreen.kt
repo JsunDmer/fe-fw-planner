@@ -2,6 +2,7 @@ package com.fefw.planner.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -36,6 +38,7 @@ import com.fefw.planner.ui.components.GrowthGrid
 import com.fefw.planner.ui.components.TagPill
 import com.fefw.planner.ui.theme.Border
 import com.fefw.planner.ui.theme.Muted
+import com.fefw.planner.ui.theme.Muted2
 import com.fefw.planner.ui.theme.Primary
 import com.fefw.planner.ui.theme.Surface1
 import com.fefw.planner.ui.theme.TextPrimary
@@ -135,6 +138,38 @@ private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean)
                         )
                     }
                 }
+            }
+        }
+        // 战技/魔法/擅长来自 learn 与 skillsGood，与网页版 ch-detail 对齐；
+        // 移动端空间有限，只保留高信号三类（可习得技能/升级技能在职业页已有，避免重复占屏）。
+        LearnChips("战技", c.learn.arts)
+        LearnChips("魔法", c.learn.magic)
+        LearnChips("擅长", c.skillsGood)
+    }
+}
+
+/**
+ * learn 字段展示块：标签 + 名称胶囊（单行横滑），风格与「特性」块一致。
+ * 空列表显示「—」，与网页版 detailListHTML「空缺不留白」的处理保持一致。
+ */
+@Composable
+private fun LearnChips(label: String, items: List<String>) {
+    val list = items.filter { it.isNotBlank() }
+    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Text(
+            if (list.isEmpty()) label else "$label · ${list.size}",
+            style = MaterialTheme.typography.labelSmall,
+            color = Muted
+        )
+        if (list.isEmpty()) {
+            Text("—", style = MaterialTheme.typography.labelSmall, color = Muted2)
+        } else {
+            Row(
+                modifier = Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                list.forEach { name -> TagPill(name) }
             }
         }
     }

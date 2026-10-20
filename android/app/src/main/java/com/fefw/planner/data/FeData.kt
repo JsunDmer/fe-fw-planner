@@ -61,6 +61,22 @@ data class CharacterSkill(
     val text: String = ""
 )
 
+/** learn.ranks 条目：魔法/战技 → { r: 修得等级, sk: 所属技能类别 }。当前 UI 未展示，先解析备后用。 */
+@Serializable
+data class RankInfo(
+    val r: String = "",
+    val sk: String = ""
+)
+
+/** fe_data.json 的 learn 字段：角色可学内容（全部 63 角色均携带）。 */
+@Serializable
+data class Learn(
+    val arts: List<String> = emptyList(),
+    val magic: List<String> = emptyList(),
+    val skills: List<String> = emptyList(),
+    val ranks: Map<String, RankInfo> = emptyMap()
+)
+
 @Serializable
 data class Step(
     val tier: String = "",
@@ -109,6 +125,12 @@ data class Character(
     val personalSkill: PersonalSkill? = null,
     val skills: List<CharacterSkill> = emptyList(),
     val paths: List<PathReco> = emptyList(),
+    /** 可学内容：战技 / 魔法 / 可习得技能 / 修得等级。 */
+    val learn: Learn = Learn(),
+    /** 升级技能（含触发条件注记，如「（等级Lv45时）」）。 */
+    val lvSkills: List<String> = emptyList(),
+    /** 擅长武器/技能类别（如 ["枪术","指挥术"]，全部角色均有）。 */
+    val skillsGood: List<String> = emptyList(),
     val recruitByRoute: Map<String, RecruitInfo> = emptyMap()
 )
 
