@@ -101,10 +101,10 @@
       store.slots.push(s); store.activeId = s.id;
     }
     state = {
-      activeId: store.activeId, tab: "recruit", error: "", scrollTo: null, showAllPaths: false, rulesOpen: false,
+      activeId: store.activeId, tab: "recruit", error: "", scrollTo: null, charsScrollTo: null, charsFocus: null, showAllPaths: false, rulesOpen: false,
       filters: { q: "", onlyPlanned: false, sort: "rep", repMin: 0, repMax: 99 },
       chars: { q: "" },
-      expandCmp: {}, expandItem: {}, expandClass: {}
+      expandCmp: {}, expandItem: {}, expandClass: {}, expandChar: {},
     };
     restoreUi();
     save();
@@ -143,8 +143,13 @@
       (state.error ? "<div class=\"toast\" data-act=\"dismiss-error\">" + esc(state.error) + "（点击关闭）</div>" : "");
     if (state.scrollTo) {
       var el = document.getElementById(state.scrollTo);
-      if (el) el.scrollIntoView({ block: "center" });
+      if (el) el.scrollIntoView({ block: "center", behavior: "smooth" });
       state.scrollTo = null;
+    }
+    if (state.charsScrollTo) {
+      var el2 = document.getElementById("char-" + state.charsScrollTo);
+      if (el2) el2.scrollIntoView({ block: "center", behavior: "smooth" });
+      state.charsScrollTo = null;
     }
     state.error = "";
   }
@@ -265,6 +270,13 @@
     return (FE.characters || []).filter(function (c) { return !c.late; }).map(function (c) {
       return { char: c, r: (c.recruitByRoute || {})[route] || null };
     });
+  }
+
+  // 「属于某条线」的判定：本线剧情固定出场或可挖角。用白名单（story/scout）而非「非 no」，
+  // 因为 recruits 是全局的、不区分路线，若不按本线可用性过滤，切换路线后别的线角色（含其它主角）会残留。
+  function availableOnRoute(c, route) {
+    var r = (c.recruitByRoute || {})[route];
+    return !!r && (r.kind === "story" || r.kind === "scout");
   }
 
   function recruitListHTML(route) {
@@ -560,21 +572,29 @@
 
   function classHTML() {
     var d = data();
+    var route = d.route;
     var chars = (FE.characters || []).filter(function (c) {
+      if (c.late) return false;
+      // 先按「本线是否可用」过滤，否则切换路线后非本线角色（含其它三线主角）会残留在此页。
+      if (!availableOnRoute(c, route)) return false;
+      var r = (c.recruitByRoute || {})[route];
+      // 剧情固定出场的角色在挖角页没有计划/招募按钮（视为自动入队），故默认也一并展示，
+      // 否则连本线主角都不会出现在转职规划里。
+      if (r.kind === "story") return true;
       if (state.showAllPaths) return (c.paths || []).length > 0;
       var rec = d.recruits[c.id] || {};
       return rec.planned || rec.done;
     });
     var toggle = "<div class=\"toolbar\"><button class=\"chk" + (state.showAllPaths ? " plan" : "") + "\" aria-pressed=\"" + state.showAllPaths + "\" data-act=\"toggle-all-paths\"><span class=\"box\">" + (state.showAllPaths ? "✓" : "") + "</span>显示全部角色</button>" +
-      "<span class=\"muted\">默认只显示「已计划 / 已招募」的角色。</span></div>";
-    if (!chars.length) return toggle + "<div class=\"empty\">还没有已计划/已招募的角色。先到「挖角规划」标记。</div>";
+      "<span class=\"muted\">只显示本线登场角色的转职规划。</span></div>";
+    if (!chars.length) return toggle + "<div class=\"empty\">本线暂无可规划的角色。</div>";
     return toggle + chars.map(charPathHTML).join("");
   }
 
   function charPathHTML(c) {
     var pd = data().paths[c.id] || {};
-    return "<div class=\"char-card\"><div class=\"char-head\"><img class=\"portrait\" src=\"" + c.portrait + "\" alt=\"" + esc(c.name) + "\">" +
-      "<div><div class=\"row-head\"><span class=\"name\">" + esc(c.name) + "</span><span class=\"badge\">" + esc(c.startClass || "") + "</span></div>" +
+    return "<div class=\"char-card\"><div class=\"char-head\"><img class=\"portrait link\" data-act=\"goto-chars\" data-char=\"" + esc(c.id) + "\" src=\"" + c.portrait + "\" alt=\"" + esc(c.name) + "\" title=\"前往角色信息\">"
+      + "<div><div class=\"row-head\"><span class=\"name link\" data-act=\"goto-chars\" data-char=\"" + esc(c.id) + "\">" + esc(c.name) + "</span><span class=\"badge\">" + esc(c.startClass || "") + "</span></div>" +
       growthMiniHTML(c) + "</div></div>" +
       pathPickerHTML(c, pd) + stepsForCharHTML(c, pd) +
       "<textarea data-act=\"note\" data-char=\"" + c.id + "\" rows=\"2\" placeholder=\"备注（可选）…\">" + esc(data().notes[c.id] || "") + "</textarea></div>";
@@ -701,6 +721,9 @@
   function charsList() {
     var cf = state.chars;
     return (FE.characters || []).filter(function (c) {
+      // 从转职页跳转时会把目标角色放进 charsFocus：即使它被路线/搜索过滤掉，也必须保留该行，
+      // 否则跳转后找不到目标行，定位与高亮会静默失效。
+      if (state.charsFocus && state.charsFocus === c.id) return true;
       if (c.late) return false;
       if (c.isHero && !isCurrentRouteHero(c)) return false;
       if (cf.q && c.name.indexOf(cf.q) < 0 && c.id.indexOf(cf.q) < 0) return false;
@@ -740,10 +763,36 @@
     var rec = data().recruits[c.id] || {};
     var dot = rec.done ? "<span class=\"pdot done\">已招募</span>" : (rec.planned ? "<span class=\"pdot plan\">已计划</span>" : "");
     var best = bestScoutScore(c);
-    return "<tr class=\"" + (rec.done ? "done" : "") + "\"><td class=\"ch-cell\"><div class=\"ch-face\"><img class=\"portrait sm\" src=\"" + c.portrait + "\" alt=\"" + esc(c.name) + "\">" +
-      "<div><div class=\"ch-name\">" + esc(c.name) + (c.isHero ? " <span class=\"badge hero\">主角</span>" : "") + "</div>" +
+    var open = !!state.expandChar[c.id];
+    var row = "<tr id=\"char-" + esc(c.id) + "\" class=\"ch-row" + (rec.done ? " done" : "") + (open ? " open" : "") + "\">" +
+      "<td class=\"ch-cell\"><div class=\"ch-face\">" +
+      "<img class=\"portrait sm link\" data-act=\"toggle-char\" data-char=\"" + esc(c.id) + "\" src=\"" + c.portrait + "\" alt=\"" + esc(c.name) + "\" title=\"查看角色详情\">" +
+      "<div><div class=\"ch-name\"><button class=\"ch-toggle\" data-act=\"toggle-char\" data-char=\"" + esc(c.id) + "\" aria-expanded=\"" + open + "\">" + (open ? "▾" : "▸") + "</button>" +
+      esc(c.name) + (c.isHero ? " <span class=\"badge hero\">主角</span>" : "") + "</div>" +
       "<div class=\"ch-sub\">" + esc(c.startClass || "") + dot + "</div></div></div></td>" +
       ROUTES.map(function (k) { return charCellHTML(c, k, best); }).join("") + "</tr>";
+    // 展开行单独占一行，colspan 覆盖全部路线列，避免撑破表格宽度。
+    if (!open) return row;
+    return row + "<tr class=\"ch-detail-row\"><td colspan=\"" + (ROUTES.length + 1) + "\">" + charDetailHTML(c) + "</td></tr>";
+  }
+
+  // 战技/skills/magic 均来自 bundle 的 learn 字段；空缺时明确显示「—」而不是留白。
+  function charDetailHTML(c) {
+    var learn = c.learn || {};
+    return "<div class=\"ch-detail\">" +
+      detailListHTML("战技", learn.arts) +
+      detailListHTML("可习得技能", learn.skills) +
+      detailListHTML("魔法", learn.magic) +
+      detailListHTML("升级技能", c.lvSkills) +
+      detailListHTML("擅长", c.skillsGood) +
+      "</div>";
+  }
+
+  function detailListHTML(label, list) {
+    var items = (list || []).filter(Boolean);
+    if (!items.length) return "<div class=\"ch-detail-block\"><h6>" + esc(label) + "</h6><span class=\"muted\">—</span></div>";
+    var chips = items.map(function (x) { return "<span class=\"tag\">" + esc(x) + "</span>"; }).join("");
+    return "<div class=\"ch-detail-block\"><h6>" + esc(label) + " · " + items.length + "</h6><div class=\"tag-list\">" + chips + "</div></div>";
   }
 
   function charCellHTML(c, route, best) {
@@ -780,6 +829,7 @@
   function mountNeeded() {
     var d = data();
     return (FE.characters || []).filter(function (c) {
+      if (!availableOnRoute(c, d.route)) return false;
       var rec = d.recruits[c.id] || {};
       return rec.planned || rec.done;
     }).map(function (c) {
@@ -812,6 +862,7 @@
 
   function assignHTML(mountName, assigned) {
     var eligible = (FE.characters || []).filter(function (c) {
+      if (!availableOnRoute(c, data().route)) return false;
       var rec = data().recruits[c.id] || {};
       return rec.planned || rec.done;
     });
@@ -903,7 +954,7 @@
     if (!t) return;
     var act = t.getAttribute("data-act"), id = t.getAttribute("data-char");
     if (act === "dismiss-error") { render(); return; }
-    if (act === "tab") { state.tab = t.getAttribute("data-tab"); syncUi(); save(); render(); return; }
+    if (act === "tab") { state.tab = t.getAttribute("data-tab"); state.charsFocus = null; syncUi(); save(); render(); return; }
     if (act === "toggle-rules") { state.rulesOpen = !state.rulesOpen; return render(); }
     if (act === "route-from-chars") {
       data().route = t.getAttribute("data-route");
@@ -925,6 +976,8 @@
     if (act === "path-src") { return selectPath(id, parseInt(t.getAttribute("data-idx"), 10)); }
     if (act === "step-done") { return toggleStepDone(id, t.getAttribute("data-tier")); }
     if (act === "class-info") { var ck = id + "#" + t.getAttribute("data-class"); state.expandClass[ck] = !state.expandClass[ck]; return render(); }
+    if (act === "goto-chars") { state.tab = "chars"; state.charsFocus = id; state.charsScrollTo = id; state.expandChar[id] = true; syncUi(); save(); return render(); }
+    if (act === "toggle-char") { state.expandChar[id] = !state.expandChar[id]; refreshChars(); return; }
     if (act === "goto-mount") { state.tab = "mounts"; state.mountHighlight = id; state.scrollTo = "need-" + id; syncUi(); save(); return render(); }
     if (act === "mount-plan") { return toggleMount(t.getAttribute("data-mount"), "planned"); }
     if (act === "mount-cap") { return toggleMount(t.getAttribute("data-mount"), "captured"); }
@@ -1021,7 +1074,7 @@
   function onInput(e) {
     var t = e.target;
     if (t.id === "recruit-search") { state.filters.q = t.value; syncUi(); save(); refreshRecruit(); return; }
-    if (t.id === "chars-search") { state.chars.q = t.value; refreshChars(); return; }
+    if (t.id === "chars-search") { state.chars.q = t.value; state.charsFocus = null; refreshChars(); return; }
     if (t.getAttribute("data-act") === "note") { data().notes[t.getAttribute("data-char")] = t.value; save(); }
   }
 
@@ -1034,7 +1087,7 @@
     if (dr) {
       var pool = recruitPool(route);
       var scoutAll = pool.filter(function (x) { return x.r && x.r.kind === "scout"; }).length;
-      var planned = pool.filter(function (x) { return (data().recruits[x.char.id] || {}).planned; }).length;
+    var planned = pool.filter(function (x) { return x.r && x.r.kind !== "no" && (data().recruits[x.char.id] || {}).planned; }).length;
       dr.innerHTML = drawerHTML(route, planned, scoutAll);
     }
   }
