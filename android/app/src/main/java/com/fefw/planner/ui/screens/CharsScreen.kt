@@ -153,7 +153,8 @@ private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean,
         // 移动端空间有限，只保留高信号三类（可习得技能/升级技能在职业页已有，避免重复占屏）。
         LearnSkillGroups(remember(c, artWeapon) { artsBySkill(c.learn, artWeapon) }, onSkill = { n, k -> skillDetail = n to k })
         LearnChips("魔法", c.learn.magic, onSkill = { n -> skillDetail = n to "魔法" })
-        LearnChips("擅长", c.skillsGood, onSkill = { n -> skillDetail = n to "擅长" })
+        // 擅长只有熟练项名称、无效果文本（skillDesc 里没有这些键），点击弹空框反而困惑，故不可点。
+        LearnChips("擅长", c.skillsGood, onSkill = null)
     }
     skillDetail?.let { (name, kind) ->
         SkillDetailDialog(name = name, kind = kind, desc = skillDesc[name], onDismiss = { skillDetail = null })
@@ -165,7 +166,7 @@ private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean,
  * 空列表显示「—」，与网页版 detailListHTML「空缺不留白」的处理保持一致。
  */
 @Composable
-private fun LearnChips(label: String, items: List<String>, onSkill: (String) -> Unit) {
+private fun LearnChips(label: String, items: List<String>, onSkill: ((String) -> Unit)?) {
     val list = items.filter { it.isNotBlank() }
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
         Text(
@@ -181,7 +182,7 @@ private fun LearnChips(label: String, items: List<String>, onSkill: (String) -> 
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                list.forEach { name -> TagPill(name, onClick = { onSkill(name) }) }
+                list.forEach { name -> TagPill(name, onClick = onSkill?.let { { it(name) } }) }
             }
         }
     }
