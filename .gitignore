@@ -18,3 +18,6 @@ android/captures/
 
 # Logs / temp
 *.log
+# Python
+__pycache__/
+.cache_annas/
