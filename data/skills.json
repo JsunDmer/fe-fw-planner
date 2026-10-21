@@ -5564,6 +5564,146 @@
     "身体"
    ],
    "chars": []
+  },
+  {
+   "id": "sk-498",
+   "name": "骑兵移动术+",
+   "text": "【骑兵】地形的移动消耗-2（最低为1）。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-499",
+   "name": "步兵再移动",
+   "text": "【步兵】战斗后，可移动最多1格。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-500",
+   "name": "多拉 Δ",
+   "text": "以凝缩的暗黑物质攻击敌人",
+   "learn": [],
+   "note": "",
+   "kind": "魔法",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-501",
+   "name": "危急回避",
+   "text": "【步兵】自身HP不高于50%时，战斗中回避+20。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-502",
+   "name": "防守减伤",
+   "text": "受到伤害减半，发动概率为防守/2%。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-503",
+   "name": "骑士先阵+",
+   "text": "【骑兵】主动进攻时，战斗中防御力+4。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-504",
+   "name": "箭术的奥妙",
+   "text": "装备相应武器/魔法时，命中、回避+10，攻击力+3。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-505",
+   "name": "体格+",
+   "text": "体格+10。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-506",
+   "name": "即时回避+",
+   "text": "【步兵】受到攻击时有5%概率发动，回避+100。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-507",
+   "name": "反击连攻",
+   "text": "敌人先攻时有20%概率发动，无视攻速进行追击。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-508",
+   "name": "魔防减伤",
+   "text": "受到伤害减半，发动概率为魔防/2%。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-509",
+   "name": "优势战斗术",
+   "text": "【步兵】位于有利地形时，战斗中攻击力+5。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-510",
+   "name": "飞行战斗术+",
+   "text": "【飞行】主动进攻时，战斗中命中+10。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "sk-511",
+   "name": "抵抗魔装+",
+   "text": "【重装】魔防+10。",
+   "learn": [],
+   "note": "",
+   "kind": "特技",
+   "chars": [],
+   "classes": []
   }
  ],
  "arts": [
@@ -12616,6 +12756,306 @@
    "sup": "--",
    "range": "--",
    "note": ""
+  },
+  {
+   "id": "art-365",
+   "name": "冰枪投斩",
+   "text": "视为魔法攻击，仅限射程1～2的枪。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-366",
+   "name": "大魔刃",
+   "text": "视为魔法攻击。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-367",
+   "name": "破弓之箭",
+   "text": "敌人使用弓时连续攻击2次，每次造成90%伤害。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-368",
+   "name": "魔法之箭",
+   "text": "视为魔法攻击。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-369",
+   "name": "幸运指挥",
+   "text": "友军幸运+2，持续到下一个己方阶段。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-370",
+   "name": "锐刃拳",
+   "text": "发生必杀时，本次攻击不消耗武器耐久。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-371",
+   "name": "回身突击",
+   "text": "战斗中敌人先攻。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-372",
+   "name": "大技号令",
+   "text": "使范围内友军获得「大技」，持续到下一个己方阶段。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-373",
+   "name": "魔风连击",
+   "text": "攻击时以魔力/2%的概率发动，无视攻速进行追击。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-374",
+   "name": "魔法指挥+",
+   "text": "友军魔力、魔防+3，持续到下一个己方阶段。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-375",
+   "name": "击昏拳",
+   "text": "命中时有5%概率使敌人混乱，无法追击。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-376",
+   "name": "暗杀拳",
+   "text": "至少造成20点伤害。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-377",
+   "name": "技术指挥++",
+   "text": "友军技巧+5，持续到下一个己方阶段。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-378",
+   "name": "命运一击",
+   "text": "攻击时以幸运/2%的概率发动，攻击力+10。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-379",
+   "name": "强力连拳",
+   "text": "连续攻击2次，命中率减半。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-380",
+   "name": "治愈号令",
+   "text": "使范围内友军获得治愈心得，持续到下一个己方阶段。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-381",
+   "name": "退身突袭",
+   "text": "战斗后可再移动最多2格。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-382",
+   "name": "精灵强打",
+   "text": "威力与命中较高。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-383",
+   "name": "重剑猛击",
+   "text": "自身命中率固定为50%。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-384",
+   "name": "强行突破号令",
+   "text": "使范围内友军在当前阶段获得「强行突破」。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-385",
+   "name": "伏骑突击",
+   "text": "连续攻击2次，每次造成70%伤害；敌人为骑兵时命中+10。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-386",
+   "name": "魔法连拳",
+   "text": "连续攻击2次，每次造成80%伤害，视为魔法攻击。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-387",
+   "name": "力量尖刺",
+   "text": "威力与命中较高。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-388",
+   "name": "魔法指挥++",
+   "text": "友军魔力、魔防+5，持续到下一个己方阶段。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-389",
+   "name": "封魔箭",
+   "text": "命中时使敌人陷入魔封状态。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-390",
+   "name": "破剑",
+   "text": "敌人使用剑时攻击力+8。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-391",
+   "name": "复苏拳",
+   "text": "击败敌人后回复HP",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-392",
+   "name": "双重挥击",
+   "text": "仅限射程1～2的武器，连续攻击2次，每次造成90%伤害。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-393",
+   "name": "破魔",
+   "text": "敌人使用魔法时攻击力+12。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
+  },
+  {
+   "id": "art-394",
+   "name": "重铅箭",
+   "text": "对重装有效。",
+   "learn": [],
+   "note": "",
+   "kind": "战技",
+   "chars": [],
+   "classes": []
   }
  ],
  "magic": [
