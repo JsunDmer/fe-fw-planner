@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.fefw.planner.data.Route
 import com.fefw.planner.ui.components.Badge
 import com.fefw.planner.ui.components.BadgeKind
 import com.fefw.planner.ui.components.RouteChip
@@ -49,7 +48,6 @@ import com.fefw.planner.ui.components.TagPill
 import com.fefw.planner.ui.components.parseHexColor
 import com.fefw.planner.ui.screens.CharsScreen
 import com.fefw.planner.ui.screens.ClassScreen
-import com.fefw.planner.ui.screens.OnboardingScreen
 import com.fefw.planner.ui.screens.OverviewScreen
 import com.fefw.planner.ui.screens.SavesScreen
 import com.fefw.planner.ui.theme.AccentSoft
@@ -76,10 +74,8 @@ fun PlannerApp(vm: PlannerViewModel) {
     val store by vm.store.collectAsStateWithLifecycle()
     val data = store.activeDataOrNull
 
-    if (data == null || data.onboarded != true) {
-        OnboardingScreen(vm)
-        return
-    }
+    // 不再有「首次选主角」引导页：无存档时直接回退，其余情况一律进入规划器。
+    if (data == null) return
 
     val tab by vm.tab.collectAsStateWithLifecycle()
     val error by vm.error.collectAsStateWithLifecycle()

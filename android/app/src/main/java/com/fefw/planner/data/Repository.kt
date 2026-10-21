@@ -140,7 +140,7 @@ class Repository(context: Context) {
             name = name?.takeIf { it.isNotBlank() } ?: "存档 $index",
             createdAt = now,
             updatedAt = now,
-            data = SlotData(route = defaultRoute, onboarded = false, ui = UiState())
+            data = SlotData(route = defaultRoute, onboarded = true, ui = UiState())
         )
     }
 

@@ -77,9 +77,7 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun currentData(): SlotData =
-        _store.value.activeDataOrNull ?: SlotData(route = defaultRoute, onboarded = false)
-
-    fun isOnboarded(): Boolean = currentData().onboarded == true
+        _store.value.activeDataOrNull ?: SlotData(route = defaultRoute, onboarded = true)
 
     private fun save(store: Store) {
         _store.value = store
@@ -246,7 +244,7 @@ class PlannerViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun clearCurrent() {
-        mutate { SlotData(route = defaultRoute, onboarded = false, ui = UiState()) }
+        mutate { SlotData(route = defaultRoute, onboarded = true, ui = UiState()) }
         restoreUi()
     }
 
