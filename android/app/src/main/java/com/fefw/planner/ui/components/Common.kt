@@ -17,9 +17,11 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -144,8 +146,10 @@ fun Badge(text: String, kind: BadgeKind = BadgeKind.Default, modifier: Modifier 
     )
 }
 
+// onClick 默认 null 表示「纯展示」：只有需要弹说明的技能胶囊才可点击，
+// 避免给所有标签（如魔法/擅长/职业名）都挂上点击手势导致误触与语义混乱。
 @Composable
-fun TagPill(text: String, modifier: Modifier = Modifier) {
+fun TagPill(text: String, modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) {
     Text(
         text = text,
         color = ScoutText,
@@ -154,6 +158,7 @@ fun TagPill(text: String, modifier: Modifier = Modifier) {
             .clip(RoundedCornerShape(999.dp))
             .background(AccentSoft)
             .border(1.dp, Color(0x4D3D9AC0), RoundedCornerShape(999.dp))
+            .then(if (onClick != null) Modifier.clickable { onClick() } else Modifier)
             .padding(horizontal = 8.dp, vertical = 2.dp)
     )
 }
@@ -402,4 +407,38 @@ private fun GrowthCellView(cell: GrowthCell, height: Dp, compact: Boolean, mini:
             )
         }
     }
+}
+
+/**
+ * 技能/战技详情浮层：点击胶囊后展示名称、类别与效果说明。
+ * 用 AlertDialog 而非自定义 Popup，是为了沿用系统遮罩（点击空白自动 onDismissRequest 关闭）
+ * 与现有存档页弹层视觉一致，无需自绘 scrim 与外点手势。
+ */
+@Composable
+fun SkillDetailDialog(
+    name: String,
+    kind: String?,
+    desc: String?,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        containerColor = Surface1,
+        title = { Text(name, color = TextPrimary) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                if (!kind.isNullOrBlank()) {
+                    Text(kind, fontSize = 12.sp, color = Muted2)
+                }
+                Text(
+                    if (desc.isNullOrBlank()) "暂无说明" else desc,
+                    color = TextSecondary,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) { Text("关闭", color = Primary) }
+        }
+    )
 }

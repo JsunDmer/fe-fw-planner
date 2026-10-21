@@ -21,7 +21,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,6 +39,7 @@ import com.fefw.planner.ui.components.BadgeKind
 import com.fefw.planner.ui.components.CheckChip
 import com.fefw.planner.ui.components.EmptyHint
 import com.fefw.planner.ui.components.GrowthGrid
+import com.fefw.planner.ui.components.SkillDetailDialog
 import com.fefw.planner.ui.components.TagPill
 import com.fefw.planner.ui.theme.Border
 import com.fefw.planner.ui.theme.Muted
@@ -96,7 +99,7 @@ fun CharsScreen(vm: PlannerViewModel) {
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 items(list, key = { it.id }) { c ->
-                    CharRow(c = c, stats = stats, highlight = locate == c.id, artWeapon = artWeapon)
+                    CharRow(c = c, stats = stats, highlight = locate == c.id, artWeapon = artWeapon, skillDesc = vm.fe.skillDesc)
                 }
             }
         }
@@ -104,7 +107,9 @@ fun CharsScreen(vm: PlannerViewModel) {
 }
 
 @Composable
-private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean, artWeapon: Map<String, String>) {
+private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean, artWeapon: Map<String, String>, skillDesc: Map<String, String>) {
+    // 弹框内容只依赖被点的那条技能；用 (name,kind) 作 key、渲染时再查 desc，避免在列表项里缓存整张 desc 映射。
+    var skillDetail by remember { mutableStateOf<Pair<String, String?>?>(null) }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -132,6 +137,7 @@ private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean,
                 Text("特性", style = MaterialTheme.typography.labelSmall, color = Muted)
                 c.skills.forEach { sk ->
                     Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        // 特性行内已直接展示 effect 文本，无独立技能名可查，故胶囊保持纯展示。
                         TagPill(sk.kind)
                         Text(
                             sk.text,
@@ -145,9 +151,12 @@ private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean,
         }
         // 战技/魔法/擅长来自 learn 与 skillsGood，与网页版 ch-detail 对齐；
         // 移动端空间有限，只保留高信号三类（可习得技能/升级技能在职业页已有，避免重复占屏）。
-        LearnSkillGroups(remember(c, artWeapon) { artsBySkill(c.learn, artWeapon) })
-        LearnChips("魔法", c.learn.magic)
-        LearnChips("擅长", c.skillsGood)
+        LearnSkillGroups(remember(c, artWeapon) { artsBySkill(c.learn, artWeapon) }, onSkill = { n, k -> skillDetail = n to k })
+        LearnChips("魔法", c.learn.magic, onSkill = { n -> skillDetail = n to "魔法" })
+        LearnChips("擅长", c.skillsGood, onSkill = { n -> skillDetail = n to "擅长" })
+    }
+    skillDetail?.let { (name, kind) ->
+        SkillDetailDialog(name = name, kind = kind, desc = skillDesc[name], onDismiss = { skillDetail = null })
     }
 }
 
@@ -156,7 +165,7 @@ private fun CharRow(c: Character, stats: List<List<String>>, highlight: Boolean,
  * 空列表显示「—」，与网页版 detailListHTML「空缺不留白」的处理保持一致。
  */
 @Composable
-private fun LearnChips(label: String, items: List<String>) {
+private fun LearnChips(label: String, items: List<String>, onSkill: (String) -> Unit) {
     val list = items.filter { it.isNotBlank() }
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
         Text(
@@ -172,7 +181,7 @@ private fun LearnChips(label: String, items: List<String>) {
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                list.forEach { name -> TagPill(name) }
+                list.forEach { name -> TagPill(name, onClick = { onSkill(name) }) }
             }
         }
     }
@@ -184,7 +193,7 @@ private fun LearnChips(label: String, items: List<String>) {
  * 实测均值 ~4 类/人、最多 8 类，纵向由 LazyColumn 承担，故取一类一行。
  */
 @Composable
-private fun LearnSkillGroups(groups: List<Pair<String, List<String>>>) {
+private fun LearnSkillGroups(groups: List<Pair<String, List<String>>>, onSkill: (String, String) -> Unit) {
     val total = groups.sumOf { it.second.size }
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
         Text(
@@ -209,7 +218,7 @@ private fun LearnSkillGroups(groups: List<Pair<String, List<String>>>) {
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        names.forEach { name -> TagPill(name) }
+                        names.forEach { name -> TagPill(name, onClick = { onSkill(name, cat) }) }
                     }
                 }
             }

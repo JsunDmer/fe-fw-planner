@@ -60,6 +60,7 @@ import com.fefw.planner.ui.components.CheckChip
 import com.fefw.planner.ui.components.ChoiceChip
 import com.fefw.planner.ui.components.EmptyHint
 import com.fefw.planner.ui.components.GrowthGrid
+import com.fefw.planner.ui.components.SkillDetailDialog
 import com.fefw.planner.ui.theme.AccentSoft
 import com.fefw.planner.ui.theme.Border
 import com.fefw.planner.ui.theme.Muted
@@ -324,6 +325,8 @@ private fun StepNode(
     val mountGrowth = if (mountEligible) mountGrowthOf(vm.fe.mounts, mountName) else null
     // 有效成长 = 角色基础 + 职业加成 + 坐骑加成；结构固定 9 格，保证所有收起态节点等高。
     val cells = growthCells(baseGrowth, cls?.growth, vm.fe.stats, mountGrowth)
+    // 点技能胶囊弹说明；只存被点名称，desc 渲染时再查（与角色页一致）。
+    var skillDetail by remember { mutableStateOf<String?>(null) }
     Column(
         modifier = Modifier
             .width(100.dp)
@@ -363,8 +366,8 @@ private fun StepNode(
             }
         }
         if (cls != null && opened) {
-            SkillList("职业特技", cls.innate, vm.fe.skillDesc)
-            SkillList("精通特技", listOf(cls.mastery), vm.fe.skillDesc)
+            SkillList("职业特技", cls.innate, vm.fe.skillDesc, onSkill = { skillDetail = it })
+            SkillList("精通特技", listOf(cls.mastery), vm.fe.skillDesc, onSkill = { skillDetail = it })
             if (mountEligible) {
                 MountPicker(vm, charId, step.tier, mountName, mountTypes)
             } else if (needsMount) {
@@ -383,6 +386,9 @@ private fun StepNode(
             CheckChip(checked = done, label = "已完成", onToggle = { vm.toggleStepDone(charId, step.tier) }, mark = "✓")
             Text(if (opened) "▾" else "▸", style = MaterialTheme.typography.bodySmall, color = Muted)
         }
+    }
+    skillDetail?.let { name ->
+        SkillDetailDialog(name = name, kind = null, desc = vm.fe.skillDesc[name], onDismiss = { skillDetail = null })
     }
 }
 
@@ -403,17 +409,22 @@ private fun WeaponChip(text: String) {
 }
 
 @Composable
-private fun SkillList(label: String, names: List<String>, desc: Map<String, String>) {
+private fun SkillList(label: String, names: List<String>, desc: Map<String, String>, onSkill: (String) -> Unit) {
     val items = names.filter { it.isNotBlank() }
     if (items.isEmpty()) return
     Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
         Text(label, style = MaterialTheme.typography.bodySmall, color = Muted)
         items.forEach { name ->
             val t = desc[name]
+            // 节点仅 100dp 宽，用整行点击而非再塞胶囊，避免挤占文字与换行错乱。
             Text(
                 if (t.isNullOrBlank()) name else "$name：$t",
                 style = MaterialTheme.typography.bodySmall,
-                color = TextSecondary
+                color = TextSecondary,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(4.dp))
+                    .clickable { onSkill(name) }
             )
         }
     }
